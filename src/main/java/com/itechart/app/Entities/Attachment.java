@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * Created by Maxim on 11/24/2015.
  */
-public class Attachments extends Entity{
+public class Attachment extends Entity{
     private String filename;
     private Date date_upload;
     private String comment;
 
-    public Attachments(String filename, Date date_upload, String comment) {
+    public Attachment(String filename, Date date_upload, String comment) {
         this.filename = filename;
         this.date_upload = date_upload;
         this.comment = comment;

@@ -1,5 +1,6 @@
 package com.itechart.app.Entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,6 +19,9 @@ public class Contact extends Entity {
     private String currentWorkplace;
     private int addressId;
     private String photoUrl;
+    private ArrayList<Telephone> telephones;
+    private ArrayList<Attachment> attachments;
+    private ArrayList<Address> addresses;
 
     public Contact(String firstName,
                    String lastName,
@@ -145,5 +149,29 @@ public class Contact extends Entity {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public ArrayList<Telephone> getTelephones() {
+        return telephones;
+    }
+
+    public void setTelephones(ArrayList<Telephone> telephones) {
+        this.telephones = telephones;
+    }
+
+    public ArrayList<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(ArrayList<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public ArrayList<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(ArrayList<Address> addresses) {
+        this.addresses = addresses;
     }
 }
