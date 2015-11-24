@@ -17,8 +17,6 @@ public class Contact extends Entity {
     private String email;
     private String currentWorkplace;
     private int addressId;
-    private boolean isDeleted;
-    private Date dateDeleted;
     private String photoUrl;
 
     public Contact(String firstName,
@@ -139,22 +137,6 @@ public class Contact extends Entity {
 
     public void setAddressId(int addressId) {
         this.addressId = addressId;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public Date getDateDeleted() {
-        return dateDeleted;
-    }
-
-    public void setDateDeleted(Date dateDeleted) {
-        this.dateDeleted = dateDeleted;
     }
 
     public String getPhotoUrl() {
