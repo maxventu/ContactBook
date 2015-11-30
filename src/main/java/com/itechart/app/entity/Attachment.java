@@ -1,4 +1,4 @@
-package com.itechart.app.Entities;
+package com.itechart.app.entity;
 
 import java.util.Date;
 

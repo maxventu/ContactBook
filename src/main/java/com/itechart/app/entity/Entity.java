@@ -1,4 +1,4 @@
-package com.itechart.app.Entities;
+package com.itechart.app.entity;
 
 import java.io.Serializable;
 
@@ -9,11 +9,11 @@ public class Entity implements Serializable,Cloneable {
     public Entity(){
     }
 
-    public Entity(int id) {
+    public Entity(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -21,6 +21,6 @@ public class Entity implements Serializable,Cloneable {
         this.id = id;
     }
 
-    private int id;
+    private Integer id;
 
 }

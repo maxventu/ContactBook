@@ -1,4 +1,4 @@
-package com.itechart.app.Entities;
+package com.itechart.app.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +11,13 @@ public class Contact extends Entity {
     private String lastName;
     private String patronymic;
     private Date dateOfBirth;
-    private boolean sexIsMale;
+    private Boolean sexIsMale;
     private String nationality;
     private String familyStatus;
     private String webStatus;
     private String email;
     private String currentWorkplace;
-    private int addressId;
+    private Integer addressId;
     private String photoUrl;
     private ArrayList<Telephone> telephones;
     private ArrayList<Attachment> attachments;
@@ -55,6 +55,9 @@ public class Contact extends Entity {
         this.lastName = lastName;
     }
 
+    public Contact() {
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -87,11 +90,11 @@ public class Contact extends Entity {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isSexIsMale() {
+    public Boolean isSexIsMale() {
         return sexIsMale;
     }
 
-    public void setSexIsMale(boolean sexIsMale) {
+    public void setSexIsMale(Boolean sexIsMale) {
         this.sexIsMale = sexIsMale;
     }
 
@@ -135,11 +138,11 @@ public class Contact extends Entity {
         this.currentWorkplace = currentWorkplace;
     }
 
-    public int getAddressId() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 

@@ -1,4 +1,4 @@
-package com.itechart.app.Entities;
+package com.itechart.app.entity;
 
 /**
  * Created by Maxim on 11/24/2015.
