@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Maxim on 11/25/2015.
  */
-public class EmptyCommand implements ActionCommand {
+public class EmptyCommand {
 
     public String execute(HttpServletRequest request) {
 /* в случае ошибки или прямого обращения к контроллеру
