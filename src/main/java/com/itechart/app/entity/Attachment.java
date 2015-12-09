@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by Maxim on 11/24/2015.
  */
-public class Attachment extends Entity{
+public class Attachment extends Entity<Integer>{
     private String filename;
     private Date date_upload;
     private String comment;

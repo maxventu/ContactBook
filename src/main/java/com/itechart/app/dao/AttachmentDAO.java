@@ -13,6 +13,11 @@ import java.util.Date;
  * Created by Maxim on 12/9/2015.
  */
 public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
+    public static AttachmentDAO INSTANCE = new AttachmentDAO();
+
+    private AttachmentDAO() {
+    }
+
     private static final String ATTACHMENT_FIND_ALL_BY_CONTACT_ID_QUERY =
             "SELECT id,filename,date_upload,comment,contact_id FROM attachment WHERE contact_id = ? AND is_deleted=0;";
     private static final String ATTACHMENT_FIND_ALL_QUERY =
@@ -28,28 +33,46 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
             "UPDATE attachment SET filename=?, comment=?" +
                     "WHERE id=?;";
     @Override
-    public ArrayList<Attachment> findAll() {
-        Connection connection = null;
+    public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
+        return connection.prepareStatement(ATTACHMENT_FIND_ALL_QUERY);
+    }
+
+    @Override
+    public PreparedStatement prepareStatementFindEntityById(Connection connection,Integer id) throws SQLException {
         PreparedStatement statement = null;
-        ArrayList<Attachment> attachments = new ArrayList<Attachment>();
-        try {
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(ATTACHMENT_FIND_ALL_QUERY);
-            ResultSet attachmentResultSet = statement.executeQuery();
-            while (attachmentResultSet.next()) {
-                attachments.add(readEntityFrom(attachmentResultSet));
-            }
-        } catch (SQLException exception) {
-            LOGGER.error("Something went wrong while finding attachments", exception);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-        return attachments;
+        statement = connection.prepareStatement(ATTACHMENT_SELECT_QUERY);
+        statement.setInt(1,id);
+        return statement;
+    }
+
+    @Override
+    public PreparedStatement prepareStatementDelete(Connection connection, Integer id) throws SQLException{
+        PreparedStatement statement=null;
+        statement = connection.prepareStatement(ATTACHMENT_DELETE_QUERY);
+        statement.setInt(1,id);
+        return  statement;
+    }
+
+    @Override
+    public PreparedStatement prepareStatementCreate(Connection connection, Attachment attachment) throws SQLException{
+        Integer i=1;
+        PreparedStatement statement = null;
+        statement = connection.prepareStatement(ATTACHMENT_CREATE_QUERY);
+        statement.setString(i++,attachment.getFilename());
+        statement.setString(i++,attachment.getComment());
+        statement.setInt(i++,attachment.getContactId());
+        return statement;
+    }
+
+    @Override
+    public PreparedStatement prepareStatementUpdate(Connection connection,Attachment attachment) throws SQLException{
+        PreparedStatement statement = null;
+        Integer i=1;
+        statement = connection.prepareStatement(ATTACHMENT_UPDATE_QUERY);
+        statement.setString(i++,attachment.getFilename());
+        statement.setString(i++,attachment.getComment());
+        statement.setInt(i++,attachment.getId());
+        return statement;
     }
 
     @Override
@@ -63,33 +86,6 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         return new Attachment(id, filename, dateUpload, comment, contactId);
     }
 
-    @Override
-    public Attachment findEntityById(Integer id) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Attachment attachment = null;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(ATTACHMENT_SELECT_QUERY);
-            statement.setInt(1,id);
-            ResultSet attachmentResultSet = statement.executeQuery();
-            while (attachmentResultSet.next()){
-                attachment = readEntityFrom(attachmentResultSet);
-            }
-        }
-        catch (Exception ex){
-            LOGGER.error("something went wrong",ex);
-        }
-        finally {
-            try{
-                connection.close();
-            }
-            catch (Exception e){
-                LOGGER.error("connection wasn't closed",e);
-            }
-        }
-        return attachment;
-    }
     public ArrayList<Attachment> findAllByContactId(Integer contactId) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -113,78 +109,5 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
             }
         }
         return attachments;
-    }
-
-    @Override
-    public void delete(Integer id) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(ATTACHMENT_DELETE_QUERY);
-            statement.setInt(1,id);
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in deleting attachment", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-    }
-
-    @Override
-    public void create(Attachment attachment) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Integer i=1;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(ATTACHMENT_CREATE_QUERY);
-            statement.setString(i++,attachment.getFilename());
-            statement.setString(i++,attachment.getComment());
-            statement.setInt(i++,attachment.getContactId());
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating attachment", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-    }
-
-    @Override
-    public void update(Attachment attachment) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Integer i=1;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(ATTACHMENT_UPDATE_QUERY);
-            statement.setString(i++,attachment.getFilename());
-            statement.setString(i++,attachment.getComment());
-            statement.setInt(i++,attachment.getId());
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating attachment", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-
     }
 }

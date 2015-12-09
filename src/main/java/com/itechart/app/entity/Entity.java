@@ -5,22 +5,22 @@ import java.io.Serializable;
 /**
  * Created by Maxim on 11/24/2015.
  */
-public class Entity implements Serializable,Cloneable {
+public class Entity <T> implements Serializable,Cloneable {
 
-    private Integer id;
+    private T id;
 
     public Entity(){
     }
 
-    public Entity(Integer id) {
+    public Entity(T id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(T id) {
         this.id = id;
     }
 }

@@ -3,38 +3,38 @@ package com.itechart.app.entity;
 /**
  * Created by Maxim on 11/24/2015.
  */
-public class Telephone extends Entity {
-    private String country_code;
+public class Telephone extends Entity<Integer> {
+    private String countryCode;
     private String number;
     private String type;
     private String comment;
     private Integer contactId;
 
-    public Telephone(String country_code, String number, String type, String comment) {
-        this.country_code = country_code;
+    public Telephone(String countryCode, String number, String type, String comment) {
+        this.countryCode = countryCode;
         this.number = number;
         this.type = type;
         this.comment = comment;
     }
 
-    public Telephone(Integer id, String country_code, String number, String type, String comment) {
+    public Telephone(Integer id, String countryCode, String number, String type, String comment) {
         super(id);
-        this.country_code = country_code;
+        this.countryCode = countryCode;
         this.number = number;
         this.type = type;
         this.comment = comment;
     }
-    public Telephone(Integer id, String country_code, String number, String type, String comment, Integer contactId) {
-        this(id,country_code,number,type,comment);
+    public Telephone(Integer id, String countryCode, String number, String type, String comment, Integer contactId) {
+        this(id, countryCode,number,type,comment);
         this.contactId = contactId;
     }
 
-    public String getCountry_code() {
-        return country_code;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getNumber() {

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by Maxim on 11/24/2015.
  */
-public class Contact extends Entity {
+public class Contact extends Entity<Integer> {
     private String firstName;
     private String lastName;
     private String patronymic;
@@ -18,9 +18,15 @@ public class Contact extends Entity {
     private String email;
     private String currentWorkplace;
     private String photoUrl;
+    private String street;
+    private String house;
+    private String apartment;
+    private String postcode;
+    private String country;
+    private String city;
+
     private ArrayList<Telephone> telephones;
     private ArrayList<Attachment> attachments;
-    private ArrayList<Address> addresses;
 
     public Contact(Integer id,
                    String firstName,
@@ -33,7 +39,13 @@ public class Contact extends Entity {
                    String webSite,
                    String email,
                    String currentWorkplace,
-                   String photoUrl) {
+                   String photoUrl,
+                   String street,
+                   String house,
+                   String apartment,
+                   String postcode,
+                   String country,
+                   String city) {
         this(id, firstName, lastName);
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
@@ -44,6 +56,12 @@ public class Contact extends Entity {
         this.email = email;
         this.currentWorkplace = currentWorkplace;
         this.photoUrl = photoUrl;
+        this.street=street;
+        this.house = house;
+        this.apartment = apartment;
+        this.postcode = postcode;
+        this.country = country;
+        this.city = city;
     }
 
     public Contact(Integer id,String firstName, String lastName) {
@@ -159,11 +177,57 @@ public class Contact extends Entity {
         this.attachments = attachments;
     }
 
-    public ArrayList<Address> getAddresses() {
-        return addresses;
+
+    public Boolean getSexIsMale() {
+        return sexIsMale;
     }
 
-    public void setAddresses(ArrayList<Address> addresses) {
-        this.addresses = addresses;
+    public String getStreet() {
+        return street;
     }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouse() {
+        return house;
+    }
+
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
+    public String getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(String apartment) {
+        this.apartment = apartment;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 }

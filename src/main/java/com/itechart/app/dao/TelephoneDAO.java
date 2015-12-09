@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 
 public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
+    public static TelephoneDAO INSTANCE = new TelephoneDAO();
+
+    private TelephoneDAO() {
+    }
     private static final String TELEPHONE_FIND_ALL_BY_CONTACT_ID_QUERY =
             "SELECT id,country_code,number,type,comment,contact_id  FROM telephone WHERE contact_id = ? AND is_deleted=0;";
     private static final String TELEPHONE_FIND_ALL_QUERY =
@@ -27,30 +31,52 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
             "UPDATE telephone SET country_code=?, number=?, type=?, comment=?, contact_id=?" +
                     "WHERE id=?;";
 
+    @Override
+    protected PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
+        return connection.prepareStatement(TELEPHONE_FIND_ALL_QUERY);
+    }
 
     @Override
-    public ArrayList<Telephone> findAll() {
-        Connection connection = null;
+    protected PreparedStatement prepareStatementFindEntityById(Connection connection, Integer id) throws SQLException {
         PreparedStatement statement = null;
-        ArrayList<Telephone> telephones = new ArrayList<Telephone>();
-        try {
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(TELEPHONE_FIND_ALL_QUERY);
-            ResultSet telephoneResultSet = statement.executeQuery();
-            while (telephoneResultSet.next()) {
-                telephones.add(readEntityFrom(telephoneResultSet));
-            }
-        } catch (SQLException exception) {
-            LOGGER.error("Something went wrong while finding telephone", exception);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-        return telephones;
+        statement = connection.prepareStatement(TELEPHONE_SELECT_QUERY);
+        statement.setInt(1,id);
+        return statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementDelete(Connection connection, Integer id) throws SQLException {
+        PreparedStatement statement = null;
+        statement = connection.prepareStatement(TELEPHONE_DELETE_QUERY);
+        statement.setInt(1,id);
+        return statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementCreate(Connection connection, Telephone telephone) throws SQLException {
+        PreparedStatement statement = null;
+        int i=1;
+        statement = connection.prepareStatement(TELEPHONE_CREATE_QUERY);
+        statement.setString(i++,telephone.getCountryCode());
+        statement.setString(i++,telephone.getNumber());
+        statement.setString(i++,telephone.getType());
+        statement.setString(i++,telephone.getComment());
+        statement.setInt(i++,telephone.getContactId());
+        return statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementUpdate(Connection connection, Telephone telephone) throws SQLException {
+        PreparedStatement statement = null;
+        int i=1;
+        statement = connection.prepareStatement(TELEPHONE_UPDATE_QUERY);
+        statement.setString(i++,telephone.getCountryCode());
+        statement.setString(i++,telephone.getNumber());
+        statement.setString(i++,telephone.getType());
+        statement.setString(i++,telephone.getComment());
+        statement.setInt(i++,telephone.getContactId());
+        statement.setInt(i++,telephone.getId());
+        return statement;
     }
 
     public ArrayList<Telephone> findAllByContactId(Integer contactId) {
@@ -87,108 +113,5 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         String type = telephoneResultSet.getString(i++);
         String comment = telephoneResultSet.getString(i++);
         return new Telephone(id,countryCode,number,type,comment);
-    }
-
-    @Override
-    public Telephone findEntityById(Integer id) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Telephone telephone = null;
-        try {
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(TELEPHONE_SELECT_QUERY);
-            statement.setInt(1,id);
-            ResultSet telephones = statement.executeQuery();
-            while (telephones.next()) {
-                telephone = readEntityFrom(telephones);
-            }
-        } catch (SQLException exception) {
-            LOGGER.error("Something went wrong while finding telephone", exception);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-        return telephone;
-    }
-
-    @Override
-    public void delete(Integer id) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(TELEPHONE_DELETE_QUERY);
-            statement.setInt(1,id);
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in deleting telephone", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-    }
-
-    @Override
-    public void create(Telephone telephone) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Integer i=1;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(TELEPHONE_CREATE_QUERY);
-            statement.setString(i++,telephone.getCountry_code());
-            statement.setString(i++,telephone.getNumber());
-            statement.setString(i++,telephone.getType());
-            statement.setString(i++,telephone.getComment());
-            statement.setInt(i++,telephone.getContactId());
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating telephone", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
-    }
-
-    @Override
-    public void update(Telephone telephone) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        Integer i=1;
-        try{
-            connection = ConnectorDB.getConnection();
-            statement = connection.prepareStatement(TELEPHONE_UPDATE_QUERY);
-            statement.setString(i++,telephone.getCountry_code());
-            statement.setString(i++,telephone.getNumber());
-            statement.setString(i++,telephone.getType());
-            statement.setString(i++,telephone.getComment());
-            statement.setInt(i++,telephone.getContactId());
-            statement.setInt(i++,telephone.getId());
-            statement.executeQuery();
-        }
-        catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating telephone", ex);
-        }
-        finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
-        }
     }
 }

@@ -12,11 +12,11 @@ import java.io.IOException;
  * Created by Maxim on 11/28/2015.
  */
 public class ApplicationController implements Controller{
-    final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
+    final Logger LOGGER = LoggerFactory.getLogger(ApplicationController.class);
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.info("URL: {}",request.getRequestURL());
-        logger.info("query: {}",request.getQueryString());
+        LOGGER.info("URL: {}", request.getRequestURL());
+        LOGGER.info("query: {}", request.getQueryString());
         String email = request.getParameter("inputEmail");
         request.setAttribute("email",email);
         request.getRequestDispatcher("result.jsp").forward(request,response);
