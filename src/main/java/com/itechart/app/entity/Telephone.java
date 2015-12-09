@@ -8,12 +8,25 @@ public class Telephone extends Entity {
     private String number;
     private String type;
     private String comment;
+    private Integer contactId;
 
     public Telephone(String country_code, String number, String type, String comment) {
         this.country_code = country_code;
         this.number = number;
         this.type = type;
         this.comment = comment;
+    }
+
+    public Telephone(Integer id, String country_code, String number, String type, String comment) {
+        super(id);
+        this.country_code = country_code;
+        this.number = number;
+        this.type = type;
+        this.comment = comment;
+    }
+    public Telephone(Integer id, String country_code, String number, String type, String comment, Integer contactId) {
+        this(id,country_code,number,type,comment);
+        this.contactId = contactId;
     }
 
     public String getCountry_code() {
@@ -46,5 +59,12 @@ public class Telephone extends Entity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    public Integer getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
     }
 }

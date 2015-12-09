@@ -6,6 +6,9 @@ import java.io.Serializable;
  * Created by Maxim on 11/24/2015.
  */
 public class Entity implements Serializable,Cloneable {
+
+    private Integer id;
+
     public Entity(){
     }
 
@@ -20,7 +23,4 @@ public class Entity implements Serializable,Cloneable {
     public void setId(int id) {
         this.id = id;
     }
-
-    private Integer id;
-
 }

@@ -41,6 +41,8 @@ public class FrontController extends HttpServlet {
         logger.info("started");
         // Set response content type
         //response.setContentType("text/html");
+        logger.info("site: {}",request.getPathInfo());
+        logger.info("query: {}",request.getQueryString());
         applicationController.processRequest(request,response);
         // Actual logic goes here.
 //        RequestDispatcher view = request.getRequestDispatcher("/index.jsp");

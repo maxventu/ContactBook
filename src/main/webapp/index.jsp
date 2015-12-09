@@ -11,6 +11,10 @@
     <title>Contact Book</title>
 </head>
 <body>
-<p>Hello, world!</p>
+<form  action="/controller" method="post">
+    <label for="inputEmail">Enter e-mail</label>
+    <input type="email" id="inputEmail" name="inputEmail" placeholder="email">
+    <button type="submit">Click me</button>
+</form>
 </body>
 </html>

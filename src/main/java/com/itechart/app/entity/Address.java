@@ -4,29 +4,34 @@ package com.itechart.app.entity;
  * Created by Maxim on 11/24/2015.
  */
 public class Address extends Entity {
-    private String countryCode;
+    private String country;
     private String city;
     private String street;
     private String house;
     private String apartment;
     private String postcode;
+    private Integer contactId;
 
 
-    public Address(String countryCode, String city, String street, String house, String apartment, String postcode) {
-        this.countryCode = countryCode;
+    public Address(String country, String city, String street, String house, String apartment, String postcode) {
+        this.country = country;
         this.city = city;
         this.street = street;
         this.house = house;
         this.apartment = apartment;
         this.postcode = postcode;
     }
-
-    public String getCountryCode() {
-        return countryCode;
+    public Address(String country, String city, String street, String house, String apartment, String postcode, Integer contactId) {
+        this(country,city,street,house,apartment,postcode);
+        this.contactId=contactId;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCity() {
@@ -68,5 +73,15 @@ public class Address extends Entity {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
+
+    public Integer getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
+    }
+
+
 
 }

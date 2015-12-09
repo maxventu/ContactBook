@@ -12,8 +12,15 @@
 
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/ContactBook</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
     <filter>
         <filter-name>PathFilter</filter-name>

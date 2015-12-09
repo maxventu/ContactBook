@@ -9,11 +9,25 @@ public class Attachment extends Entity{
     private String filename;
     private Date date_upload;
     private String comment;
+    private Integer contactId;
+
 
     public Attachment(String filename, Date date_upload, String comment) {
+        super();
         this.filename = filename;
         this.date_upload = date_upload;
         this.comment = comment;
+    }
+
+    public Attachment(Integer id, String filename, Date date_upload, String comment) {
+        super(id);
+        this.filename = filename;
+        this.date_upload = date_upload;
+        this.comment = comment;
+    }
+    public Attachment(Integer id, String filename, Date date_upload, String comment,Integer contactId) {
+        this(id, filename, date_upload, comment);
+        this.contactId = contactId;
     }
 
     public String getFilename() {
@@ -39,4 +53,14 @@ public class Attachment extends Entity{
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Integer getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
+    }
+
+
 }

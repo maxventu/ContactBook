@@ -14,43 +14,40 @@ public class Contact extends Entity {
     private Boolean sexIsMale;
     private String nationality;
     private String familyStatus;
-    private String webStatus;
+    private String webSite;
     private String email;
     private String currentWorkplace;
-    private Integer addressId;
     private String photoUrl;
     private ArrayList<Telephone> telephones;
     private ArrayList<Attachment> attachments;
     private ArrayList<Address> addresses;
 
-    public Contact(String firstName,
+    public Contact(Integer id,
+                   String firstName,
                    String lastName,
                    String patronymic,
                    Date dateOfBirth,
-                   boolean sexIsMale,
+                   Boolean sexIsMale,
                    String nationality,
                    String familyStatus,
-                   String webStatus,
+                   String webSite,
                    String email,
                    String currentWorkplace,
-                   int addressId,
                    String photoUrl) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this(id, firstName, lastName);
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
         this.sexIsMale = sexIsMale;
         this.nationality = nationality;
         this.familyStatus = familyStatus;
-        this.webStatus = webStatus;
+        this.webSite = webSite;
         this.email = email;
         this.currentWorkplace = currentWorkplace;
-        this.addressId = addressId;
         this.photoUrl = photoUrl;
     }
 
-    public Contact(String firstName, String lastName) {
+    public Contact(Integer id,String firstName, String lastName) {
+        super(id);
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -114,12 +111,12 @@ public class Contact extends Entity {
         this.familyStatus = familyStatus;
     }
 
-    public String getWebStatus() {
-        return webStatus;
+    public String getWebSite() {
+        return webSite;
     }
 
-    public void setWebStatus(String webStatus) {
-        this.webStatus = webStatus;
+    public void setWebSite(String webSite) {
+        this.webSite = webSite;
     }
 
     public String getEmail() {
@@ -136,14 +133,6 @@ public class Contact extends Entity {
 
     public void setCurrentWorkplace(String currentWorkplace) {
         this.currentWorkplace = currentWorkplace;
-    }
-
-    public Integer getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
     }
 
     public String getPhotoUrl() {
