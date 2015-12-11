@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by Maxim on 11/28/2015.
@@ -14,12 +15,25 @@ import java.io.IOException;
 public class ApplicationController implements Controller{
     final Logger LOGGER = LoggerFactory.getLogger(ApplicationController.class);
 
+    final private HashMap<String,Controller> mapOfControllers;
+    {
+        mapOfControllers=new HashMap<String, Controller>();
+        mapOfControllers.put("/main",new MainFrameController());
+        mapOfControllers.put("/edit",new ContactController());
+        mapOfControllers.put("/update",new ContactController());
+        mapOfControllers.put("/email",new EmailController());
+    }
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOGGER.info("URL: {}", request.getRequestURL());
-        LOGGER.info("query: {}", request.getQueryString());
-        String email = request.getParameter("inputEmail");
-        request.setAttribute("email",email);
-        request.getRequestDispatcher("result.jsp").forward(request,response);
+        ErrorHandler errorHandler = new ErrorHandler();
+        LOGGER.debug("URL: {}", request.getRequestURL());
+        LOGGER.debug("query: {}", request.getQueryString());
+        LOGGER.debug("URI: {}", request.getRequestURI());
+        LOGGER.debug("path: {}", request.getPathInfo());
+        Controller controller = mapOfControllers.get(request.getPathInfo());
+        if(controller!=null)
+        controller.processRequest(request,response);
+        else response.sendError(404);
 
     }
 }

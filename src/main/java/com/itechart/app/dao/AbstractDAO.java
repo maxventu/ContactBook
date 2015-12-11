@@ -29,17 +29,18 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         ArrayList<T> arrayList = new ArrayList<T>();
         try {
             connection = ConnectorDB.getConnection();
-            //statement = connection.prepareStatement(LOCATION_FIND_ALL_QUERY);
             statement = prepareStatementFindAll(connection);
             ResultSet addressResultSet = statement.executeQuery();
             while (addressResultSet.next()) {
                 arrayList.add(readEntityFrom(addressResultSet));
             }
+            //if(arrayList.isEmpty())arrayList.add(new T());
         } catch (SQLException exception) {
             LOGGER.error("Something went wrong while finding all", exception);
         }
         finally {
             try {
+                if(connection!=null)
                 connection.close();
             } catch (SQLException e) {
                 LOGGER.error("Connection is not closed", e);
@@ -61,7 +62,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             }
         }
         catch (Exception ex){
-            LOGGER.error("something went wrong",ex);
+            LOGGER.error("something went wrong while finding entity",ex);
         }
         finally {
             try{
@@ -82,7 +83,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             statement.executeQuery();
         }
         catch (SQLException ex){
-            LOGGER.error("Something went wrong in deleting attachment", ex);
+            LOGGER.error("Something went wrong in deleting entity", ex);
         }
         finally {
             try {
@@ -101,7 +102,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             statement.executeQuery();
         }
         catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating attachment", ex);
+            LOGGER.error("Something went wrong in creating entity", ex);
         }
         finally {
             try {
@@ -122,7 +123,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             statement.executeQuery();
         }
         catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating attachment", ex);
+            LOGGER.error("Something went wrong in creating entity", ex);
         }
         finally {
             try {

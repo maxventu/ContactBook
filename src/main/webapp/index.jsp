@@ -11,7 +11,7 @@
     <title>Contact Book</title>
 </head>
 <body>
-<form  action="/controller" method="post">
+<form  action="/main.do" method="post">
     <label for="inputEmail">Enter e-mail</label>
     <input type="email" id="inputEmail" name="inputEmail" placeholder="email">
     <button type="submit">Click me</button>

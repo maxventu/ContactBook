@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Maxim on 11/29/2015.
+ * Created by Maxim on 12/10/2015.
  */
-public class ErrorHandler implements Controller{
+public class EmailController implements Controller {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/error.jsp").forward(request,response);
+
     }
 }

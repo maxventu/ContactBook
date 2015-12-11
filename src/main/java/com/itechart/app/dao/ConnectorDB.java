@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class ConnectorDB {
     private static DataSource dataSource;
-    final static Logger LOGGER =  LoggerFactory.getLogger("Connector DB");
+    final static Logger LOGGER =  LoggerFactory.getLogger(ConnectorDB.class);
 
     static {
         initConnector();
@@ -23,7 +23,8 @@ public class ConnectorDB {
     private static void initConnector() {
         try{
         InitialContext initContext= new InitialContext();
-        DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/ContactBook");
+            //Context envContext  = (Context) initContext.lookup("java:/comp/env");
+            dataSource = (DataSource)initContext.lookup("java:/comp/env/jdbc/mysql");
         }
         catch(NamingException e){
             LOGGER.error("Problem with context.xml",e);

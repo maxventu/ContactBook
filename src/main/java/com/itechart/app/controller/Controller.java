@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Maxim on 11/29/2015.
  */
 public interface Controller {
-    public void processRequest(HttpServletRequest
+    void processRequest(HttpServletRequest
                                        request, HttpServletResponse response)
             throws ServletException, java.io.IOException;
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by Maxim on 11/25/2015.
  */
-@WebServlet("/controller")
+@WebServlet("/ContactBook/*")
 public class FrontController extends HttpServlet {
     final Logger logger = LoggerFactory.getLogger(FrontController.class);
 
