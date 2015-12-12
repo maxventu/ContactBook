@@ -79,7 +79,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         return statement;
     }
 
-    public ArrayList<Telephone> findAllByContactId(Integer contactId) {
+    public ArrayList<Telephone> findAllByContactId(Integer contactId) throws ClassNotFoundException {
         Connection connection = null;
         PreparedStatement statement = null;
         ArrayList<Telephone> telephones = new ArrayList<Telephone>();

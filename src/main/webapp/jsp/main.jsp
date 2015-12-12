@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css/Bootstrap_cosmo.css">
 </head>
 <body>
-<c:import url="_mainTableContacts.jsp"></c:import>
+<div class="container">
+    <c:import url="partial/_mainTableContacts.jsp"></c:import>
+</div>
 </body>
 </html>

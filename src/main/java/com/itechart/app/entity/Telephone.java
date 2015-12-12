@@ -67,4 +67,8 @@ public class Telephone extends Entity<Integer> {
     public void setContactId(Integer contactId) {
         this.contactId = contactId;
     }
+
+    public String getFullNumber(){
+        return "+"+countryCode+" "+number;
+    }
 }

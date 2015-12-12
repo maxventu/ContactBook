@@ -122,8 +122,12 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         String apartment =  contact.getString(index++);
         String postcode =  contact.getString(index++);
         Location location = LocationDAO.INSTANCE.findEntityById(postcode);
-        String country = location.getCountry();
-        String city = location.getCity();
+        String country = null;
+        String city = null;
+        if(location!=null){
+            country = location.getCountry();
+            city = location.getCity();
+        }
         return new Contact( id,
                  firstName,
                  lastName,

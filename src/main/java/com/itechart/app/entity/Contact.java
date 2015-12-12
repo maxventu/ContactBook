@@ -230,4 +230,21 @@ public class Contact extends Entity<Integer> {
         this.city = city;
     }
 
+    public String getFullAddress(){
+        StringBuilder stringBuilder=new StringBuilder();
+        if(postcode!=null)stringBuilder.append(postcode).append(" ");
+        if(street!=null)stringBuilder.append(street).append(" st., ");
+        if(house!=null)stringBuilder.append(house).append("-");
+        if(apartment!=null)stringBuilder.append(apartment).append(", ");
+        if(city!=null)stringBuilder.append(city).append(", ");
+        if(country!=null)stringBuilder.append(country);
+        String string = ""+stringBuilder;
+        string.trim();
+        if(string.lastIndexOf(",")==string.length()-2)string=string.substring(0,string.length()-2);
+        if(string.lastIndexOf("-")==string.length()-2)string=string.substring(0,string.length()-2);
+        return string;
+    }
+    public String getFullName(){
+        return firstName+" "+lastName+" "+patronymic;
+    }
 }

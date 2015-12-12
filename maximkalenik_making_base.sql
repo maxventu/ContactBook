@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `maximkalenik`.`contact` (
   `apartment` VARCHAR(10) NULL DEFAULT NULL,
   `is_deleted` TINYINT(1) NULL DEFAULT '0',
   `date_deleted` DATETIME NULL DEFAULT NULL,
-  `location_postcode` VARCHAR(10) NOT NULL,
+  `location_postcode` VARCHAR(10) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_contact_location1_idx` (`location_postcode` ASC),
