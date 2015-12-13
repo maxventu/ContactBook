@@ -4,8 +4,8 @@ package com.itechart.app.entity.helpers;
  * Created by Maxim on 12/12/2015.
  */
 public enum FamilyStatus {
-    married("Married"),
     single("Single"),
+    married("Married"),
     divorced("Divorced"),
     widow("Widow/Widower");
 

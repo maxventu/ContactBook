@@ -7,26 +7,26 @@ import java.util.Date;
  */
 public class Attachment extends Entity<Integer>{
     private String filename;
-    private Date date_upload;
+    private Date dateUpload;
     private String comment;
     private Integer contactId;
 
 
-    public Attachment(String filename, Date date_upload, String comment) {
+    public Attachment(String filename, Date dateUpload, String comment) {
         super();
         this.filename = filename;
-        this.date_upload = date_upload;
+        this.dateUpload = dateUpload;
         this.comment = comment;
     }
 
-    public Attachment(Integer id, String filename, Date date_upload, String comment) {
+    public Attachment(Integer id, String filename, Date dateUpload, String comment) {
         super(id);
         this.filename = filename;
-        this.date_upload = date_upload;
+        this.dateUpload = dateUpload;
         this.comment = comment;
     }
-    public Attachment(Integer id, String filename, Date date_upload, String comment,Integer contactId) {
-        this(id, filename, date_upload, comment);
+    public Attachment(Integer id, String filename, Date dateUpload, String comment,Integer contactId) {
+        this(id, filename, dateUpload, comment);
         this.contactId = contactId;
     }
 
@@ -38,12 +38,12 @@ public class Attachment extends Entity<Integer>{
         this.filename = filename;
     }
 
-    public Date getDate_upload() {
-        return date_upload;
+    public Date getDateUpload() {
+        return dateUpload;
     }
 
-    public void setDate_upload(Date date_upload) {
-        this.date_upload = date_upload;
+    public void setDateUpload(Date dateUpload) {
+        this.dateUpload = dateUpload;
     }
 
     public String getComment() {

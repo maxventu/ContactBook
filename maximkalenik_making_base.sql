@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `maximkalenik`.`contact` (
 
 
 -- -----------------------------------------------------
--- Table `maximkalenik`.`attachments`
+-- Table `maximkalenik`.`attachment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `maximkalenik`.`attachments` (
+CREATE TABLE IF NOT EXISTS `maximkalenik`.`attachment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `filename` VARCHAR(45) NULL DEFAULT NULL,
   `date_upload` DATETIME NULL DEFAULT NULL,
@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `maximkalenik`.`attachments` (
   `is_deleted` TINYINT(1) NULL DEFAULT '0',
   `date_deleted` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`, `contact_id`),
-  INDEX `fk_attachments_contact_idx` (`contact_id` ASC),
-  CONSTRAINT `fk_attachments_contact`
+  INDEX `fk_attachment_contact_idx` (`contact_id` ASC),
+  CONSTRAINT `fk_attachment_contact`
   FOREIGN KEY (`contact_id`)
   REFERENCES `maximkalenik`.`contact` (`id`)
     ON DELETE NO ACTION

@@ -15,7 +15,7 @@ public enum TelephoneType {
 
     private String value;
 
-    public static TelephoneType get(String input) {
+    public TelephoneType get(String input) {
 
         for (TelephoneType tel : TelephoneType.values()) {
             if (tel.name().equals(input)) {
