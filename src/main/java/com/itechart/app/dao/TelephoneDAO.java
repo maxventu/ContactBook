@@ -109,9 +109,10 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         Integer i=1;
         Integer id = telephoneResultSet.getInt(i++);
         String countryCode = telephoneResultSet.getString(i++);
+        String operatorCode = telephoneResultSet.getString(i++);
         String number = telephoneResultSet.getString(i++);
         String type = telephoneResultSet.getString(i++);
         String comment = telephoneResultSet.getString(i++);
-        return new Telephone(id,countryCode,number,type,comment);
+        return new Telephone(id,countryCode,operatorCode,number,type,comment);
     }
 }

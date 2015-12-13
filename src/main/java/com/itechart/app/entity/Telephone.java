@@ -5,27 +5,30 @@ package com.itechart.app.entity;
  */
 public class Telephone extends Entity<Integer> {
     private String countryCode;
+    private String operatorCode;
     private String number;
     private String type;
     private String comment;
     private Integer contactId;
 
-    public Telephone(String countryCode, String number, String type, String comment) {
+    public Telephone(String countryCode,String operatorCode, String number, String type, String comment) {
         this.countryCode = countryCode;
+        this.operatorCode = operatorCode;
         this.number = number;
         this.type = type;
         this.comment = comment;
     }
 
-    public Telephone(Integer id, String countryCode, String number, String type, String comment) {
+    public Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment) {
         super(id);
         this.countryCode = countryCode;
+        this.operatorCode = operatorCode;
         this.number = number;
         this.type = type;
         this.comment = comment;
     }
-    public Telephone(Integer id, String countryCode, String number, String type, String comment, Integer contactId) {
-        this(id, countryCode,number,type,comment);
+    public Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment, Integer contactId) {
+        this(id, operatorCode, countryCode,number,type,comment);
         this.contactId = contactId;
     }
 
@@ -68,7 +71,18 @@ public class Telephone extends Entity<Integer> {
         this.contactId = contactId;
     }
 
+
+    public String getOperatorCode() {
+        return operatorCode;
+    }
+
+    public void setOperatorCode(String operatorCode) {
+        this.operatorCode = operatorCode;
+    }
+
+
+
     public String getFullNumber(){
-        return "+"+countryCode+" "+number;
+        return (countryCode!=null ? "+"+countryCode: "")+(operatorCode!=null ? "("+operatorCode+")": "")+""+number;
     }
 }

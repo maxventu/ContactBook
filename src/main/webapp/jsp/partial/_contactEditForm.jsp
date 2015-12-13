@@ -87,7 +87,7 @@
         <div class="col-lg-10">
             <select class="form-control" name="familyStatus" id="familyStatus">
                 <c:if test="${contact.familyStatus == null}">
-                    <option>Choose</option>
+                    <option>Choose status</option>
                 </c:if>
                 <c:forEach var="status" items="${familyStatuses}">
                     <c:choose>

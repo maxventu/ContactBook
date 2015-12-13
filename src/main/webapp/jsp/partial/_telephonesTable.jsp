@@ -13,7 +13,7 @@
     pageContext.setAttribute("telephoneType", TelephoneType.MOB);
 %>
 <jsp:useBean id="telephones" scope="request" type="java.util.List<com.itechart.app.entity.Telephone>"/>
-
+<c:import url="_modalTelephoneEdit.jsp"></c:import>
 <div class="form-horizontal" role="form">
     <div class="form-group">
         <label for="telephonesTable" class="col-lg-2 control-label">Telephones</label>

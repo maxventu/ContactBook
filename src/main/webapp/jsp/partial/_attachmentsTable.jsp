@@ -22,19 +22,19 @@
                             <th class="col-lg-3">Date of upload</th>
                             <th class="col-lg-4">
                                 <span class="col-lg-5" style="padding-left: 0;">Comment</span>
-                <span class="col-lg-7">
-                    <span class="btn-group pull-right" role="group">
-                      <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                      </button>
-                      <button type="button" class="btn btn-primary btn-sm" >
-                          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                      </button>
-                      <button type="button" class="btn btn-success btn-sm">
-                          <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
-                      </button>
-                    </span>
-                </span>
+                                <span class="col-lg-7">
+                                    <span class="btn-group pull-right" role="group">
+                                      <button type="button" class="btn btn-danger btn-sm">
+                                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-primary btn-sm" >
+                                          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-success btn-sm">
+                                          <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                      </button>
+                                    </span>
+                                </span>
                             </th>
                         </tr>
                         <c:forEach var="attachment" items="${attachments}">
@@ -48,15 +48,6 @@
                                 <td>${attachment.comment}</td>
                             </tr>
                         </c:forEach>
-                        <tr>
-                            <td>
-                                <label for="att_${attachment.id}" class="sr-only"></label>
-                                <input type="checkbox" id="att_${attachment.id}">
-                            </td>
-                            <td>file.jpg</td>
-                            <td>10/12/2015</td>
-                            <td>blablabla</td>
-                        </tr>
                     </table>
                 </div>
             </div>
