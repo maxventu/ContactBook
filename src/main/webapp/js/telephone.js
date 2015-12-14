@@ -2,6 +2,7 @@ window.onload = load;
 var ContactBook = {
     lastId:0
 };
+
 function load(){
     console.log("adding listeners");
     setLastTelephoneId();
@@ -36,6 +37,7 @@ function openTelephoneModal(){
     telephoneModal.setAttribute("class","modal fade in");
     telephoneModal.setAttribute("style","display: block;");
 }
+
 function closeTelephoneModal(){
     console.log("hide telephone modal");
     document.body.removeAttribute("class");
@@ -77,12 +79,14 @@ function deleteTelephone(){
         }
     }
 }
+
 function editTelephoneModal(){
     setFullNameIn("telephoneModalLabel");
     var id=getFirstSelectedTelephoneId("telephoneCheckbox");
     if(id!=null)
         initTelephoneModalFields(id);
     openTelephoneModal();
+
     function getFirstSelectedTelephoneId(checkName){
         var elements = document.getElementsByName(checkName);
         if(elements.length<1)return null;
@@ -102,10 +106,6 @@ function submitTelephone(){
 
     var elem = document.getElementById("telephoneModal_id");
     var telephoneId = elem.value;
-/*
-    var typeInModal = document.getElementById("telephoneModal_id");
-    var sel=document.getElementById("telephoneModal_type_select");
-    typeInModal.setAttribute("value",sel.value);*/
 
     if(telephoneId != "" && telephoneId != null && telephoneId!=undefined)
         updateTelephone(telephoneId);
@@ -114,29 +114,25 @@ function submitTelephone(){
     closeTelephoneModal();
 
     function updateTelephone(telephoneId) {
-        updateTelephone();
-        function updateTelephone(){
-            //setInfoTelephoneToNew(telephoneId,"check");
-            var country_code = setInfoTelephoneToNew(telephoneId,"country_code");
-            var operator_code = setInfoTelephoneToNew(telephoneId,"operator_code");
-            var number = setInfoTelephoneToNew(telephoneId,"number");
-            var type = setInfoTelephoneToNew(telephoneId,"type_select");
-            var comment = setInfoTelephoneToNew(telephoneId,"comment");
-            var str = "+"+country_code.value+"("+operator_code.value+")"+number.value;
-            var parent = country_code.parentNode;
-            var tds = parent.getElementsByTagName("td");
+        var country_code = setInfoTelephoneToNew(telephoneId,"country_code");
+        var operator_code = setInfoTelephoneToNew(telephoneId,"operator_code");
+        var number = setInfoTelephoneToNew(telephoneId,"number");
+        var type = setInfoTelephoneToNew(telephoneId,"type_select");
+        var comment = setInfoTelephoneToNew(telephoneId,"comment");
+        var str = "+"+country_code.value+"("+operator_code.value+")"+number.value;
+        var parent = country_code.parentNode;
+        var tds = parent.getElementsByTagName("td");
 
-            tds[1].innerHTML = str;
-            var typeSel = document.getElementById("telephoneModal_type_select");
-            tds[2].innerHTML = typeSel[typeSel.selectedIndex].text;
-            tds[3].innerHTML = comment.value;
+        tds[1].innerHTML = str;
+        var typeSel = document.getElementById("telephoneModal_type_select");
+        tds[2].innerHTML = typeSel[typeSel.selectedIndex].text;
+        tds[3].innerHTML = comment.value;
 
-            function setInfoTelephoneToNew(telephoneId,fieldType){
-                var inputInModal = document.getElementById("telephoneModal_"+fieldType);
-                var inputInTable = document.getElementById("tel_"+fieldType+"_"+telephoneId);
-                inputInTable.value = inputInModal.value;
-                return inputInTable;
-            }
+        function setInfoTelephoneToNew(telephoneId,fieldType){
+            var inputInModal = document.getElementById("telephoneModal_"+fieldType);
+            var inputInTable = document.getElementById("tel_"+fieldType+"_"+telephoneId);
+            inputInTable.value = inputInModal.value;
+            return inputInTable;
         }
     }
 
@@ -193,33 +189,13 @@ function submitTelephone(){
             input.value = inputInModal.value;
             return input;
         }
+
         function createTelephoneNewHistory(elementId){
             var el = document.createElement("input");
             el.setAttribute("type", "hidden");
             el.setAttribute("name","newTelephone");
             el.setAttribute("value",elementId);
             return el;
-        }
-        function initNewTelephone(){
-            var country_code = setInfoTelephoneToNew(newId,"country_code");
-            var operator_code = setInfoTelephoneToNew(newId,"operator_code");
-            var number = setInfoTelephoneToNew(newId,"number");
-            var type = setInfoTelephoneToNew(newId,"type");
-            var comment = setInfoTelephoneToNew(newId,"comment");
-            var tds = parent.getElementsByTagName("td");
-            var str = "+"+country_code.value+"("+operator_code.value+")"+number.value;
-            tds[1].innerHTML = str;
-            var selection = document.getElementById("telephoneModal_type_select");
-            str = selection[selection.selectedIndex].text;
-            tds[2].innerHTML = str;
-            tds[3].innerHTML = comment.value;
-            function setInfoTelephoneToNew(telId,fieldType){
-                var inputInModal = document.getElementById("telephoneModal_"+fieldType);
-                var inputInTable = document.getElementById("tel_"+fieldType+"_new");
-                inputInTable.id = "tel_"+fieldType+"_"+telId;
-                inputInTable.value = inputInModal.value;
-                return inputInTable;
-            }
         }
     }
 }
@@ -230,14 +206,20 @@ function setFullNameIn(modalLabelId){
     var lastName = document.getElementById("lastName");
     label.innerHTML = "New telephone for "+firstName.value+" "+lastName.value;
 }
+
 function reinitTelephoneModal(){
-    setValueInputToNull("telephoneModal_country_code");
-    setValueInputToNull("telephoneModal_operator_code");
-    setValueInputToNull("telephoneModal_number");
-    setValueInputToNull("telephoneModal_comment");
+    var types = [
+        "telephoneModal_country_code",
+        "telephoneModal_operator_code",
+        "telephoneModal_number",
+        "telephoneModal_comment",
+        "telephoneModal_id"];
+    types.forEach(function(type,i,types){
+        setValueInputToNull(type);
+    });
     var sel = document.getElementById("telephoneModal_type_select");
     sel.selectedIndex = 0;
-    setValueInputToNull("telephoneModal_id");
+
     function setValueInputToNull(id){
         var input = document.getElementById(id);
         input.value=null;
@@ -245,12 +227,10 @@ function reinitTelephoneModal(){
 }
 
 function initTelephoneModalFields(telephoneId){
-    setInfoTelephoneToModal(telephoneId,"country_code");
-    setInfoTelephoneToModal(telephoneId,"operator_code");
-    setInfoTelephoneToModal(telephoneId,"number");
-    setInfoTelephoneToModal(telephoneId,"comment");
-    setInfoTelephoneToModal(telephoneId,"type_select");
-    setInfoTelephoneToModal(telephoneId,"id");
+    var types = ["id","country_code","operator_code","number","comment","type_select"];
+    types.forEach(function(type,i,types){
+        setInfoTelephoneToModal(telephoneId,type);
+    });
 
     var modal = document.getElementById("telephoneModal_id");
     modal.value = telephoneId;
@@ -265,22 +245,21 @@ function initTelephoneModalFields(telephoneId){
 function getAllSelectedChecks(checkName){
     var elements = document.getElementsByName(checkName);
     var tmp = [];
-    if(elements.length==0)return null;
     for(var i=0;i<elements.length;i++){
         if(elements[i].checked==true) tmp.push(elements[i]);
     }
+    if(tmp.length==0)return null;
     return tmp;
 }
+
 function setLastTelephoneId(){
     var elements = document.getElementsByName("telephoneCheckbox");
     if(elements.length>0)
-    ContactBook.lastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
+        ContactBook.lastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
     else ContactBook.lastId = 0;
 }
 
-function getSelectedTelephoneTypeModal(optionsName)
-{
+function getSelectedTelephoneTypeModal(optionsName) {
     var options = document.getElementsByName(optionsName);
-
     return options[options.selectedIndex];
 }
