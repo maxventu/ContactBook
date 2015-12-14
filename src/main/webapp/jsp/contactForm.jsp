@@ -14,6 +14,9 @@
     <title>Contact</title>
     <link rel="stylesheet" href="../css/Bootstrap_cosmo.css">
     <link rel="stylesheet" href="../css/contactbook.css">
+    <script src="../js/attachment.js"></script>
+    <script src="../js/telephone.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 <body>
 
@@ -28,13 +31,13 @@
         </div>
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="partial/_telephonesTable.jsp"/>
+                <c:import url="partial/telephone/_telephonesTable.jsp"/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="partial/_attachmentsTable.jsp"/>
+                <c:import url="partial/attachment/_attachmentsTable.jsp"/>
             </div>
         </div>
 
@@ -46,9 +49,8 @@
     </form>
 </div>
 
-<c:import url="partial/_modalTelephoneEdit.jsp"></c:import>
+<c:import url="partial/telephone/_telephoneEditModal.jsp"></c:import>
+<c:import url="partial/attachment/_attachmentAddModal.jsp"></c:import>
+<c:import url="partial/attachment/_attachmentEditModal.jsp"></c:import>
 </body>
-<script>
-    <c:import url="../js/telephone.js"></c:import>
-</script>
 </html>
