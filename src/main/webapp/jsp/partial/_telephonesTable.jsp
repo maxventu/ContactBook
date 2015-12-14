@@ -13,15 +13,16 @@
     pageContext.setAttribute("telephoneType", TelephoneType.MOB);
 %>
 <jsp:useBean id="telephones" scope="request" type="java.util.List<com.itechart.app.entity.Telephone>"/>
-<c:import url="_modalTelephoneEdit.jsp"></c:import>
+
 <div class="form-horizontal" role="form">
     <div class="form-group">
         <label for="telephonesTable" class="col-lg-2 control-label">Telephones</label>
         <div class="col-lg-10">
-            <div class="panel panel-default" id="telephonesTable">
+            <div class="panel panel-default" id="telephonesTable" style="margin-bottom: 0;">
                 <div class="panel-body">
 
-                    <table class="table table-condensed table-stripped">
+                    <table class="table table-condensed table-stripped" >
+                        <tbody id="tel_table">
                         <tr>
                             <th class="col-lg-1"></th>
                             <th class="col-lg-4">Telephone</th>
@@ -30,30 +31,39 @@
                                 <span class="col-lg-5" style="padding-left: 0;">Comment</span>
                                 <span class="col-lg-7">
                                     <span class="btn-group pull-right" role="group">
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <button type="button" class="btn btn-danger btn-sm" id="telephoneDelete" >
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-primary btn-sm" >
+                                        <button type="button" id="telephoneEditButton" class="btn btn-primary btn-sm">
                                             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-success btn-sm">
-                                            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" id="telephoneAddButton" class="btn btn-success btn-sm">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </span>
                                 </span>
                             </th>
                         </tr>
                         <c:forEach var="telephone" items="${telephones}">
-                            <tr >
+                            <tr id="tel_id_${telephone.id}">
                                 <td>
-                                    <label for="tel_${telephone.id}" class="sr-only"></label>
-                                    <input type="checkbox" id="tel_${telephone.id}">
+                                    <label for="tel_check_${telephone.id}" class="sr-only"></label>
+                                    <input name="telephoneCheckbox" type="checkbox" id="tel_check_${telephone.id}">
                                 </td>
                                 <td>${telephone.fullNumber}</td>
                                 <td>${telephoneType.get(telephone.type).value}</td>
                                 <td>${telephone.comment}</td>
+
+                                <input type="hidden" id="tel_country_code_${telephone.id}" value="${telephone.countryCode}">
+                                <input type="hidden" id="tel_operator_code_${telephone.id}" value="${telephone.operatorCode}">
+                                <input type="hidden" id="tel_number_${telephone.id}" value="${telephone.number}">
+                                <input type="hidden" id="tel_type_select_${telephone.id}" value="${telephone.type}">
+                                <input type="hidden" id="tel_comment_${telephone.id}" value="${telephone.comment}">
                             </tr>
                         </c:forEach>
+                        <span class="not-visible" id="deletedTelephones"></span>
+                        <span class="not-visible" id="newTelephones"></span>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `maximkalenik`.`attachment` (
 CREATE TABLE IF NOT EXISTS `maximkalenik`.`telephone` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `country_code` VARCHAR(10) NULL DEFAULT NULL,
-  'operator_code' INT(4) NULL DEFAULT NULL,
+  `operator_code` VARCHAR(4) NULL DEFAULT NULL,
   `number` INT(11) NOT NULL,
   `type` VARCHAR(5) NULL DEFAULT NULL,
   `comment` VARCHAR(100) NULL DEFAULT NULL,

@@ -245,6 +245,6 @@ public class Contact extends Entity<Integer> {
         return string;
     }
     public String getFullName(){
-        return firstName+" "+lastName+" "+patronymic;
+        return ((firstName!=null? firstName+" ":"")+(lastName!=null? lastName : "") +(patronymic!=null? " "+patronymic:" ")).trim();
     }
 }

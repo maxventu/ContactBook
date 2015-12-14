@@ -4,6 +4,7 @@ package com.itechart.app.entity.helpers;
  * Created by Maxim on 12/12/2015.
  */
 public enum TelephoneType {
+
     MOB("Mobile"),
     WOR("Work"),
     HOM("Home"),

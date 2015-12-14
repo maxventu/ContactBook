@@ -12,47 +12,63 @@
 <%
     pageContext.setAttribute("telephoneTypes", TelephoneType.values());
 %>
+<jsp:useBean id="telephoneTypes" scope="page" type="com.itechart.app.entity.helpers.TelephoneType[]"/>
 <div class="modal fade" id="telephoneModal" tabindex="-1" role="dialog" aria-labelledby="telephoneModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close telephone-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="telephoneModalLabel">Telephone of</h4>
+                <input type="hidden" id="telephoneModal_id">
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-1">
-                        <label class="sr-only" for="telephoneModal_country_code">Country code</label>
-                        <input type="text" class="form-control " id="telephoneModal_country_code" placeholder="Contry code" value="">
+                <div class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label class="" for="telephoneModal_country_code">Country</label>
+                                <input type="text"  pattern="[0-9]{0,3}" class="form-control small-padding" id="telephoneModal_country_code">
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="" for="telephoneModal_operator_code">Operator</label>
+                                <input type="text" pattern="[0-9]{0,3}" class="form-control small-padding"  id="telephoneModal_operator_code" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="" for="telephoneModal_number">Number</label>
+                                <input type="tel" class="form-control" pattern="[0-9]{5,10}" id="telephoneModal_number">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="telephoneModal_type_select" class="">Telephone type</label>
+                                <select class="form-control" name="telephoneTypes" id="telephoneModal_type_select">
+                                    <c:forEach var="telephoneType" items="${telephoneTypes}">
+                                        <option name="telephoneType" id="telephoneModal_type_${telephoneType}" value="${telephoneType}">${telephoneType.value}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-1"  style="padding-left: 0;">
-                        <label class="sr-only" for="telephoneModal_operator_code">Operator code</label>
-                        <input type="text" class="form-control " id="telephoneModal_operator_code" placeholder="Operator code" value="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="sr-only" for="telephoneModal_comment">Comment</label>
+                                <input type="text" class="form-control" id="telephoneModal_comment" placeholder="Type any comment here">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4"  style="padding-left: 0;">
-                        <label class="sr-only" for="telephoneModal_number">Number</label>
-                        <input type="text" class="form-control" id="telephoneModal_number" placeholder="Number" value="">
-                    </div>
-                    <div class="col-lg-4"  style="padding-left: 0;">
-                        <label for="telephoneModal_type" class="sr-only">Telephone type</label>
-                        <select class="form-control" name="telephoneType" id="telephoneModal_type">
-                            <c:forEach var="telephoneType" items="${telephoneTypes}">
-                                <option value="${status}">${status.value}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <label class="sr-only" for="telephoneModal_comment">Comment</label>
-                        <input type="text" class="form-control" id="telephoneModal_comment" placeholder="Type any comment here" value="">
+
+                    <div class="alert alert-danger" role="alert" id="telephoneModalAlert" style="display:none;">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Enter a valid telephone N{0,3} N{0,3} N{5-10}
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default telephone-close-modal">Close</button>
                 <button type="button" class="btn btn-primary" id="telephoneModalApply">Apply</button>
             </div>
+
         </div>
     </div>
 </div>

@@ -18,17 +18,17 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
     private TelephoneDAO() {
     }
     private static final String TELEPHONE_FIND_ALL_BY_CONTACT_ID_QUERY =
-            "SELECT id,country_code,number,type,comment,contact_id  FROM telephone WHERE contact_id = ? AND is_deleted=0;";
+            "SELECT id,country_code,operator_code,number,type,comment,contact_id  FROM telephone WHERE contact_id = ? AND is_deleted=0;";
     private static final String TELEPHONE_FIND_ALL_QUERY =
-            "SELECT id,country_code,number,type,comment,contact_id  FROM telephone WHERE is_deleted=0;";
+            "SELECT id,country_code,operator_code,number,type,comment,contact_id  FROM telephone WHERE is_deleted=0;";
     private static final String TELEPHONE_SELECT_QUERY =
-            "SELECT id,country_code,number,type,comment,contact_id  FROM telephone WHERE id = ? AND is_deleted=0;";
+            "SELECT id,country_code,operator_code,number,type,comment,contact_id  FROM telephone WHERE id = ? AND is_deleted=0;";
     private static final String TELEPHONE_DELETE_QUERY =
             "UPDATE telephone SET is_deleted=1, date_deleted=NOW() WHERE id=?;";
     private static final String TELEPHONE_CREATE_QUERY =
-            "INSERT INTO telephone (country_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?);";
+            "INSERT INTO telephone (country_code,operator_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?, ?);";
     private static final String TELEPHONE_UPDATE_QUERY =
-            "UPDATE telephone SET country_code=?, number=?, type=?, comment=?, contact_id=?" +
+            "UPDATE telephone SET country_code=?,operator_code=?, number=?, type=?, comment=?, contact_id=?" +
                     "WHERE id=?;";
 
     @Override
@@ -58,6 +58,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         int i=1;
         statement = connection.prepareStatement(TELEPHONE_CREATE_QUERY);
         statement.setString(i++,telephone.getCountryCode());
+        statement.setString(i++,telephone.getOperatorCode());
         statement.setString(i++,telephone.getNumber());
         statement.setString(i++,telephone.getType());
         statement.setString(i++,telephone.getComment());
@@ -71,6 +72,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         int i=1;
         statement = connection.prepareStatement(TELEPHONE_UPDATE_QUERY);
         statement.setString(i++,telephone.getCountryCode());
+        statement.setString(i++,telephone.getOperatorCode());
         statement.setString(i++,telephone.getNumber());
         statement.setString(i++,telephone.getType());
         statement.setString(i++,telephone.getComment());

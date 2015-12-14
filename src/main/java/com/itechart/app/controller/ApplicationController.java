@@ -26,10 +26,7 @@ public class ApplicationController implements Controller{
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ErrorHandler errorHandler = new ErrorHandler();
-        LOGGER.debug("URL: {}", request.getRequestURL());
         LOGGER.debug("query: {}", request.getQueryString());
-        LOGGER.debug("URI: {}", request.getRequestURI());
-        LOGGER.debug("path: {}", request.getPathInfo());
         Controller controller = mapOfControllers.get(request.getPathInfo());
         if(controller!=null)
         controller.processRequest(request,response);

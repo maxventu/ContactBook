@@ -38,11 +38,9 @@ public class FrontController extends HttpServlet {
     protected void execute(HttpServletRequest
                                    request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
-        logger.info("started");
+        logger.debug("started");
         // Set response content type
         //response.setContentType("text/html");
-        logger.info("site: {}",request.getPathInfo());
-        logger.info("query: {}",request.getQueryString());
         applicationController.processRequest(request,response);
         // Actual logic goes here.
 //        RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
