@@ -14,10 +14,12 @@
     <title>Contact Book</title>
     <link rel="stylesheet" href="../css/Bootstrap_cosmo.css">
 </head>
+
 <body>
 <c:import url="partial/_navbar.jsp"/>
-<div class="container">
-    <c:import url="partial/_mainTableContacts.jsp"></c:import>
-</div>
+    <div class="container">
+        <c:import url="partial/_mainTableContacts.jsp"></c:import>
+    </div>
+<input type="hidden" id="page_number" value="${pageNumber}">
 </body>
 </html>

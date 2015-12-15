@@ -30,14 +30,13 @@ public class ApplicationController implements Controller{
         ErrorHandler errorHandler = new ErrorHandler();
         LOGGER.debug("query: {}", request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
-
-            try{
-                if(controller!=null)
-        controller.processRequest(request,response);
-            }
-        catch(Exception e) {
+        if(controller!=null)
+            controller.processRequest(request,response);
+        else try{
+            request.getRequestDispatcher("/jsp"+request.getPathInfo()+".jsp").forward(
+                    request, response);
+        }catch(Exception e){
             response.sendError(404);
         }
-
     }
 }

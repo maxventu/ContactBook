@@ -9,12 +9,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <table class="table table-stripped">
+    <tbody id="akk_table">
     <tr>
-        <th></th>
-        <th>Full name</th>
-        <th>Date of birth</th>
-        <th>Address</th>
-        <th>Company</th>
+        <th class="col-lg-1"></th>
+        <th class="col-lg-3">Full name</th>
+        <th class="col-lg-3">Date of birth</th>
+        <th class="col-lg-3">Address</th>
+        <th class="col-lg-3">
+            <span class="col-lg-5" style="padding-left: 0;">Comment</span>
+            <span class="col-lg-7">
+                <span class="btn-group pull-right" role="group">
+                    <button type="button" id="accountDelete" class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" id="accountAddButton" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </span>
+        </th>
     </tr>
     <c:forEach var="contact" items="${contacts}">
         <tr>
@@ -25,4 +38,5 @@
             <td>${contact.currentWorkplace}</td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>

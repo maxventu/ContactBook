@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="../css/Bootstrap_cosmo.css">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <a class="nav navbar-brand" href="/ContactBook/main">Contact Book</a>
@@ -14,7 +15,7 @@
                 <li><a href="/ContactBook/search">Search</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/ContactBook/jsp/about.jsp">About</a></li>
+                <li><a href="/ContactBook/about">About</a></li>
             </ul>
     </div>
 </nav>
