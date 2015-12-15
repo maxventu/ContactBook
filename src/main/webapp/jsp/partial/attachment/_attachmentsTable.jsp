@@ -19,9 +19,9 @@
                         <tbody id="att_table">
                             <tr>
                                 <th class="col-lg-1"></th>
-                                <th class="col-lg-4">Name</th>
+                                <th class="col-lg-3">Name</th>
                                 <th class="col-lg-3">Date of upload</th>
-                                <th class="col-lg-4">
+                                <th class="col-lg-5">
                                     <span class="col-lg-5" style="padding-left: 0;">Comment</span>
                                     <span class="col-lg-7">
                                         <span class="btn-group pull-right" role="group">

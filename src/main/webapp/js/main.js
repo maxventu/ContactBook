@@ -9,7 +9,7 @@ function load(){
     loadAttachments();
 }
 
-function openModal(id){
+function openModal(textLabel,id){
     document.body.setAttribute("class","modal-open");
     document.body.setAttribute("style","padding-right: 17px;");
 
@@ -18,7 +18,7 @@ function openModal(id){
     el.setAttribute("class","modal-backdrop fade in");
     document.body.appendChild(el);
 
-    setFullNameIn(id+"Label");
+    setFullNameIn(textLabel,id+"Label");
     var modal = document.getElementById(id);
     modal.setAttribute("class","modal fade in");
     modal.setAttribute("style","display: block;");
@@ -43,11 +43,11 @@ function setValueOfInputToNull(id){
     input.value=null;
 }
 
-function setFullNameIn(modalLabelId){
+function setFullNameIn(textLabel,modalLabelId){
     var label = document.getElementById(modalLabelId);
     var firstName = document.getElementById("firstName");
     var lastName = document.getElementById("lastName");
-    label.innerHTML = "New attachment for "+firstName.value+" "+lastName.value;
+    label.innerHTML = textLabel+firstName.value+" "+lastName.value;
 }
 function initModalClosingByName(name,func){
     var modal = document.getElementsByClassName(name+"-close-modal");

@@ -23,15 +23,15 @@
             <div class="row">
               <div class="col-lg-12">
                 <label class="" for="attachmentEditModal_filename">File name</label>
-                <input type="text"  class="form-control small-padding" id="attachmentEditModal_filename">
+                <input type="text"  class="form-control" id="attachmentEditModal_filename" placeholder="Filename">
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-12">
-                <label class="sr-only" for="attachmentEditModal_comment">Comment</label>
-                <input type="text" class="form-control" id="attachmentEditModal_comment">
+                <label class="" for="attachmentEditModal_comment">Comment</label>
+                <input type="text" class="form-control" id="attachmentEditModal_comment" placeholder="Add coments here">
               </div>
             </div>
           </div>

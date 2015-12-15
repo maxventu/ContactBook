@@ -14,7 +14,7 @@ function loadAttachments(){
 }
 
 function createAttachmentModal(){
-    openModal("attachmentAddModal");
+    openModal("New attachment for ","attachmentAddModal");
 }
 
 function deleteAttachments(){
@@ -61,7 +61,7 @@ function editAttachmentModal(){
     var id=getFirstSelectedAttachmentId("attachmentCheckbox");
     if(id!=null){
         initAttachmentEditModalFields(id);
-        openModal("attachmentEditModal");
+        openModal("Edit attachment for "+"attachmentEditModal");
     }
 
     function getFirstSelectedAttachmentId(checkName){
@@ -76,7 +76,7 @@ function editAttachmentModal(){
 
 function submitEditAttachment() {
 
-    var modal_id = document.getElementById("attachmentModal_id");
+    var modal_id = document.getElementById("attachmentEditModal_id");
     var attId = modal_id.value;
 
     if(attId != "" && attId != null && attId!=undefined)
@@ -127,7 +127,7 @@ function submitAddAttachment() {
     newTableRow.appendChild(td);
 
     td = document.createElement("td");
-    td.innerHTML = thisDate.getTime() +" "+ thisDate.getDate();
+    td.innerHTML = thisDate.toLocaleTimeString() +" "+ thisDate.toLocaleDateString();
     newTableRow.appendChild(td);
 
     td = document.createElement("td");
@@ -135,6 +135,7 @@ function submitAddAttachment() {
     newTableRow.appendChild(td);
 
     newTableRow.appendChild(filename);
+    newTableRow.appendChild(file);
     newTableRow.appendChild(date);
     newTableRow.appendChild(comment);
 

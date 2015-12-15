@@ -25,9 +25,9 @@
                         <tbody id="tel_table">
                         <tr>
                             <th class="col-lg-1"></th>
-                            <th class="col-lg-4">Telephone</th>
+                            <th class="col-lg-3">Telephone</th>
                             <th class="col-lg-3">Type</th>
-                            <th class="col-lg-4">
+                            <th class="col-lg-5">
                                 <span class="col-lg-5" style="padding-left: 0;">Comment</span>
                                 <span class="col-lg-7">
                                     <span class="btn-group pull-right" role="group">

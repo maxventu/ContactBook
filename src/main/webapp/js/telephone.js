@@ -10,8 +10,8 @@ function loadTelephone(){
     initModalClosingByName("telephoneModal",closeTelephoneModal);
 }
 
-function openTelephoneModal(){
-    openModal("telephoneModal");
+function openTelephoneModal(textLabel){
+    openModal(textLabel,"telephoneModal");
     var country_code = document.getElementById("telephoneModal_country_code");
     country_code.focus();
 }
@@ -51,9 +51,11 @@ function deleteTelephones(){
 
 function editTelephoneModal(){
     var id=getFirstSelectedTelephoneId("telephoneCheckbox");
-    if(id!=null)
+    if(id!=null){
         initTelephoneModalFields(id);
-    openTelephoneModal();
+        openTelephoneModal("Edit telephone of ");
+    }
+    else createTelephoneModal();
 
     function getFirstSelectedTelephoneId(checkName){
         var elements = document.getElementsByName(checkName);
@@ -66,7 +68,7 @@ function editTelephoneModal(){
 }
 
 function createTelephoneModal(){
-    openTelephoneModal();
+    openTelephoneModal("Add new telephone to ");
 }
 
 function submitTelephone(){
