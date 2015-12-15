@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -9,14 +10,26 @@
          pageEncoding="UTF-8"%>
 <html><title>Error Page</title>
 <body>
-Request from ${pageContext.errorData.requestURI} is failed
-<br/>
-Servlet name: ${pageContext.errorData.servletName}
-<br/>
-Status code: ${pageContext.errorData.statusCode}
-<br/>
-Exception: ${pageContext.exception}
-<br/>
-Message from exception: ${pageContext.exception.message}
+<c:import url="partial/_navbar.jsp"/>
+<div class="container">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">Request from ${pageContext.errorData.requestURI} is failed</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">Status code: ${pageContext.errorData.statusCode}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">Exception: ${pageContext.exception}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">Message from exception: ${pageContext.exception.message}</div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

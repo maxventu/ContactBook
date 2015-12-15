@@ -6,7 +6,7 @@ var ContactBook = {
 
 function load(){
     loadTelephoneMangment();
-    loadAttachmentsMangment();
+    loadAttachmentsManagement();
     loadAvatarMangment()
 }
 
@@ -41,7 +41,7 @@ function closeModal(id){
 
 function setValueOfInputToNull(id){
     var input = document.getElementById(id);
-    input.value=null;
+    input.value="";
 }
 
 function setFullNameIn(textLabel,modalLabelId){

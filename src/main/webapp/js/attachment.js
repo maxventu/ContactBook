@@ -1,6 +1,11 @@
 
-function loadAttachmentsMangment(){
+function loadAttachmentsManagement(){
     setLastAttachmentId();
+
+    var cont = document.getElementById("modal_contact_id");
+    var contId = document.getElementById("contact_id");
+    cont.value = contId.value;
+
     var button = document.getElementById("attachmentAddButton");
     button.onclick = createAttachmentModal;
     button = document.getElementById("attachmentDelete");
@@ -11,6 +16,8 @@ function loadAttachmentsMangment(){
     initModalClosingByName("attachmentEditModal",closeAttachmentEditModal);
     initModalSubmitById("attachmentAddModalApply",submitAddAttachment);
     initModalSubmitById("attachmentEditModalApply",submitEditAttachment);
+    var button = document.getElementById("hiddenAttachmentFrame");
+    button.onload = handleAttachmentResponse;
 }
 
 function createAttachmentModal(){
@@ -48,7 +55,7 @@ function deleteAttachments(){
 
 function closeAttachmentAddModal(){
     closeModal("attachmentAddModal");
-    reinitAttachmentAddModal();
+
 }
 
 function closeAttachmentEditModal(){
@@ -116,28 +123,20 @@ function submitAddAttachment() {
     td.appendChild(input);
     newTableRow.appendChild(td);
 
-    var filename = createSpecificInput(newId,"filename");
-    var file = createSpecificInput(newId,"file");
-    var comment = createSpecificInput(newId,"comment");
-    var date = createInputWithCurrentDate(newId,"date_upload");
-    var thisDate = new Date(date.value);
-
-    td = document.createElement("td");
-    td.innerHTML = filename.value;
+    td = createTD(newId,"filename");
     newTableRow.appendChild(td);
 
-    td = document.createElement("td");
-    td.innerHTML = thisDate.toLocaleTimeString() +" "+ thisDate.toLocaleDateString();
+    td = createTD(newId,"date_upload");
+    td.innerHTML="now processing";
     newTableRow.appendChild(td);
 
-    td = document.createElement("td");
-    td.innerHTML = comment.value;
+    td = createTD(newId,"comment");
     newTableRow.appendChild(td);
 
-    newTableRow.appendChild(filename);
-    newTableRow.appendChild(file);
-    newTableRow.appendChild(date);
-    newTableRow.appendChild(comment);
+    newTableRow.appendChild(createHiddenInput(newId,"filename"));
+    newTableRow.appendChild(createHiddenInput(newId,"file_url"));
+    newTableRow.appendChild(createHiddenInput(newId,"date_upload"));
+    newTableRow.appendChild(createHiddenInput(newId,"comment"));
 
     var attachments = document.getElementById("att_table");
     attachments.appendChild(newTableRow);
@@ -145,19 +144,6 @@ function submitAddAttachment() {
     newAttachmentsContainer.appendChild(createAttachmentNewHistory(newId));
 
     closeAttachmentAddModal();
-    function createInputWithCurrentDate(attId,fieldType){
-        var input = createHiddenInput(attId,fieldType);
-        var currentDate = new Date();
-        input.value = currentDate.toISOString();
-        return input;
-    }
-    function createSpecificInput(attId,fieldType){
-        var input = createHiddenInput(attId,fieldType);
-        var inputInModal = document.getElementById("attachmentAddModal_"+fieldType);
-        input.value = inputInModal.value;
-        return input;
-    }
-
     function createHiddenInput(attId,fieldType){
         var input = document.createElement("input");
         input.setAttribute("type","hidden");
@@ -165,6 +151,11 @@ function submitAddAttachment() {
         return input;
     }
 
+    function createTD(attId,fieldType){
+        var td = document.createElement("td");
+        td.id="td_"+fieldType+"_"+attId;
+        return td;
+    }
     function createAttachmentNewHistory(elementId){
         var el = document.createElement("input");
         el.setAttribute("type", "hidden");
@@ -210,4 +201,33 @@ function reinitAttachmentEditModal(){
     types.forEach(function(type,i,types){
         setValueOfInputToNull("attachmentEditModal_"+type);
     });
+}
+
+function handleAttachmentResponse(){
+    var attId = ContactBook.attachmentLastId;
+
+    var uploadDocument = document.getElementById("hiddenAttachmentFrame").contentWindow.document;
+    var loaded = uploadDocument.getElementById("attachmentLoaded");
+    if(loaded!= null && loaded.value == "true"){
+
+        initInputAndTD(attId,"comment","attachmentComment");
+        initInputAndTD(attId,"date_upload","attachmentDate");
+        initInputAndTD(attId,"filename","attachmentFileName");
+        initInput(attId,"file_url","attachmentURL");
+        loaded.value=false;
+    }
+    reinitAttachmentAddModal();
+    function initInputAndTD(id,type,name){
+        var comment_input = document.getElementById("att_"+type+"_"+attId);
+        var comment_td = document.getElementById("td_"+type+"_"+attId);
+        var comment = uploadDocument.getElementById(name);
+        comment_input.value=comment.value;
+        comment_td.innerHTML=comment.value;
+    }
+    function initInput(id,type,name){
+        var comment_input = document.getElementById("att_"+type+"_"+attId);
+        var comment = uploadDocument.getElementById(name);
+        comment_input.value=comment.value;
+    }
+
 }

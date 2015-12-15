@@ -21,6 +21,7 @@
 </head>
 <body>
 
+<c:import url="partial/_navbar.jsp"/>
 <div class="container">
 
     <form id="data" method="POST" action="upload" enctype="multipart/form-data">

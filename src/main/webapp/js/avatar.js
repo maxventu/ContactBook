@@ -34,16 +34,14 @@ function reinitAvatarEditModal(){
     });
 }
 
-function handleAvatarResponse(msg){
+function handleAvatarResponse(){
     var uploadDocument = document.getElementById("hiddenAvatarFrame").contentWindow.document;
     var loaded = uploadDocument.getElementById("avatarLoaded");
-    console.log("fuck "+loaded.value);
     if(loaded!= null && loaded.value == "true"){
 
         var url = uploadDocument.getElementById("avatarURL");
 
         var ava_image = document.getElementById("ava_image");
-        console.log(ava_image.value);
         ava_image.src=url.value;
         loaded.value=false;
     }

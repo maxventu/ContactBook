@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -11,6 +12,9 @@
     <title></title>
 </head>
 <body>
+<c:import url="partial/_navbar.jsp"/>
+<div class="container">
 
+</div>
 </body>
 </html>

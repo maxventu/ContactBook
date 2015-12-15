@@ -15,7 +15,7 @@
 %>
 
 <iframe id="hiddenAvatarFrame" name="hiddenAvatarFrame" style="width:0px; height:0px; border:0px"></iframe>
-<iframe id="hiddenAttachFrame" name="hiddenAttachFrame" style="width:0px; height:0px; border:0px"></iframe>
+<iframe id="hiddenAttachmentFrame" name="hiddenAttachmentFrame" style="width:0px; height:0px; border:0px"></iframe>
 <div class="form-horizontal" role="form">
     <div class="form-group row">
         <div class="col-lg-push-2 col-lg-2">

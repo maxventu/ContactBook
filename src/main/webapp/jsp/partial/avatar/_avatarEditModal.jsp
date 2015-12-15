@@ -11,7 +11,7 @@
 <div class="modal fade" id="avatarEditModal" tabindex="-1" role="dialog" aria-labelledby="avatarEditModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="avatar" method="post" target="hiddenAvatarFrame" enctype="multipart/form-data">
+            <form action="upload_avatar" method="post" target="hiddenAvatarFrame" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close avatarEditModal-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="avatarEditModalLabel">Avatar</h4>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default avatarEditModal-close-modal">Close</button>
-                    <input type="submit" name="avatarUpload" class="btn btn-primary" id="avatarEditModalApply">
+                    <input type="submit" class="btn btn-primary" id="avatarEditModalApply" value="Apply">
                 </div>
             </form>
         </div>
