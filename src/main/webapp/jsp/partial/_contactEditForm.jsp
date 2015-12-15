@@ -14,18 +14,23 @@
     pageContext.setAttribute("familyStatuses", FamilyStatus.values());
 %>
 
+<iframe id="hiddenAvatarFrame" name="hiddenAvatarFrame" style="width:0px; height:0px; border:0px"></iframe>
+<iframe id="hiddenAttachFrame" name="hiddenAttachFrame" style="width:0px; height:0px; border:0px"></iframe>
 <div class="form-horizontal" role="form">
     <div class="form-group row">
         <div class="col-lg-push-2 col-lg-2">
             <c:choose>
                 <c:when test="${contact.photoUrl != null}">
-                    <img src="${contact.photoUrl}" class="img-responsive" alt="${contact.fullName}">
+                    <img id="ava_image" src="${contact.photoUrl}" class="img-responsive" alt="${contact.fullName}">
                 </c:when>
                 <c:otherwise>
-                    <img src="http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png" class="img-responsive" alt="${contact.fullName}">
+                    <img id="ava_image" src="http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png" class="img-responsive" alt="${contact.fullName}">
                 </c:otherwise>
             </c:choose>
-            <%--TODO: image modal dialog--%>
+            <input type="hidden" id="ava_file">
+
+
+        <%--TODO: image modal dialog--%>
         </div>
     </div>
 

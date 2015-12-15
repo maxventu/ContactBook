@@ -17,6 +17,7 @@
     <script src="../js/attachment.js"></script>
     <script src="../js/telephone.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/avatar.js"></script>
 </head>
 <body>
 
@@ -49,8 +50,9 @@
     </form>
 </div>
 
-<c:import url="partial/telephone/_telephoneEditModal.jsp"></c:import>
-<c:import url="partial/attachment/_attachmentAddModal.jsp"></c:import>
-<c:import url="partial/attachment/_attachmentEditModal.jsp"></c:import>
+<c:import url="partial/telephone/_telephoneEditModal.jsp"/>
+<c:import url="partial/attachment/_attachmentAddModal.jsp"/>
+<c:import url="partial/attachment/_attachmentEditModal.jsp"/>
+<c:import url="partial/avatar/_avatarEditModal.jsp"/>
 </body>
 </html>

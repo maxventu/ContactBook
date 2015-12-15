@@ -1,4 +1,4 @@
-function loadTelephone(){
+function loadTelephoneMangment(){
     setLastTelephoneId();
     var button = document.getElementById("telephoneAddButton");
     button.onclick = createTelephoneModal;

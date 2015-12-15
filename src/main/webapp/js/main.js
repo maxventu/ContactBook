@@ -5,8 +5,9 @@ var ContactBook = {
 };
 
 function load(){
-    loadTelephone();
-    loadAttachments();
+    loadTelephoneMangment();
+    loadAttachmentsMangment();
+    loadAvatarMangment()
 }
 
 function openModal(textLabel,id){

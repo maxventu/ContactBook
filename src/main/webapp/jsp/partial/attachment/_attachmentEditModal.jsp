@@ -13,7 +13,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close attachmentEditModal-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="attachmentEditModalLabel">Attachment of</h4>
+        <h4 class="modal-title" id="attachmentEditModalLabel">Attachment</h4>
         <input type="hidden" id="attachmentEditModal_id">
       </div>
       <div class="modal-body">

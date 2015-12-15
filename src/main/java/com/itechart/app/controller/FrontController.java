@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
     final Logger logger = LoggerFactory.getLogger(FrontController.class);
 
+    public static FrontController INSTANCE;
+    public static ServletContext getFrontControllerServletContext(){
+        return INSTANCE.getServletContext();
+    }
     private ApplicationController applicationController;
     // Initializes the servlet.
     public void init(ServletConfig config) throws
             ServletException {
         super.init(config);
+        INSTANCE = this;
         applicationController = new ApplicationController();
     }
 

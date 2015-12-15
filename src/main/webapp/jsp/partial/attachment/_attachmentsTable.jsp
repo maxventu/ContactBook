@@ -44,7 +44,7 @@
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
                                         <input type="checkbox" id="att_check_${attachment.id}">
                                     </td>
-                                    <td>${attachment.filename}</td>
+                                    <td><a href="/ContactBook/attachment?id=${attachment.id}" >${attachment.filename}</a></td>
                                     <td>${attachment.dateUpload}</td>
                                     <td>${attachment.comment}</td>
                                     <input type="hidden" id="att_filename_${attachment.id}" value="${attachment.filename}">

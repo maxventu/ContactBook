@@ -22,15 +22,21 @@ public class ApplicationController implements Controller{
         mapOfControllers.put("/edit",new ContactController());
         mapOfControllers.put("/update",new ContactController());
         mapOfControllers.put("/email",new EmailController());
+        mapOfControllers.put("/avatar",new AvatarUploadController());
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ErrorHandler errorHandler = new ErrorHandler();
         LOGGER.debug("query: {}", request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
-        if(controller!=null)
+
+            try{
+                if(controller!=null)
         controller.processRequest(request,response);
-        else response.sendError(404);
+            }
+        catch(Exception e) {
+            response.sendError(404);
+        }
 
     }
 }

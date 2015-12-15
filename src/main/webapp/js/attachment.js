@@ -1,5 +1,5 @@
 
-function loadAttachments(){
+function loadAttachmentsMangment(){
     setLastAttachmentId();
     var button = document.getElementById("attachmentAddButton");
     button.onclick = createAttachmentModal;
@@ -61,7 +61,7 @@ function editAttachmentModal(){
     var id=getFirstSelectedAttachmentId("attachmentCheckbox");
     if(id!=null){
         initAttachmentEditModalFields(id);
-        openModal("Edit attachment for "+"attachmentEditModal");
+        openModal("Edit attachment for ","attachmentEditModal");
     }
 
     function getFirstSelectedAttachmentId(checkName){

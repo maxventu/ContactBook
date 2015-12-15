@@ -14,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close attachmentAddModal-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="attachmentAddModalLabel">Attachment of</h4>
+        <h4 class="modal-title" id="attachmentAddModalLabel">Attachment</h4>
         <input type="hidden" id="attachmentAddModal_id">
       </div>
       <div class="modal-body">
@@ -28,7 +28,7 @@
               </div>
               <div class="col-lg-8">
                 <label class="" for="attachmentAddModal_file">File</label>
-                <input type="file"  class="form-control"  id="attachmentAddModal_file" placeholder="file.txt">
+                <input type="file"  class="form-control"  id="attachmentAddModal_file">
               </div>
             </div>
           </div>

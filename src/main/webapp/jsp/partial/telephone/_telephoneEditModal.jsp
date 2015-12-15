@@ -18,7 +18,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close telephoneModal-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="telephoneModalLabel">Telephone of</h4>
+                <h4 class="modal-title" id="telephoneModalLabel">Telephone</h4>
                 <input type="hidden" id="telephoneModal_id">
             </div>
             <div class="modal-body">
