@@ -1,4 +1,4 @@
-package com.itechart.app.controller;
+package com.itechart.app.controller.helpers;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

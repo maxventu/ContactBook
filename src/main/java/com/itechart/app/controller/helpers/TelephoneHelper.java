@@ -38,14 +38,17 @@ public class TelephoneHelper extends EntityHelper{
     }
 
     private void deleteTelephones(ArrayList<Telephone> telephones){
+        LOGGER.debug("deleting telephones");
         for(Telephone t : telephones)
             TelephoneDAO.INSTANCE.delete(t.getId());
     }
     private void updateTelephones(ArrayList<Telephone> telephones){
+        LOGGER.debug("updating telephones");
         for(Telephone t : telephones)
             TelephoneDAO.INSTANCE.update(t);
     }
     private void createTelephones(ArrayList<Telephone> telephones){
+        LOGGER.debug("creating telephones");
         Integer i = TelephoneDAO.INSTANCE.maxRow();
         i++;
         for(Telephone t : telephones)

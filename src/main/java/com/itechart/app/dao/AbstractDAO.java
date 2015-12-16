@@ -96,6 +96,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
     }
     public void create(T entity){
+        LOGGER.debug("creating entity");
         Connection connection = null;
         PreparedStatement statement = null;
         try{
@@ -109,6 +110,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         finally {
             try {
                 connection.close();
+                LOGGER.debug("end creating entity");
             } catch (SQLException e) {
                 LOGGER.error("Connection is not closed", e);
             }

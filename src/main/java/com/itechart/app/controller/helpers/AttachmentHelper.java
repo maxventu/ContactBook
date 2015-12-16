@@ -25,6 +25,7 @@ public class AttachmentHelper extends EntityHelper{
     private AttachmentHelper(){}
 
     public void processAttachments(HttpServletRequest request,Integer contactId){
+        LOGGER.debug("processing attachments");
         ArrayList<Integer> att_id = getIntListFromArray(request.getParameterValues("att_id"));
         String[] att_filename = request.getParameterValues("att_filename");
         String[] att_date_upload = request.getParameterValues("att_date_upload");
@@ -40,14 +41,17 @@ public class AttachmentHelper extends EntityHelper{
     }
 
     private void deleteAttachments(ArrayList<Attachment> attachments){
+        LOGGER.debug("deleting attachments");
         for(Attachment att : attachments)
             AttachmentDAO.INSTANCE.delete(att.getId());
     }
     private void updateAttachments(ArrayList<Attachment> attachments){
+        LOGGER.debug("updating attachments");
         for(Attachment att : attachments)
             AttachmentDAO.INSTANCE.update(att);
     }
     private void createAttachments(ArrayList<Attachment> attachments){
+        LOGGER.debug("creating attachments");
         Integer i = AttachmentDAO.INSTANCE.maxRow();
         i++;
         for(Attachment att : attachments)
@@ -56,7 +60,6 @@ public class AttachmentHelper extends EntityHelper{
             AttachmentDAO.INSTANCE.create(att);
         }
     }
-
 
     private ArrayList<Attachment> getAttachmentsByCriterionFromRequest(String criterion,HttpServletRequest request, HashMap<Integer,Attachment> attachmentHashMap){
         return getSpecificAttachmentsArray(getIntListFromArray(request.getParameterValues(criterion)),attachmentHashMap);
@@ -77,7 +80,7 @@ public class AttachmentHelper extends EntityHelper{
         try {
             date = format.parse(string);
         } catch (ParseException e) {
-            LOGGER.error("getting date from string",e);
+            LOGGER.error("error while getting date from string",e);
         }
         return date;
     }

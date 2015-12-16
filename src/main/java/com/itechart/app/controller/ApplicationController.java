@@ -1,5 +1,6 @@
 package com.itechart.app.controller;
 
+import com.itechart.app.controller.helpers.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 /**
  * Created by Maxim on 11/28/2015.
  */
-public class ApplicationController implements Controller{
+public class ApplicationController implements Controller {
     final Logger LOGGER = LoggerFactory.getLogger(ApplicationController.class);
 
     final private HashMap<String,Controller> mapOfControllers;

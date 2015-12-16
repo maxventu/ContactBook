@@ -1,4 +1,4 @@
-package com.itechart.app.controller;
+package com.itechart.app.controller.helpers;
 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;

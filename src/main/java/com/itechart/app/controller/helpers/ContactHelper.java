@@ -41,6 +41,7 @@ public class ContactHelper extends  EntityHelper{
         } catch (ParseException e) {
             LOGGER.error("parsing date of birth",e);
         }
+        LOGGER.debug("init contact");
         Contact contact = new Contact(contactId,map.get("firstName"),map.get("lastName"),map.get("patronymic"),date,"1".equals(map.get("sexIsMale")),
                 map.get("nationality"),map.get("familyStatus"),map.get("webSite"),map.get("email"),map.get("currentWorkplace"),map.get("photoUrl"),map.get("street"),map.get("house"),
                 map.get("apartment"),map.get("postcode"),map.get("country"),map.get("city"));

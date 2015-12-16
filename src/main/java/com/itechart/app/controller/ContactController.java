@@ -1,9 +1,6 @@
 package com.itechart.app.controller;
 
-import com.itechart.app.controller.helpers.AttachmentHelper;
-import com.itechart.app.controller.helpers.ContactHelper;
-import com.itechart.app.controller.helpers.LocationHelper;
-import com.itechart.app.controller.helpers.TelephoneHelper;
+import com.itechart.app.controller.helpers.*;
 import com.itechart.app.dao.AttachmentDAO;
 import com.itechart.app.dao.ContactDAO;
 import com.itechart.app.dao.TelephoneDAO;
@@ -64,16 +61,17 @@ public class ContactController implements Controller {
         String st = request.getParameter("id");
         if(!"".equals(st))updateContact(request, st);
         else createContact(request);
-        request.getRequestDispatcher("/main").forward(request,response);
+        request.getRequestDispatcher("/ContactBook/main").forward(request,response);
     }
 
     private void createContact(HttpServletRequest request) {
+
         Integer contactId = ContactDAO.INSTANCE.maxRow()+1;
         LOGGER.debug("setting up a new contact with id={}",contactId);
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
         ContactDAO.INSTANCE.create(contact);
         setContactInfo(request, contact, contactId);
-
+        LOGGER.debug("contact with id={} is set",contactId);
     }
 
     private void updateContact(HttpServletRequest request, String contactIdStr) {
@@ -82,9 +80,10 @@ public class ContactController implements Controller {
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
         ContactDAO.INSTANCE.update(contact);
         setContactInfo(request,contact,contactId);
-
+        LOGGER.debug("contact with id={} updated",contactIdStr);
     }
     private void setContactInfo(HttpServletRequest request,Contact contact, Integer contactId){
+        LOGGER.debug("setting up info for contact id={}",contactId);
         Location location = new Location(contact.getPostcode(),contact.getCountry(),contact.getCity());
         LocationHelper.INSTANCE.updateLocation(location);
         TelephoneHelper.INSTANCE.processTelephones(request,contactId);

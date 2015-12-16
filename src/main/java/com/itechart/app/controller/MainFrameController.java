@@ -1,5 +1,6 @@
 package com.itechart.app.controller;
 
+import com.itechart.app.controller.helpers.Controller;
 import com.itechart.app.dao.ContactDAO;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import java.util.Collection;
 /**
  * Created by Maxim on 12/10/2015.
  */
-public class MainFrameController implements Controller{
+public class MainFrameController implements Controller {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String selectedButton = request.getParameter("mainFormButton");
@@ -19,7 +20,7 @@ public class MainFrameController implements Controller{
     }
     private void redirectRequest(String type,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if("add_contact".equals(type))request.getRequestDispatcher("/ContactBook/edit").forward(request,response);
-        else if("send_email".equals(type))request.getRequestDispatcher("/email").forward(request,response);
+        else if("send_email".equals(type))request.getRequestDispatcher("/email").forward(request, response);
         else if("delete_contacts".equals(type)) deleteContacts(request,response);
         else initContacts(request,response);
     }
