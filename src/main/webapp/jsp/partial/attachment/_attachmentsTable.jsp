@@ -42,18 +42,19 @@
                                 <tr id="att_id_${attachment.id}">
                                     <td>
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
-                                        <input type="checkbox" id="att_check_${attachment.id}">
+                                        <input type="checkbox" name="att_id" id="att_check_${attachment.id}" value="${attachment.id}">
                                     </td>
                                     <td><a href="/ContactBook/attachment?id=${attachment.id}" >${attachment.filename}</a></td>
                                     <td>${attachment.dateUpload}</td>
                                     <td>${attachment.comment}</td>
-                                    <input type="hidden" id="att_filename_${attachment.id}" value="${attachment.filename}">
-                                    <input type="hidden" id="att_date_upload_${attachment.id}" value="${attachment.dateUpload}">
-                                    <input type="hidden" id="att_comment_${attachment.id}" value="${attachment.comment}">
+                                    <input type="hidden" name="att_filename" id="att_filename_${attachment.id}" value="${attachment.filename}">
+                                    <input type="hidden" name="att_date_upload" id="att_date_upload_${attachment.id}" value="${attachment.dateUpload}">
+                                    <input type="hidden" name="att_comment" id="att_comment_${attachment.id}" value="${attachment.comment}">
                                 </tr>
                             </c:forEach>
                             <span class="not-visible" id="deletedAttachments"></span>
                             <span class="not-visible" id="newAttachments"></span>
+                            <span class="not-visible" id="updatedAttachments"></span>
                         </tbody>
                     </table>
                 </div>

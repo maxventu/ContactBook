@@ -17,6 +17,9 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
 
     private ContactDAO() {
     }
+
+    private static final String CONTACT_MAX_ID = "select MAX(id) FROM contact";
+
     private static final String CONTACT_FIND_ALL_QUERY =
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE is_deleted=0;";
@@ -26,9 +29,9 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
     private static final String CONTACT_DELETE_QUERY =
             "UPDATE contact SET is_deleted=1, date_deleted=NOW() WHERE id=?;";
     private static final String CONTACT_CREATE_QUERY =
-            "INSERT INTO contact (first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
+            "INSERT INTO contact (id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String CONTACT_UPDATE_QUERY =
             "UPDATE contact SET first_name=?, last_name=?, patronymic=?, date_of_birth=?, sex_is_male=?, nationality=?," +
                     " family_status=?, web_site=?, email=?, current_workplace=?, photo_url=?,street=?, house=?, apartment=?, location_postcode=?" +
@@ -61,6 +64,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         PreparedStatement statement = null;
         int i=1;
         statement = connection.prepareStatement(CONTACT_CREATE_QUERY);
+        statement.setInt(i++,contact.getId());
         statement.setString(i++,contact.getFirstName());
         statement.setString(i++,contact.getLastName());
         statement.setString(i++,contact.getPatronymic());
@@ -100,6 +104,11 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++, contact.getApartment());
         statement.setInt(i++, contact.getId());
         return statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementMaxRow(Connection connection) throws SQLException {
+        return connection.prepareStatement(CONTACT_MAX_ID);
     }
 
     @Override
@@ -146,6 +155,11 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
                  postcode,
                  country,
                  city);
+    }
+
+    @Override
+    protected Integer readKeyFrom(ResultSet entityResultSet) throws SQLException {
+        return entityResultSet.getInt(1);
     }
 
 }

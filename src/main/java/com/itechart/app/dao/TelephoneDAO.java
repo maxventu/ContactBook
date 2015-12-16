@@ -17,6 +17,9 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
 
     private TelephoneDAO() {
     }
+
+    private static final String TELEPHONE_MAX_ID = "select MAX(id) FROM telephone";
+
     private static final String TELEPHONE_FIND_ALL_BY_CONTACT_ID_QUERY =
             "SELECT id,country_code,operator_code,number,type,comment,contact_id  FROM telephone WHERE contact_id = ? AND is_deleted=0;";
     private static final String TELEPHONE_FIND_ALL_QUERY =
@@ -26,7 +29,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
     private static final String TELEPHONE_DELETE_QUERY =
             "UPDATE telephone SET is_deleted=1, date_deleted=NOW() WHERE id=?;";
     private static final String TELEPHONE_CREATE_QUERY =
-            "INSERT INTO telephone (country_code,operator_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?, ?);";
+            "INSERT INTO telephone (id,country_code,operator_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?, ?, ?);";
     private static final String TELEPHONE_UPDATE_QUERY =
             "UPDATE telephone SET country_code=?,operator_code=?, number=?, type=?, comment=?, contact_id=?" +
                     "WHERE id=?;";
@@ -57,6 +60,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         PreparedStatement statement = null;
         int i=1;
         statement = connection.prepareStatement(TELEPHONE_CREATE_QUERY);
+        statement.setInt(i++, telephone.getId());
         statement.setString(i++,telephone.getCountryCode());
         statement.setString(i++,telephone.getOperatorCode());
         statement.setString(i++,telephone.getNumber());
@@ -79,6 +83,11 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         statement.setInt(i++,telephone.getContactId());
         statement.setInt(i++,telephone.getId());
         return statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementMaxRow(Connection connection) throws SQLException {
+        return connection.prepareStatement(TELEPHONE_MAX_ID);
     }
 
     public ArrayList<Telephone> findAllByContactId(Integer contactId){
@@ -115,6 +124,12 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
         String number = telephoneResultSet.getString(i++);
         String type = telephoneResultSet.getString(i++);
         String comment = telephoneResultSet.getString(i++);
-        return new Telephone(id,countryCode,operatorCode,number,type,comment);
+        Integer contactId = telephoneResultSet.getInt(i++);
+        return new Telephone(id,countryCode,operatorCode,number,type,comment,contactId);
+    }
+
+    @Override
+    protected Integer readKeyFrom(ResultSet entityResultSet) throws SQLException {
+        return entityResultSet.getInt(1);
     }
 }

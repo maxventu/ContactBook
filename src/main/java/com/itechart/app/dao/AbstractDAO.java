@@ -21,7 +21,10 @@ public abstract class AbstractDAO  <K,T extends Entity>{
     protected abstract PreparedStatement prepareStatementDelete(Connection connection, K id) throws SQLException;
     protected abstract PreparedStatement prepareStatementCreate(Connection connection, T entity) throws SQLException;
     protected abstract PreparedStatement prepareStatementUpdate(Connection connection,T entity) throws SQLException;
+    protected abstract PreparedStatement prepareStatementMaxRow(Connection connection)throws SQLException;
+
     protected abstract T readEntityFrom(ResultSet entityResultSet) throws SQLException;
+    protected abstract K readKeyFrom(ResultSet entityResultSet)throws SQLException;
 
     public ArrayList<T> findAll(){
         Connection connection = null;
@@ -49,7 +52,6 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         return arrayList;
     }
     public T findEntityById(K id){
-
         Connection connection = null;
         PreparedStatement statement = null;
         T entity = null;
@@ -133,5 +135,30 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             }
         }
 
+    }
+    public K maxRow(){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        K maxRow = null;
+        try{
+            connection = ConnectorDB.getConnection();
+            statement = prepareStatementMaxRow(connection);
+            ResultSet attachmentResultSet = statement.executeQuery();
+            while (attachmentResultSet.next()){
+                maxRow = readKeyFrom(attachmentResultSet);
+            }
+        }
+        catch (Exception ex){
+            LOGGER.error("something went wrong while finding entity",ex);
+        }
+        finally {
+            try{
+                connection.close();
+            }
+            catch (Exception e){
+                LOGGER.error("connection wasn't closed",e);
+            }
+        }
+        return maxRow;
     }
 }

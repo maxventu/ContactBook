@@ -26,7 +26,7 @@ function createAttachmentModal(){
 
 function deleteAttachments(){
 
-    var allSelected = getAllSelectedChecks("attachmentCheckbox");
+    var allSelected = getAllSelectedChecks("att_id");
     for( var i = 0; i < allSelected.length; i++ )
         deleteAttachment(allSelected[i]);
 
@@ -43,7 +43,7 @@ function deleteAttachments(){
         function createDeleteHistory(elementId){
             var el = document.createElement("input");
             el.setAttribute("type", "hidden");
-            el.setAttribute("name","deletedAttachment");
+            el.setAttribute("name","deletedAttachments");
             el.setAttribute("value",elementId);
             return el;
         }
@@ -65,7 +65,7 @@ function closeAttachmentEditModal(){
 
 function editAttachmentModal(){
 
-    var id=getFirstSelectedAttachmentId("attachmentCheckbox");
+    var id=getFirstSelectedAttachmentId("att_id");
     if(id!=null){
         initAttachmentEditModalFields(id);
         openModal("Edit attachment for ","attachmentEditModal");
@@ -97,7 +97,19 @@ function submitEditAttachment() {
         tds[1].innerHTML = filename.value;
         tds[3].innerHTML = comment.value;
 
+        var updatedAttachmentsContainer = document.getElementById("updatedAttachments");
+        updatedAttachmentsContainer.appendChild(createDeleteHistory(attachmentId));
+
         closeAttachmentEditModal();
+
+
+        function createUpdateHistory(elementId){
+            var el = document.createElement("input");
+            el.setAttribute("type", "hidden");
+            el.setAttribute("name","updatedAttachments");
+            el.setAttribute("value",elementId);
+            return el;
+        }
     }
     function setInfoAttachmentToNew(attachmentId,fieldType){
         var inputInModal = document.getElementById("attachmentEditModal_"+fieldType);
@@ -117,7 +129,7 @@ function submitAddAttachment() {
 
     var td = document.createElement("td");
     var input = document.createElement("input");
-    input.setAttribute("name","attachmentCheckbox");
+    input.setAttribute("name","att_id");
     input.setAttribute("type","checkbox");
     input.id = "att_check_"+newId;
     td.appendChild(input);
@@ -147,6 +159,7 @@ function submitAddAttachment() {
     function createHiddenInput(attId,fieldType){
         var input = document.createElement("input");
         input.setAttribute("type","hidden");
+        input.setAttribute("name","att_"+fieldType);
         input.id = "att_"+fieldType+"_"+attId;
         return input;
     }
@@ -159,7 +172,7 @@ function submitAddAttachment() {
     function createAttachmentNewHistory(elementId){
         var el = document.createElement("input");
         el.setAttribute("type", "hidden");
-        el.setAttribute("name","newAttachment");
+        el.setAttribute("name","newAttachments");
         el.setAttribute("value",elementId);
         return el;
     }
@@ -182,7 +195,7 @@ function initAttachmentEditModalFields(attachmentId){
 }
 
 function setLastAttachmentId(){
-    var elements = document.getElementsByName("attachmentCheckbox");
+    var elements = document.getElementsByName("att_id");
     if(elements.length>0)
         ContactBook.attachmentLastId = parseInt(elements[elements.length-1].id.replace("att_check_",""));
     else ContactBook.attachmentLastId = 0;

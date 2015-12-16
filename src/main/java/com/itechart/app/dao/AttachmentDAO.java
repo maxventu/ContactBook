@@ -2,10 +2,7 @@ package com.itechart.app.dao;
 
 import com.itechart.app.entity.Attachment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,6 +15,8 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
     private AttachmentDAO() {
     }
 
+    private static final String ATTACHMENT_MAX_ID = "select MAX(id) FROM attachment";
+
     private static final String ATTACHMENT_FIND_ALL_BY_CONTACT_ID_QUERY =
             "SELECT id,filename,date_upload,comment,contact_id FROM attachment WHERE contact_id = ? AND is_deleted=0;";
     private static final String ATTACHMENT_FIND_ALL_QUERY =
@@ -27,8 +26,8 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
     private static final String ATTACHMENT_DELETE_QUERY =
             "UPDATE attachment SET is_deleted=1, date_deleted=NOW() WHERE id=?;";
     private static final String ATTACHMENT_CREATE_QUERY =
-            "INSERT INTO attachment (filename,date_upload,comment,contact_id)" +
-                    "VALUES (?, CURDATE(), ?, ?);";
+            "INSERT INTO attachment (id, filename,date_upload,comment,contact_id)" +
+                    "VALUES (?, ?, ?, ?, ?);";
     private static final String ATTACHMENT_UPDATE_QUERY =
             "UPDATE attachment SET filename=?, comment=?" +
                     "WHERE id=?;";
@@ -58,7 +57,9 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         Integer i=1;
         PreparedStatement statement = null;
         statement = connection.prepareStatement(ATTACHMENT_CREATE_QUERY);
+        statement.setInt(i++,attachment.getId());
         statement.setString(i++,attachment.getFilename());
+        statement.setTimestamp(i++, new Timestamp(attachment.getDateUpload().getTime()));
         statement.setString(i++,attachment.getComment());
         statement.setInt(i++,attachment.getContactId());
         return statement;
@@ -76,14 +77,24 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
     }
 
     @Override
+    protected PreparedStatement prepareStatementMaxRow(Connection connection) throws SQLException {
+        return connection.prepareStatement(ATTACHMENT_MAX_ID);
+    }
+
+    @Override
     protected Attachment readEntityFrom(ResultSet attachmentResultSet) throws SQLException {
         Integer i=1;
         Integer id = attachmentResultSet.getInt(i++);
         String filename = attachmentResultSet.getString(i++);
-        Date dateUpload = attachmentResultSet.getDate(i++);
+        Date dateUpload = attachmentResultSet.getTimestamp(i++);
         String comment = attachmentResultSet.getString(i++);
         Integer contactId = attachmentResultSet.getInt(i++);
         return new Attachment(id, filename, dateUpload, comment, contactId);
+    }
+
+    @Override
+    protected Integer readKeyFrom(ResultSet entityResultSet) throws SQLException {
+        return entityResultSet.getInt(1);
     }
 
     public ArrayList<Attachment> findAllByContactId(Integer contactId) {

@@ -27,7 +27,7 @@
                     <img id="ava_image" src="http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png" class="img-responsive" alt="${contact.fullName}">
                 </c:otherwise>
             </c:choose>
-            <input type="hidden" id="ava_file">
+            <input name="photoUrl" type="hidden" id="ava_file">
 
 
         <%--TODO: image modal dialog--%>
@@ -37,28 +37,28 @@
     <div class="form-group">
         <label for="firstName" class="col-lg-2 control-label">First name</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="firstName" placeholder="Albert" value="${contact.firstName}">
+            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Albert" value="${contact.firstName}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="lastName" class="col-lg-2 control-label">Last name</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="lastName" placeholder="Einstein" value="${contact.lastName}">
+            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Einstein" value="${contact.lastName}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="patronymic" class="col-lg-2 control-label">Patronymic</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="patronymic" placeholder="Hermann" value="${contact.patronymic}">
+            <input type="text" name="patronymic" class="form-control" id="patronymic" placeholder="Hermann" value="${contact.patronymic}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="dateOfBirth" class="col-lg-2 control-label">Date of birth</label>
         <div class="col-lg-10">
-            <input type="date" class="form-control" id="dateOfBirth" value="${contact.dateOfBirth}">
+            <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" value="${contact.dateOfBirth}">
         </div>
     </div>
 
@@ -83,7 +83,7 @@
     <div class="form-group">
         <label for="nationality" class="col-lg-2 control-label">Nationality</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="nationality" placeholder="Kingdom of Württemberg" value="${contact.nationality}">
+            <input type="text" name="nationality" class="form-control" id="nationality" placeholder="Kingdom of Württemberg" value="${contact.nationality}">
         </div>
     </div>
 
@@ -111,21 +111,21 @@
     <div class="form-group">
         <label for="webSite" class="col-lg-2 control-label">Web site</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="webSite" placeholder="www.einstein.com" value="${contact.webSite}">
+            <input type="text" name="webSite" class="form-control" id="webSite" placeholder="www.einstein.com" value="${contact.webSite}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="email" class="col-lg-2 control-label">Email</label>
         <div class="col-lg-10">
-            <input type="email" class="form-control" id="email" placeholder="albert.einstein@gmail.com" value="${contact.email}">
+            <input type="email" name="email" class="form-control" id="email" placeholder="albert.einstein@gmail.com" value="${contact.email}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="currentWorkplace" class="col-lg-2 control-label">Workplace</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="currentWorkplace" placeholder="Company Inc." value="${contact.currentWorkplace}">
+            <input type="text" name="currentWorkplace" class="form-control" id="currentWorkplace" placeholder="Company Inc." value="${contact.currentWorkplace}">
         </div>
     </div>
 
@@ -135,15 +135,15 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label class="sr-only" for="postcode">Postcode</label>
-                    <input type="text" class="form-control" id="postcode" placeholder="Postcode" value="${contact.postcode}">
+                    <input type="text" name="postcode" class="form-control" id="postcode" placeholder="Postcode" value="${contact.postcode}">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="City" value="${contact.city}">
+                    <input type="text" name="city" class="form-control" id="city" placeholder="City" value="${contact.city}">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="country">Country</label>
-                    <input type="text" class="form-control" id="country" placeholder="Country" value="${contact.country}">
+                    <input type="text" name="country" class="form-control" id="country" placeholder="Country" value="${contact.country}">
                 </div>
             </div>
         </div>
@@ -155,15 +155,15 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label class="sr-only" for="street">Street</label>
-                    <input type="text" class="form-control " id="street" placeholder="Street" value="${contact.street}">
+                    <input type="text" name="street" class="form-control " id="street" placeholder="Street" value="${contact.street}">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="house">House</label>
-                    <input type="text" class="form-control" id="house" placeholder="House" value="${contact.house}">
+                    <input type="text" name="house" class="form-control" id="house" placeholder="House" value="${contact.house}">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="apartment">Apartment</label>
-                    <input type="text" class="form-control" id="apartment" placeholder="Apartment" value="${contact.apartment}">
+                    <input type="text" name="apartment" class="form-control" id="apartment" placeholder="Apartment" value="${contact.apartment}">
                 </div>
             </div>
         </div>

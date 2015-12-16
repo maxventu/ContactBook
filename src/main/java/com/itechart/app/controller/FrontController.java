@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/ContactBook/*")
 public class FrontController extends HttpServlet {
-    final Logger logger = LoggerFactory.getLogger(FrontController.class);
+    final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static FrontController INSTANCE;
     public static ServletContext getFrontControllerServletContext(){
@@ -44,7 +44,7 @@ public class FrontController extends HttpServlet {
     protected void execute(HttpServletRequest
                                    request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
-        logger.debug("started");
+        LOGGER.debug("started");
         // Set response content type
         //response.setContentType("text/html");
         applicationController.processRequest(request,response);

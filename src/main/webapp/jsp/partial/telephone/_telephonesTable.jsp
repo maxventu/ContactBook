@@ -48,21 +48,22 @@
                             <tr id="tel_id_${telephone.id}">
                                 <td>
                                     <label for="tel_check_${telephone.id}" class="sr-only"></label>
-                                    <input name="telephoneCheckbox" type="checkbox" id="tel_check_${telephone.id}">
+                                    <input name="tel_id" type="checkbox" id="tel_check_${telephone.id}" value="${telephone.id}">
                                 </td>
                                 <td>${telephone.fullNumber}</td>
                                 <td>${telephoneType.get(telephone.type).value}</td>
                                 <td>${telephone.comment}</td>
 
-                                <input type="hidden" id="tel_country_code_${telephone.id}" value="${telephone.countryCode}">
-                                <input type="hidden" id="tel_operator_code_${telephone.id}" value="${telephone.operatorCode}">
-                                <input type="hidden" id="tel_number_${telephone.id}" value="${telephone.number}">
-                                <input type="hidden" id="tel_type_select_${telephone.id}" value="${telephone.type}">
-                                <input type="hidden" id="tel_comment_${telephone.id}" value="${telephone.comment}">
+                                <input type="hidden" name="tel_country_code" id="tel_country_code_${telephone.id}" value="${telephone.countryCode}">
+                                <input type="hidden" name="tel_operator_code" id="tel_operator_code_${telephone.id}" value="${telephone.operatorCode}">
+                                <input type="hidden" name="tel_number" id="tel_number_${telephone.id}" value="${telephone.number}">
+                                <input type="hidden" name="tel_type" id="tel_type_select_${telephone.id}" value="${telephone.type}">
+                                <input type="hidden" name="tel_comment" id="tel_comment_${telephone.id}" value="${telephone.comment}">
                             </tr>
                         </c:forEach>
                         <span class="not-visible" id="deletedTelephones"></span>
                         <span class="not-visible" id="newTelephones"></span>
+                        <span class="not-visible" id="updatedTelephones"></span>
                         </tbody>
                     </table>
                 </div>

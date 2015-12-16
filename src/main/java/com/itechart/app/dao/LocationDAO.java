@@ -15,6 +15,9 @@ public class LocationDAO extends AbstractDAO<String,Location>{
 
     private LocationDAO() {
     }
+
+    private static final String LOCATION_MAX_ID = "select MAX(id) FROM location";
+
     private static final String LOCATION_FIND_ALL_QUERY =
             "SELECT postcode,country,city  FROM location WHERE is_deleted=0;";
     private static final String LOCATION_SELECT_QUERY =
@@ -23,8 +26,7 @@ public class LocationDAO extends AbstractDAO<String,Location>{
     private static final String LOCATION_CREATE_QUERY =
             "INSERT INTO location (postcode,country,city) VALUES (?, ?, ?);";
     private static final String LOCATION_UPDATE_QUERY =
-            "UPDATE location SET country=?, city=?" +
-                    "WHERE postcode=?;";
+            "UPDATE location SET country=?, city=? WHERE postcode=?;";
 
     @Override
     public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
@@ -49,7 +51,7 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         PreparedStatement statement = null;
         Integer i=1;
         statement = connection.prepareStatement(LOCATION_CREATE_QUERY);
-        statement.setString(i++, location.getPostcode());
+        statement.setString(i++, location.getId());
         statement.setString(i++, location.getCountry());
         statement.setString(i++, location.getCity());
         return  statement;
@@ -62,8 +64,13 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         statement = connection.prepareStatement(LOCATION_UPDATE_QUERY);
         statement.setString(i++, location.getCountry());
         statement.setString(i++, location.getCity());
-        statement.setString(i++, location.getPostcode());
+        statement.setString(i++, location.getId());
         return  statement;
+    }
+
+    @Override
+    protected PreparedStatement prepareStatementMaxRow(Connection connection) throws SQLException {
+        return connection.prepareStatement(LOCATION_MAX_ID);
     }
 
     @Override
@@ -73,5 +80,10 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         String country = entityResultSet.getString(i++);
         String city = entityResultSet.getString(i++);
         return new Location(postcode, country, city);
+    }
+
+    @Override
+    protected String readKeyFrom(ResultSet entityResultSet) throws SQLException {
+        return entityResultSet.getString(1);
     }
 }

@@ -4,7 +4,6 @@ package com.itechart.app.entity;
  * Created by Maxim on 11/24/2015.
  */
 public class Location extends Entity<String> {
-    private String postcode;
     private String country;
     private String city;
 
@@ -28,14 +27,6 @@ public class Location extends Entity<String> {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
     }
 
 

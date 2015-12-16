@@ -19,7 +19,7 @@ public class Telephone extends Entity<Integer> {
         this.comment = comment;
     }
 
-    public Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment) {
+    private Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment) {
         super(id);
         this.countryCode = countryCode;
         this.operatorCode = operatorCode;

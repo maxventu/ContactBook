@@ -14,9 +14,23 @@ import java.util.Collection;
 public class MainFrameController implements Controller{
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Collection collection = ContactDAO.INSTANCE.findAll();
+        String selectedButton = request.getParameter("mainFormButton");
+        redirectRequest(selectedButton,request,response);
+    }
+    private void redirectRequest(String type,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if("add_contact".equals(type))request.getRequestDispatcher("/ContactBook/edit").forward(request,response);
+        else if("send_email".equals(type))request.getRequestDispatcher("/email").forward(request,response);
+        else if("delete_contacts".equals(type)) deleteContacts(request,response);
+        else initContacts(request,response);
+    }
 
+    private void initContacts(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
+        Collection collection = ContactDAO.INSTANCE.findAll();
         request.setAttribute("contacts", collection);
         request.getRequestDispatcher("/jsp/main.jsp").forward(request,response);
+    }
+
+    private void deleteContacts(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+
     }
 }
