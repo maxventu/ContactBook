@@ -24,7 +24,7 @@
 <c:import url="partial/_navbar.jsp"/>
 <div class="container">
 
-    <form id="data" method="POST" action="edit">
+    <form id="data" method="POST" action="/ContactBook/edit">
         <input type="hidden" name="id" id="contact_id" value="${contact.id}">
         <div class="row">
             <div class="col-lg-10">

@@ -167,10 +167,10 @@ function submitTelephone(){
         function createInput(telId,fieldType){
             var input = document.createElement("input");
             input.setAttribute("type","hidden");
-            inputInModal.setAttribute("name","tel_"+fieldType);
 
-            input.id = "tel_"+fieldType+"_"+telId;
             var inputInModal = document.getElementById("telephoneModal_"+fieldType);
+            inputInModal.setAttribute("name","tel_"+fieldType);
+            input.id = "tel_"+fieldType+"_"+telId;
             input.value = inputInModal.value;
             return input;
         }

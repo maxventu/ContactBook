@@ -26,8 +26,7 @@ import java.util.ArrayList;
 public class ContactController implements Controller {
     final Logger LOGGER = LoggerFactory.getLogger(ContactController.class);
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+        LOGGER.debug("started");
         if(isSaving(request))forwardEditedContact(request, response);
         else forwardNewContact(request,response);
 
@@ -63,15 +62,14 @@ public class ContactController implements Controller {
 
     private void forwardEditedContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String st = request.getParameter("id");
-        if(st!=null)updateContact(request, st);
+        if(!"".equals(st))updateContact(request, st);
         else createContact(request);
         request.getRequestDispatcher("/main").forward(request,response);
     }
 
     private void createContact(HttpServletRequest request) {
-        LOGGER.debug("setting up a new contact");
-
         Integer contactId = ContactDAO.INSTANCE.maxRow()+1;
+        LOGGER.debug("setting up a new contact with id={}",contactId);
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
         ContactDAO.INSTANCE.create(contact);
         setContactInfo(request, contact, contactId);
@@ -80,7 +78,6 @@ public class ContactController implements Controller {
 
     private void updateContact(HttpServletRequest request, String contactIdStr) {
         LOGGER.debug("updating contact, id={}",contactIdStr);
-
         Integer contactId = Integer.parseInt(contactIdStr);
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
         ContactDAO.INSTANCE.update(contact);

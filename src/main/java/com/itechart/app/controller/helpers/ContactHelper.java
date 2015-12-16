@@ -36,6 +36,7 @@ public class ContactHelper extends  EntityHelper{
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
+            if(map.get("dateOfBirth")!=null && !"".equals(map.get("dateOfBirth")))
             date = df.parse(map.get("dateOfBirth"));
         } catch (ParseException e) {
             LOGGER.error("parsing date of birth",e);
