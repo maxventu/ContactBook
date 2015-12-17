@@ -1,8 +1,13 @@
 package com.itechart.app.controller;
 
+import com.itechart.app.controller.helpers.AttachmentHelper;
 import com.itechart.app.controller.helpers.Controller;
 import com.itechart.app.controller.helpers.DateHelper;
 import com.itechart.app.controller.helpers.Upload;
+import com.itechart.app.dao.AttachmentDAO;
+import com.itechart.app.dao.ContactDAO;
+import com.itechart.app.entity.Attachment;
+import com.itechart.app.entity.Contact;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
@@ -10,12 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,20 +33,54 @@ public class AttachmentController extends Upload implements Controller {
     final Logger LOGGER = LoggerFactory.getLogger(AvatarUploadController.class);
     // upload settings
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
-        String id = request.getParameter("id");
-        if(id!=null) showAttachment(request,response);
+        String contactId = request.getParameter("id");
+
+        if(contactId!=null && !"".equals(contactId)) {
+            if("/attachments".equals(request.getPathInfo()))showAttachments(request, response,contactId);
+            else showAttachment(request,response,contactId);
+        }
         else uploadAttachment(request,response);
     }
 
-    private void showAttachment(HttpServletRequest request, HttpServletResponse response) {
+    private void showAttachments(HttpServletRequest request, HttpServletResponse response,String contactId) throws ServletException, IOException {
+        Integer contId = Integer.parseInt(contactId);
+        Collection<Attachment> attachments = AttachmentDAO.INSTANCE.findAllByContactId(contId);
+        Contact contact = ContactDAO.INSTANCE.findEntityById(contId);
+        request.setAttribute("attachments",attachments);
+        request.setAttribute("contact",contact);
+        request.getRequestDispatcher("/jsp/attachments.jsp").forward(
+                request, response);
+    }
 
+    private void showAttachment(HttpServletRequest request, HttpServletResponse response, String contactId) throws IOException, ServletException {
+        String fileId = request.getParameter("file");
+        if(fileId!=null && !"".equals(fileId))
+        {
+            LOGGER.debug("show attachment contact id={}, file id={}",contactId,fileId);
+            Integer id = Integer.parseInt(fileId);
+            Attachment attachment = AttachmentDAO.INSTANCE.findEntityById(id);
+            File file = AttachmentHelper.INSTANCE.getFile(getAttachmentDirectoryPath() + File.separator + contactId, attachment.getDateUploadAsId());
+            ServletOutputStream out = AttachmentHelper.INSTANCE.getOutputStream(response, "application/octet-stream", attachment.getFilename() + "." + FilenameUtils.getExtension(file.getName()));
+            byte[] buf = new byte[8192];
+
+            FileInputStream is = new FileInputStream(file);
+            int c = 0;
+
+            while ((c = is.read(buf, 0, buf.length)) > 0) {
+                out.write(buf, 0, c);
+                out.flush();
+            }
+
+            out.close();
+            is.close();
+        }
     }
 
     private void uploadAttachment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.debug("attachment starts uploading");
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
-            writer.println("Error: Form must has enctype=multipart/form-data.");
+            writer.println("Error: Form must have enctype=multipart/form-data.");
             writer.flush();
             return;
         }
@@ -48,21 +89,19 @@ public class AttachmentController extends Upload implements Controller {
         String contactId="";
         String comment="";
         String filename="";
-        String uploadPath = FrontController.INSTANCE.getServletContext().getRealPath("");
+
 
         try{
-            //createDirectoryIfNotExists(uploadPath);
-
             List<FileItem> formItems = upload.parseRequest(request);
 
             if (formItems != null && formItems.size() > 0) {
                 for (FileItem item : formItems) {
                     if (item.isFormField()) {
                         if("contact_id".equals(item.getFieldName())){
-                            contactId=item.getString();
+                            contactId=item.getString("UTF-8");
                         }
                         else if("attachment_filename".equals(item.getFieldName())){
-                            filename = item.getString();
+                            filename = item.getString("UTF-8");
                         }
                         else if("attachment_comment".equals(item.getFieldName())){
                             comment = item.getString("UTF-8");
@@ -71,21 +110,18 @@ public class AttachmentController extends Upload implements Controller {
                 }
                 for (FileItem item : formItems) {
                     if (!item.isFormField()) {
-                        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date now = new Date();
-                        String date = sdfDate.format(now);
+                        String date = DateHelper.INSTANCE.getStringDate(now);
                         String fileName = new File(item.getName()).getName();
 
                         fileName = DateHelper.INSTANCE.getDateId(now)+"."+ FilenameUtils.getExtension(fileName);
-                        String fromProjectAvatarPath = getPathToFile(contactId);
 
-                        String filePath = uploadPath + fromProjectAvatarPath + File.separator + fileName;
-                        createDirectoryIfNotExists(uploadPath + fromProjectAvatarPath);
-                        File storeFile = new File(filePath);
+                        createDirectoryIfNotExists(getAttachmentDirectoryPath());
+                        File storeFile = new File(getRealAttachmentPath(contactId,fileName));
                         LOGGER.debug("start saving file");
                         item.write(storeFile);
                         LOGGER.debug("end saving file");
-                        request.setAttribute("attachmentURL",getPathToFile(contactId) + File.separator + fileName);
+                        //request.setAttribute("attachmentURL",getPathToFile(contactId,fileName));
                         request.setAttribute("attachmentLoaded","true");
                         request.setAttribute("attachmentDate",date);
                         request.setAttribute("attachmentComment",comment);
@@ -104,7 +140,5 @@ public class AttachmentController extends Upload implements Controller {
 
     }
 
-    private String getPathToFile(String contactId){
-        return File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY + File.separator + contactId;
-    }
+
 }

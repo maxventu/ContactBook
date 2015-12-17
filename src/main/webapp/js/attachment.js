@@ -26,7 +26,7 @@ function createAttachmentModal(){
 
 function deleteAttachments(){
 
-    var allSelected = getAllSelectedChecks("att_id");
+    var allSelected = getAllSelectedChecks("att_check");
     for( var i = 0; i < allSelected.length; i++ )
         deleteAttachment(allSelected[i]);
 
@@ -65,7 +65,7 @@ function closeAttachmentEditModal(){
 
 function editAttachmentModal(){
 
-    var id=getFirstSelectedAttachmentId("att_id");
+    var id=getFirstSelectedAttachmentId("att_check");
     if(id!=null){
         initAttachmentEditModalFields(id);
         openModal("Edit attachment for ","attachmentEditModal");
@@ -98,7 +98,7 @@ function submitEditAttachment() {
         tds[3].innerHTML = comment.value;
 
         var updatedAttachmentsContainer = document.getElementById("updatedAttachments");
-        updatedAttachmentsContainer.appendChild(createDeleteHistory(attachmentId));
+        updatedAttachmentsContainer.appendChild(createUpdateHistory(attachmentId));
 
         closeAttachmentEditModal();
 
@@ -125,11 +125,11 @@ function submitAddAttachment() {
     var newId = contactVariables.attachmentLastId;
 
     var newTableRow = document.createElement("tr");
-    newTableRow.id = "att_id_"+newId;
+    newTableRow.id = "att_check_"+newId;
 
     var td = document.createElement("td");
     var input = document.createElement("input");
-    input.setAttribute("name","att_id");
+    input.setAttribute("name","att_check");
     input.setAttribute("type","checkbox");
     input.id = "att_check_" + newId;
     td.appendChild(input);
@@ -149,7 +149,6 @@ function submitAddAttachment() {
     idInput.value = newId;
     newTableRow.appendChild(idInput);
     newTableRow.appendChild(createHiddenInput(newId,"filename"));
-    newTableRow.appendChild(createHiddenInput(newId,"file_url"));
     newTableRow.appendChild(createHiddenInput(newId,"date_upload"));
     newTableRow.appendChild(createHiddenInput(newId,"comment"));
 
@@ -198,7 +197,7 @@ function initAttachmentEditModalFields(attachmentId){
 }
 
 function setLastAttachmentId(){
-    var elements = document.getElementsByName("att_id");
+    var elements = document.getElementsByName("att_check");
     if(elements.length>0)
         contactVariables.attachmentLastId = parseInt(elements[elements.length-1].id.replace("att_check_",""));
     else contactVariables.attachmentLastId = 0;
@@ -229,7 +228,6 @@ function handleAttachmentResponse(){
         initInputAndTD(attId,"comment","attachmentComment");
         initInputAndTD(attId,"date_upload","attachmentDate");
         initInputAndTD(attId,"filename","attachmentFileName");
-        initInput(attId,"file_url","attachmentURL");
         loaded.value=false;
     }
     reinitAttachmentAddModal();

@@ -54,14 +54,25 @@ public class DateHelper {
     public String getStringDate(Date date){
         LOGGER.debug("getting string date for {}",date);
         if(date != null){
-            SimpleDateFormat sdfDate = new SimpleDateFormat("mm:ss dd-MM-yyyy");
+            SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
             return sdfDate.format(date);
         }
         return null;
     }
 
     public String getDateId(Date date){
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmssSS");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmss");
         return sdfDate.format(date);
+    }
+
+    public Date getDateFromString(String string){
+        DateFormat format = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        Date date=null;
+        try {
+            date = format.parse(string);
+        } catch (ParseException e) {
+            LOGGER.error("error while getting date from string",e);
+        }
+        return date;
     }
 }

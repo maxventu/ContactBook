@@ -23,7 +23,7 @@ function closeTelephoneModal(){
 
 function deleteTelephones(){
 
-    var allSelected = getAllSelectedChecks("tel_id");
+    var allSelected = getAllSelectedChecks("tel_check");
     for( var i = 0; i < allSelected.length; i++ )
         deleteTelephone(allSelected[i]);
 
@@ -50,7 +50,7 @@ function deleteTelephones(){
 }
 
 function editTelephoneModal(){
-    var id=getFirstSelectedTelephoneId("tel_id");
+    var id=getFirstSelectedTelephoneId("tel_check");
     if(id!=null){
         initTelephoneModalFields(id);
         openTelephoneModal("Edit telephone of ");
@@ -128,7 +128,7 @@ function submitTelephone(){
 
         var td = document.createElement("td");
         var input = document.createElement("input");
-        input.setAttribute("name","tel_id");
+        input.setAttribute("name","tel_check");
         input.setAttribute("type","checkbox");
         input.id = "tel_check_"+newId;
         td.appendChild(input);
@@ -224,7 +224,7 @@ function initTelephoneModalFields(telephoneId){
 
 
 function setLastTelephoneId(){
-    var elements = document.getElementsByName("tel_id");
+    var elements = document.getElementsByName("tel_check");
     if(elements.length>0)
         contactVariables.telephoneLastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
     else contactVariables.telephoneLastId = 0;

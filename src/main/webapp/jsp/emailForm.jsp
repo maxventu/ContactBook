@@ -8,9 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Email</title>
 </head>
 <body>
+<c:import url="partial/_navbar.jsp"/>
+<div class="container">
+  <div class="form-horizontal">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-8">
+        <h3>
 
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

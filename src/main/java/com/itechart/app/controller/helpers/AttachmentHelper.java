@@ -5,12 +5,12 @@ import com.itechart.app.entity.Attachment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -32,10 +32,11 @@ public class AttachmentHelper extends AbstractHelper {
         String[] att_comment = request.getParameterValues("att_comment");
         HashMap<Integer,Attachment> attachmentHashMap = new HashMap<Integer, Attachment>();
         for(int i=0;i<att_id.size();i++)
-            attachmentHashMap.put(att_id.get(i), new Attachment(att_id.get(i), att_filename[i], getDateFromString(att_date_upload[i]), att_comment[i], contactId));
+            attachmentHashMap.put(att_id.get(i), new Attachment(att_id.get(i), att_filename[i],
+                    DateHelper.INSTANCE.getDateFromString(att_date_upload[i]), att_comment[i], contactId));
 
         ArrayList<Attachment> newAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
-        ArrayList<Attachment> updatedAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
+        ArrayList<Attachment> updatedAttachmentsArray = getAttachmentsByCriterionFromRequest("updatedAttachments", request, attachmentHashMap);
 
         deleteAttachments(getIntListFromArray(request.getParameterValues("deletedAttachments")));
         createAttachments(newAttachmentsArray);
@@ -45,8 +46,21 @@ public class AttachmentHelper extends AbstractHelper {
     private void deleteAttachments(ArrayList<Integer> attachment_ids){
         LOGGER.debug("deleting attachments");
         for(Integer id : attachment_ids)
+        {
+            deleteAttachmentFromDisk(id);
             AttachmentDAO.INSTANCE.delete(id);
+        }
+
     }
+
+    private void deleteAttachmentFromDisk(Integer id){
+        Attachment att = AttachmentDAO.INSTANCE.findEntityById(id);
+        File file = AttachmentHelper.INSTANCE.getFile(Upload.getAttachmentDirectoryPath() + File.separator + att.getContactId(), att.getDateUploadAsId());
+        if(file!=null)
+            file.delete();
+    }
+
+
     private void updateAttachments(ArrayList<Attachment> attachments){
         LOGGER.debug("updating attachments");
         for(Attachment att : attachments)
@@ -60,6 +74,7 @@ public class AttachmentHelper extends AbstractHelper {
         {
             att.setId(i);
             AttachmentDAO.INSTANCE.create(att);
+            i++;
         }
     }
 
@@ -76,14 +91,18 @@ public class AttachmentHelper extends AbstractHelper {
         }
         return specificArray;
     }
-    private Date getDateFromString(String string){
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date=null;
-        try {
-            date = format.parse(string);
-        } catch (ParseException e) {
-            LOGGER.error("error while getting date from string",e);
-        }
-        return date;
+    public ServletOutputStream getOutputStream(HttpServletResponse response,String contentType,String headerFileName) throws IOException {
+        response.setContentType(contentType);
+        response.setHeader("Content-Disposition","attachment;filename="+headerFileName);
+        return response.getOutputStream();
     }
+    public File getFile(String directory,String filename){
+        File dir = new File(directory);
+        File[] listOfFiles = dir.listFiles();
+        for(File f:listOfFiles) {
+            if(f.getName().startsWith(filename))return f;
+        }
+        return null;
+    }
+
 }

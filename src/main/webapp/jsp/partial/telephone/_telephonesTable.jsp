@@ -49,12 +49,12 @@
                             <tr id="tel_id_${telephone.id}">
                                 <td>
                                     <label for="tel_check_${telephone.id}" class="sr-only"></label>
-                                    <input name="tel_id" type="checkbox" id="tel_check_${telephone.id}" value="${telephone.id}">
+                                    <input name="tel_check" type="checkbox" id="tel_check_${telephone.id}" ">
                                 </td>
                                 <td>${telephone.fullNumber}</td>
                                 <td>${telephoneType.get(telephone.type).value}</td>
                                 <td>${telephone.comment}</td>
-
+                                <input type="hidden" name="tel_id" id="tel_id_${telephone.id}" value="${telephone.id}">
                                 <input type="hidden" name="tel_country_code" id="tel_country_code_${telephone.id}" value="${telephone.countryCode}">
                                 <input type="hidden" name="tel_operator_code" id="tel_operator_code_${telephone.id}" value="${telephone.operatorCode}">
                                 <input type="hidden" name="tel_number" id="tel_number_${telephone.id}" value="${telephone.number}">

@@ -13,7 +13,7 @@
 
 <div class="form-horizontal" role="form">
     <div class="form-group">
-        <label for="telephonesTable" class="col-lg-2 control-label">Attachments</label>
+        <label for="telephonesTable" class="col-lg-2 control-label"><a href="/ContactBook/attachments?id=${contact.id}">Attachments</a></label>
         <div class="col-lg-10">
             <div class="panel panel-default" id="telephonesTable">
                 <div class="panel-body">
@@ -44,11 +44,12 @@
                                 <tr id="att_id_${attachment.id}">
                                     <td>
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
-                                        <input type="checkbox" name="att_id" id="att_check_${attachment.id}" value="${attachment.id}">
+                                        <input type="checkbox" id="att_check_${attachment.id}" name="att_check" id="att_check_${attachment.id}">
                                     </td>
-                                    <td><a href="/ContactBook/attachment?id=${attachment.dateUploadAsId}" >${attachment.filename}</a></td>
-                                    <td>${attachment.dateUpload}</td>
+                                    <td>${attachment.filename}</td>
+                                    <td>${attachment.stringDate}</td>
                                     <td>${attachment.comment}</td>
+                                    <input type="hidden" name="att_id" id="att_id_${attachment.id}" value="${attachment.id}">
                                     <input type="hidden" name="att_filename" id="att_filename_${attachment.id}" value="${attachment.filename}">
                                     <input type="hidden" name="att_date_upload" id="att_date_upload_${attachment.id}" value="${attachment.stringDate}">
                                     <input type="hidden" name="att_comment" id="att_comment_${attachment.id}" value="${attachment.comment}">

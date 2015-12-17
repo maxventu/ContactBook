@@ -12,7 +12,6 @@
 </head>
 <body>
     <input type="hidden" id="attachmentLoaded" value="${attachmentLoaded}">
-    <input type="hidden" id="attachmentURL" value="${attachmentURL}">
     <input type="hidden" id="attachmentDate" value="${attachmentDate}">
     <input type="hidden" id="attachmentComment" value="${attachmentComment}">
     <input type="hidden" id="attachmentFileName" value="${attachmentFileName}">

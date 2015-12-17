@@ -1,9 +1,8 @@
 package com.itechart.app.controller.helpers;
 
+import com.itechart.app.controller.FrontController;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -11,8 +10,6 @@ import java.io.File;
  * Created by Maxim on 12/15/2015.
  */
 public class Upload {
-
-    final Logger LOGGER = LoggerFactory.getLogger(Upload.class);
 
     protected static final String UPLOAD_DIRECTORY = "upload";
     protected static final String AVATAR_DIRECTORY = "avatar";
@@ -39,4 +36,15 @@ public class Upload {
             uploadDir.mkdir();
         }
     }
+
+
+    public static String getAttachmentDirectoryPath(){
+        return FrontController.INSTANCE.getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY;
+    }
+
+    public static String getRealAttachmentPath(String contactId,String fileName){
+        return getAttachmentDirectoryPath()+ File.separator + contactId + File.separator + fileName;
+    }
+
+
 }

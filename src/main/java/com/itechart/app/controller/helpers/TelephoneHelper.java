@@ -59,6 +59,7 @@ public class TelephoneHelper extends AbstractHelper {
         {
             t.setId(i);
             TelephoneDAO.INSTANCE.create(t);
+            i++;
         }
     }
 
