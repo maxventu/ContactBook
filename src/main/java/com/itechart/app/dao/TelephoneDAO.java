@@ -29,7 +29,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
     private static final String TELEPHONE_DELETE_QUERY =
             "UPDATE telephone SET is_deleted=1, date_deleted=NOW() WHERE id=?";
     private static final String TELEPHONE_CREATE_QUERY =
-            "INSERT INTO telephone (id,country_code,operator_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO telephone (id,country_code,operator_code,number,type,comment,contact_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String TELEPHONE_UPDATE_QUERY =
             "UPDATE telephone SET country_code=?,operator_code=?, number=?, type=?, comment=?, contact_id=?" +
                     " WHERE id=?";

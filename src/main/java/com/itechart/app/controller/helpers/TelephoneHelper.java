@@ -21,6 +21,7 @@ public class TelephoneHelper extends EntityHelper{
     private TelephoneHelper(){}
 
     public void processTelephones(HttpServletRequest request,Integer contactId){
+        LOGGER.debug("editing telephones");
         ArrayList<Integer> tel_id = getIntListFromArray(request.getParameterValues("tel_id"));
         String[] tel_country_code = request.getParameterValues("tel_country_code");
         String[] tel_operator_code = request.getParameterValues("tel_operator_code");
@@ -31,19 +32,19 @@ public class TelephoneHelper extends EntityHelper{
         for(int i=0;i<tel_id.size();i++)
             telephoneHashMap.put(tel_id.get(i),new Telephone(tel_id.get(i),tel_country_code[i],tel_operator_code[i],tel_number[i],tel_type[i],tel_comment[i],contactId));
 
-        ArrayList<Telephone> deletedTelephonesArray = getTelephonesByCriterionFromRequest("deletedTelephones",request,telephoneHashMap);
+
         ArrayList<Telephone> newTelephonesArray = getTelephonesByCriterionFromRequest("newTelephones", request, telephoneHashMap);
         ArrayList<Telephone> updatedTelephonesArray = getTelephonesByCriterionFromRequest("updatedTelephones", request, telephoneHashMap);
-        deleteTelephones(deletedTelephonesArray);
+        deleteTelephones(getIntListFromArray(request.getParameterValues("deletedTelephones")));
         createTelephones(newTelephonesArray);
         updateTelephones(updatedTelephonesArray);
 
     }
 
-    private void deleteTelephones(ArrayList<Telephone> telephones){
+    private void deleteTelephones(ArrayList<Integer> telephone_ids){
         LOGGER.debug("deleting telephones");
-        for(Telephone t : telephones)
-            TelephoneDAO.INSTANCE.delete(t.getId());
+        for(Integer id : telephone_ids)
+            TelephoneDAO.INSTANCE.delete(id);
     }
     private void updateTelephones(ArrayList<Telephone> telephones){
         LOGGER.debug("updating telephones");

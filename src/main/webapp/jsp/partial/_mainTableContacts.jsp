@@ -42,6 +42,7 @@
                 <td>${contact.currentWorkplace}</td>
             </tr>
         </c:forEach>
+        <span class="not-visible" id="deletedContacts"></span>
         </tbody>
     </table>
 </form>

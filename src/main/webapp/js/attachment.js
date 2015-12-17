@@ -131,7 +131,7 @@ function submitAddAttachment() {
     var input = document.createElement("input");
     input.setAttribute("name","att_id");
     input.setAttribute("type","checkbox");
-    input.id = "att_check_"+newId;
+    input.id = "att_check_" + newId;
     td.appendChild(input);
     newTableRow.appendChild(td);
 
@@ -145,6 +145,9 @@ function submitAddAttachment() {
     td = createTD(newId,"comment");
     newTableRow.appendChild(td);
 
+    var idInput = createHiddenInput(newId,"id");
+    idInput.value = newId;
+    newTableRow.appendChild(idInput);
     newTableRow.appendChild(createHiddenInput(newId,"filename"));
     newTableRow.appendChild(createHiddenInput(newId,"file_url"));
     newTableRow.appendChild(createHiddenInput(newId,"date_upload"));

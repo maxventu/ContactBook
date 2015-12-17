@@ -24,27 +24,17 @@ public class ContactController implements Controller {
     final Logger LOGGER = LoggerFactory.getLogger(ContactController.class);
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.debug("started");
-        if(isSaving(request))forwardEditedContact(request, response);
-        else forwardNewContact(request,response);
 
-    }
-
-    private boolean isSaving(HttpServletRequest request){
-        String saving = request.getParameter("save_button");
-        return "save_contact".equals(saving);
+        if (isSaving(request)) forwardEditedContact(request, response);
+        else forwardNewContact(request, response);
     }
 
     private void forwardNewContact(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-
+        LOGGER.debug("editing/creating contact init");
         String st = request.getParameter("id");
         if(st!=null)initEditContact(request,st);
         else initNewEditContact(request);
         request.getRequestDispatcher("/jsp/contactForm.jsp").forward(request,response);
-    }
-    private void initNewEditContact(HttpServletRequest request){
-        request.setAttribute("contact", new Contact());
-        request.setAttribute("telephones", new ArrayList<Telephone>());
-        request.setAttribute("attachments", new ArrayList<Attachment>());
     }
 
     private void initEditContact(HttpServletRequest request,String id){
@@ -55,6 +45,12 @@ public class ContactController implements Controller {
         request.setAttribute("contact", contact);
         request.setAttribute("telephones", telephones);
         request.setAttribute("attachments", attachments);
+    }
+
+    private void initNewEditContact(HttpServletRequest request){
+        request.setAttribute("contact", new Contact());
+        request.setAttribute("telephones", new ArrayList<Telephone>());
+        request.setAttribute("attachments", new ArrayList<Attachment>());
     }
 
     private void forwardEditedContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,7 +95,10 @@ public class ContactController implements Controller {
         LocationHelper.INSTANCE.updateLocation(location);
     }
 
-
+    private boolean isSaving(HttpServletRequest request){
+        String saving = request.getParameter("save_button");
+        return "save_contact".equals(saving);
+    }
 
 
 

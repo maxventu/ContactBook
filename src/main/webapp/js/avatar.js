@@ -42,7 +42,9 @@ function handleAvatarResponse(){
         var url = uploadDocument.getElementById("avatarURL");
 
         var ava_image = document.getElementById("ava_image");
+        var hidden_url = document.getElementById("photoUrl");
         ava_image.src=url.value;
+        hidden_url.value = url.value;
         loaded.value=false;
     }
     submitEditAvatar();

@@ -93,7 +93,7 @@ function submitTelephone(){
         var tds = parent.getElementsByTagName("td");
 
         tds[1].innerHTML = str;
-        var typeSel = document.getElementById("telephoneModal_type_select");
+        var typeSel = document.getElementById("telephoneModal_type");
         tds[2].innerHTML = typeSel[typeSel.selectedIndex].text;
         tds[3].innerHTML = comment.value;
 
@@ -137,7 +137,7 @@ function submitTelephone(){
         var country_code = createInput(newId,"country_code");
         var operator_code = createInput(newId,"operator_code");
         var number = createInput(newId,"number");
-        var type = createInput(newId,"type_select");
+        var type = createInput(newId,"type");
         var comment = createInput(newId,"comment");
 
         td = document.createElement("td");
@@ -145,7 +145,7 @@ function submitTelephone(){
         newTableRow.appendChild(td);
 
         td = document.createElement("td");
-        var sel = document.getElementById("telephoneModal_type_select");
+        var sel = document.getElementById("telephoneModal_type");
         td.innerHTML = sel[sel.selectedIndex].text;
         newTableRow.appendChild(td);
 
@@ -153,6 +153,9 @@ function submitTelephone(){
         td.innerHTML = comment.value;
         newTableRow.appendChild(td);
 
+        var idInput = createHiddenInput(newId,"id");
+        idInput.value = newId;
+        newTableRow.appendChild(idInput);
         newTableRow.appendChild(country_code);
         newTableRow.appendChild(operator_code);
         newTableRow.appendChild(number);
@@ -169,9 +172,17 @@ function submitTelephone(){
             input.setAttribute("type","hidden");
 
             var inputInModal = document.getElementById("telephoneModal_"+fieldType);
-            inputInModal.setAttribute("name","tel_"+fieldType);
+            input.setAttribute("name","tel_"+fieldType);
             input.id = "tel_"+fieldType+"_"+telId;
             input.value = inputInModal.value;
+            return input;
+        }
+
+        function createHiddenInput(attId,fieldType){
+            var input = document.createElement("input");
+            input.setAttribute("type","hidden");
+            input.setAttribute("name","tel_"+fieldType);
+            input.id = "tel_"+fieldType+"_"+attId;
             return input;
         }
 
@@ -191,7 +202,7 @@ function reinitTelephoneModal(){
     types.forEach(function(type,i,types){
         setValueOfInputToNull("telephoneModal_"+type);
     });
-    var sel = document.getElementById("telephoneModal_type_select");
+    var sel = document.getElementById("telephoneModal_type");
     sel.selectedIndex = 0;
 }
 

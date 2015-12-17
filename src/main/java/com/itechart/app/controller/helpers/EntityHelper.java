@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class EntityHelper {
     protected static ArrayList<Integer> getIntListFromArray(String[] array){
         ArrayList<Integer> list = new ArrayList<Integer>();
+        if(array!=null)
         for(int i=0;i<array.length;i++)
             list.add(Integer.parseInt(array[i]));
         return list;

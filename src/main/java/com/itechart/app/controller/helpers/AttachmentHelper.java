@@ -34,19 +34,18 @@ public class AttachmentHelper extends EntityHelper{
         for(int i=0;i<att_id.size();i++)
             attachmentHashMap.put(att_id.get(i), new Attachment(att_id.get(i), att_filename[i], getDateFromString(att_date_upload[i]), att_comment[i], contactId));
 
-        ArrayList<Attachment> deletedAttachmentsArray = getAttachmentsByCriterionFromRequest("deletedAttachments", request, attachmentHashMap);
         ArrayList<Attachment> newAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
         ArrayList<Attachment> updatedAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
 
-        deleteAttachments(deletedAttachmentsArray);
+        deleteAttachments(getIntListFromArray(request.getParameterValues("deletedAttachments")));
         createAttachments(newAttachmentsArray);
         updateAttachments(updatedAttachmentsArray);
     }
 
-    private void deleteAttachments(ArrayList<Attachment> attachments){
+    private void deleteAttachments(ArrayList<Integer> attachment_ids){
         LOGGER.debug("deleting attachments");
-        for(Attachment att : attachments)
-            AttachmentDAO.INSTANCE.delete(att.getId());
+        for(Integer id : attachment_ids)
+            AttachmentDAO.INSTANCE.delete(id);
     }
     private void updateAttachments(ArrayList<Attachment> attachments){
         LOGGER.debug("updating attachments");
