@@ -53,8 +53,15 @@ public class DateHelper {
 
     public String getStringDate(Date date){
         LOGGER.debug("getting string date for {}",date);
-        if(date != null)
-            return date.toString();
+        if(date != null){
+            SimpleDateFormat sdfDate = new SimpleDateFormat("mm:ss dd-MM-yyyy");
+            return sdfDate.format(date);
+        }
         return null;
+    }
+
+    public String getDateId(Date date){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmssSS");
+        return sdfDate.format(date);
     }
 }

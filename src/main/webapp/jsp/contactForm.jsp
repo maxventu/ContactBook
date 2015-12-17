@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/contactbook.css">
     <script src="../js/attachment.js"></script>
     <script src="../js/telephone.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/contactEdit.js"></script>
     <script src="../js/avatar.js"></script>
 </head>
 <body>

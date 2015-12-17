@@ -121,8 +121,8 @@ function submitEditAttachment() {
 }
 
 function submitAddAttachment() {
-    ContactBook.attachmentLastId= 1+parseInt(ContactBook.attachmentLastId);
-    var newId = ContactBook.attachmentLastId;
+    contactVariables.attachmentLastId= 1+parseInt(contactVariables.attachmentLastId);
+    var newId = contactVariables.attachmentLastId;
 
     var newTableRow = document.createElement("tr");
     newTableRow.id = "att_id_"+newId;
@@ -200,8 +200,8 @@ function initAttachmentEditModalFields(attachmentId){
 function setLastAttachmentId(){
     var elements = document.getElementsByName("att_id");
     if(elements.length>0)
-        ContactBook.attachmentLastId = parseInt(elements[elements.length-1].id.replace("att_check_",""));
-    else ContactBook.attachmentLastId = 0;
+        contactVariables.attachmentLastId = parseInt(elements[elements.length-1].id.replace("att_check_",""));
+    else contactVariables.attachmentLastId = 0;
 }
 
 ///
@@ -220,7 +220,7 @@ function reinitAttachmentEditModal(){
 }
 
 function handleAttachmentResponse(){
-    var attId = ContactBook.attachmentLastId;
+    var attId = contactVariables.attachmentLastId;
 
     var uploadDocument = document.getElementById("hiddenAttachmentFrame").contentWindow.document;
     var loaded = uploadDocument.getElementById("attachmentLoaded");

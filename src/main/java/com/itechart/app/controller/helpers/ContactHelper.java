@@ -1,27 +1,24 @@
 package com.itechart.app.controller.helpers;
 
+import com.itechart.app.dao.ContactDAO;
 import com.itechart.app.entity.Contact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Maxim on 12/16/2015.
  */
-public class ContactHelper extends  EntityHelper{
+public class ContactHelper extends AbstractHelper {
     final Logger LOGGER = LoggerFactory.getLogger(ContactHelper.class);
 
     public static final ContactHelper INSTANCE = new ContactHelper();
 
     private ContactHelper(){}
 
-    public Contact getContact(HttpServletRequest request,Integer contactId)
-    {
+    public Contact getContact(HttpServletRequest request,Integer contactId){
         LOGGER.debug("creating contact with id={}",contactId);
         List<String> strings = Arrays.asList("id", "firstName", "lastName", "patronymic", "dateOfBirth", "sexIsMale",
                 "nationality", "familyStatus", "webSite", "email", "currentWorkplace", "photoUrl", "street", "house",
@@ -37,4 +34,12 @@ public class ContactHelper extends  EntityHelper{
                 map.get("apartment"),map.get("postcode"),map.get("country"),map.get("city"));
         return contact;
     }
+
+    public void deleteContacts(HttpServletRequest request){
+        ArrayList<Integer> contactIds = getIntListFromArray(request.getParameterValues("choseContacts"));
+        for(Integer id : contactIds){
+            ContactDAO.INSTANCE.delete(id);
+        }
+    }
+
 }

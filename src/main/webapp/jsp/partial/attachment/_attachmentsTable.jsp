@@ -1,4 +1,4 @@
-<jsp:useBean id="attachments" scope="request" type="java.util.List<com.itechart.app.entity.Attachment>"/>
+
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<jsp:useBean id="attachments" scope="request" type="java.util.List<com.itechart.app.entity.Attachment>"/>
 
 <div class="form-horizontal" role="form">
     <div class="form-group">
@@ -45,11 +46,11 @@
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
                                         <input type="checkbox" name="att_id" id="att_check_${attachment.id}" value="${attachment.id}">
                                     </td>
-                                    <td><a href="/ContactBook/attachment?id=${attachment.id}" >${attachment.filename}</a></td>
+                                    <td><a href="/ContactBook/attachment?id=${attachment.dateUploadAsId}" >${attachment.filename}</a></td>
                                     <td>${attachment.dateUpload}</td>
                                     <td>${attachment.comment}</td>
                                     <input type="hidden" name="att_filename" id="att_filename_${attachment.id}" value="${attachment.filename}">
-                                    <input type="hidden" name="att_date_upload" id="att_date_upload_${attachment.id}" value="${attachment.dateUpload}">
+                                    <input type="hidden" name="att_date_upload" id="att_date_upload_${attachment.id}" value="${attachment.stringDate}">
                                     <input type="hidden" name="att_comment" id="att_comment_${attachment.id}" value="${attachment.comment}">
                                 </tr>
                             </c:forEach>

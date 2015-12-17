@@ -1,5 +1,5 @@
 window.onload = load;
-var ContactBook = {
+var contactVariables = {
     telephoneLastId:0,
     attachmentLastId:0
 };

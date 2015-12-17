@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by Maxim on 12/16/2015.
  */
-public class TelephoneHelper extends EntityHelper{
+public class TelephoneHelper extends AbstractHelper {
 
     final Logger LOGGER = LoggerFactory.getLogger(TelephoneHelper.class);
 

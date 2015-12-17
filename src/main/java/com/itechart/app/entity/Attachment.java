@@ -1,5 +1,7 @@
 package com.itechart.app.entity;
 
+import com.itechart.app.controller.helpers.DateHelper;
+
 import java.util.Date;
 
 /**
@@ -62,5 +64,12 @@ public class Attachment extends Entity<Integer>{
         this.contactId = contactId;
     }
 
+    public String getStringDate(){
+        return DateHelper.INSTANCE.getStringDate(dateUpload);
+    }
+
+    public String getDateUploadAsId(){
+        return DateHelper.INSTANCE.getDateId(dateUpload);
+    }
 
 }

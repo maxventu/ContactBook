@@ -13,6 +13,7 @@
 <head>
     <title>Contact Book</title>
     <link rel="stylesheet" href="../css/Bootstrap_cosmo.css">
+    <script src="../js/contact.js"></script>
 </head>
 
 <body>

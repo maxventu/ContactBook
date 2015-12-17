@@ -35,14 +35,14 @@
         </tr>
         <c:forEach var="contact" items="${contacts}">
             <tr>
-                <td><input type="checkbox" checkboxid="${contact.id}"></td>
+                <td><input name="choseContactsCheckbox" type="checkbox" value="${contact.id}"></td>
                 <td><a href="/ContactBook/edit?id=${contact.id}" >${contact.fullName}</a></td>
                 <td>${contact.dateOfBirth}</td>
                 <td>${contact.fullAddress}</td>
                 <td>${contact.currentWorkplace}</td>
             </tr>
         </c:forEach>
-        <span class="not-visible" id="deletedContacts"></span>
+        <span class="not-visible" id="choseContacts"></span>
         </tbody>
     </table>
 </form>

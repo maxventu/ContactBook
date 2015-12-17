@@ -1,5 +1,6 @@
 package com.itechart.app.controller;
 
+import com.itechart.app.controller.helpers.ContactHelper;
 import com.itechart.app.controller.helpers.Controller;
 import com.itechart.app.dao.ContactDAO;
 
@@ -32,6 +33,7 @@ public class MainFrameController implements Controller {
     }
 
     private void deleteContacts(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-
+        ContactHelper.INSTANCE.deleteContacts(request);
+        initContacts(request,response);
     }
 }

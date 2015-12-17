@@ -1,6 +1,7 @@
 package com.itechart.app.controller;
 
 import com.itechart.app.controller.helpers.Controller;
+import com.itechart.app.controller.helpers.DateHelper;
 import com.itechart.app.controller.helpers.Upload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -65,11 +66,11 @@ public class AttachmentUploadController extends Upload implements Controller {
                         String date = sdfDate.format(now);
                         String fileName = new File(item.getName()).getName();
 
-                        fileName = date.replace(" ", "_").replace("-","").replace(":","")+"."+ FilenameUtils.getExtension(fileName);
+                        fileName = DateHelper.INSTANCE.getDateId(now)+"."+ FilenameUtils.getExtension(fileName);
                         String fromProjectAvatarPath = getPathToFile(contactId);
 
                         String filePath = uploadPath + fromProjectAvatarPath + File.separator + fileName;
-                        createDirectoryIfNotExists(uploadPath+ fromProjectAvatarPath);
+                        createDirectoryIfNotExists(uploadPath + fromProjectAvatarPath);
                         File storeFile = new File(filePath);
                         LOGGER.debug("start saving file");
                         item.write(storeFile);
@@ -93,6 +94,6 @@ public class AttachmentUploadController extends Upload implements Controller {
 
     }
     private String getPathToFile(String contactId){
-        return File.separator + UPLOAD_DIRECTORY+ File.separator+ATTACHMENT_DIRECTORY + File.separator + contactId;
+        return File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY + File.separator + contactId;
     }
 }

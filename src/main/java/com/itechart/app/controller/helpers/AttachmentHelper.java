@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by Maxim on 12/16/2015.
  */
-public class AttachmentHelper extends EntityHelper{
+public class AttachmentHelper extends AbstractHelper {
     final Logger LOGGER = LoggerFactory.getLogger(AttachmentHelper.class);
 
 

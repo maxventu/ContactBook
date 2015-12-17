@@ -120,8 +120,8 @@ function submitTelephone(){
     }
 
     function createNewTelephone() {
-        ContactBook.telephoneLastId= 1+parseInt(ContactBook.telephoneLastId);
-        var newId = ContactBook.telephoneLastId;
+        contactVariables.telephoneLastId= 1+parseInt(contactVariables.telephoneLastId);
+        var newId = contactVariables.telephoneLastId;
 
         var newTableRow = document.createElement("tr");
         newTableRow.id = "tel_id_"+newId;
@@ -153,7 +153,7 @@ function submitTelephone(){
         td.innerHTML = comment.value;
         newTableRow.appendChild(td);
 
-        var idInput = createHiddenInput(newId,"id");
+        var idInput = createHiddenInputForTelephones(newId,"id");
         idInput.value = newId;
         newTableRow.appendChild(idInput);
         newTableRow.appendChild(country_code);
@@ -178,7 +178,7 @@ function submitTelephone(){
             return input;
         }
 
-        function createHiddenInput(attId,fieldType){
+        function createHiddenInputForTelephones(attId,fieldType){
             var input = document.createElement("input");
             input.setAttribute("type","hidden");
             input.setAttribute("name","tel_"+fieldType);
@@ -226,6 +226,6 @@ function initTelephoneModalFields(telephoneId){
 function setLastTelephoneId(){
     var elements = document.getElementsByName("tel_id");
     if(elements.length>0)
-        ContactBook.telephoneLastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
-    else ContactBook.telephoneLastId = 0;
+        contactVariables.telephoneLastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
+    else contactVariables.telephoneLastId = 0;
 }

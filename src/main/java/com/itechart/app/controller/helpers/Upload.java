@@ -2,6 +2,8 @@ package com.itechart.app.controller.helpers;
 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -9,6 +11,8 @@ import java.io.File;
  * Created by Maxim on 12/15/2015.
  */
 public class Upload {
+
+    final Logger LOGGER = LoggerFactory.getLogger(Upload.class);
 
     protected static final String UPLOAD_DIRECTORY = "upload";
     protected static final String AVATAR_DIRECTORY = "avatar";

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Maxim on 12/16/2015.
  */
-public class EntityHelper {
+public class AbstractHelper {
     protected static ArrayList<Integer> getIntListFromArray(String[] array){
         ArrayList<Integer> list = new ArrayList<Integer>();
         if(array!=null)
