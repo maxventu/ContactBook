@@ -24,7 +24,7 @@ public class ApplicationController implements Controller {
         mapOfControllers.put("/update",new ContactController());
         mapOfControllers.put("/email",new EmailController());
         mapOfControllers.put("/upload_avatar",new AvatarUploadController());
-        mapOfControllers.put("/upload_attachment",new AttachmentUploadController());
+        mapOfControllers.put("/upload_attachment",new AttachmentController());
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

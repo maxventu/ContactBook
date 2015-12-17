@@ -22,10 +22,20 @@ import java.util.List;
 /**
  * Created by Maxim on 12/15/2015.
  */
-public class AttachmentUploadController extends Upload implements Controller {
+public class AttachmentController extends Upload implements Controller {
     final Logger LOGGER = LoggerFactory.getLogger(AvatarUploadController.class);
     // upload settings
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+        String id = request.getParameter("id");
+        if(id!=null) showAttachment(request,response);
+        else uploadAttachment(request,response);
+    }
+
+    private void showAttachment(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void uploadAttachment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.debug("attachment starts uploading");
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
@@ -86,13 +96,14 @@ public class AttachmentUploadController extends Upload implements Controller {
             }
 
         }catch (Exception e){
-           LOGGER.error("something bad happened while uploading",e);
+            LOGGER.error("something bad happened while uploading",e);
         }
         // redirects client to message page
         request.getRequestDispatcher("/jsp/partial/attachment/attachmentAnswer.jsp").forward(
                 request, response);
 
     }
+
     private String getPathToFile(String contactId){
         return File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY + File.separator + contactId;
     }
