@@ -12,18 +12,18 @@ public class Attachment extends Entity<Integer>{
     private Integer contactId;
 
 
-    public Attachment(String filename, Date dateUpload, String comment) {
+    private Attachment(String filename, Date dateUpload, String comment) {
         super();
-        this.filename = filename;
+        this.filename = getNullableString(filename);
         this.dateUpload = dateUpload;
-        this.comment = comment;
+        this.comment = getNullableString(comment);
     }
 
     public Attachment(Integer id, String filename, Date dateUpload, String comment) {
         super(id);
-        this.filename = filename;
+        this.filename = getNullableString(filename);
         this.dateUpload = dateUpload;
-        this.comment = comment;
+        this.comment = getNullableString(comment);
     }
     public Attachment(Integer id, String filename, Date dateUpload, String comment,Integer contactId) {
         this(id, filename, dateUpload, comment);

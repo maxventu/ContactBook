@@ -1,4 +1,5 @@
 <%@ page import="com.itechart.app.entity.helpers.TelephoneType" %>
+<jsp:useBean id="telephones" scope="request" type="java.util.List<com.itechart.app.entity.Telephone>"/>
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -12,7 +13,7 @@
     pageContext.setAttribute("telephoneTypes", TelephoneType.values());
     pageContext.setAttribute("telephoneType", TelephoneType.MOB);
 %>
-<jsp:useBean id="telephones" scope="request" type="java.util.List<com.itechart.app.entity.Telephone>"/>
+
 
 <div class="form-horizontal" role="form">
     <div class="form-group">

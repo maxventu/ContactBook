@@ -38,6 +38,9 @@ public class AttachmentHelper extends EntityHelper{
         ArrayList<Attachment> newAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
         ArrayList<Attachment> updatedAttachmentsArray = getAttachmentsByCriterionFromRequest("newAttachments", request, attachmentHashMap);
 
+        deleteAttachments(deletedAttachmentsArray);
+        createAttachments(newAttachmentsArray);
+        updateAttachments(updatedAttachmentsArray);
     }
 
     private void deleteAttachments(ArrayList<Attachment> attachments){

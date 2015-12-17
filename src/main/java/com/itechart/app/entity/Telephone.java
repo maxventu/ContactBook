@@ -11,21 +11,21 @@ public class Telephone extends Entity<Integer> {
     private String comment;
     private Integer contactId;
 
-    public Telephone(String countryCode,String operatorCode, String number, String type, String comment) {
-        this.countryCode = countryCode;
-        this.operatorCode = operatorCode;
-        this.number = number;
-        this.type = type;
-        this.comment = comment;
+    private Telephone(String countryCode,String operatorCode, String number, String type, String comment) {
+        this.countryCode = getNullableString(countryCode);
+        this.operatorCode = getNullableString(operatorCode);
+        this.number = getNullableString(number);
+        this.type = getNullableString(type);
+        this.comment = getNullableString(comment);
     }
 
     private Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment) {
         super(id);
-        this.countryCode = countryCode;
-        this.operatorCode = operatorCode;
-        this.number = number;
-        this.type = type;
-        this.comment = comment;
+        this.countryCode = getNullableString(countryCode);
+        this.operatorCode = getNullableString(operatorCode);
+        this.number = getNullableString(number);
+        this.type = getNullableString(type);
+        this.comment = getNullableString(comment);
     }
     public Telephone(Integer id, String countryCode,String operatorCode, String number, String type, String comment, Integer contactId) {
         this(id, operatorCode, countryCode,number,type,comment);
@@ -85,4 +85,5 @@ public class Telephone extends Entity<Integer> {
     public String getFullNumber(){
         return (countryCode!=null ? "+"+countryCode: "")+(operatorCode!=null ? "("+operatorCode+")": "")+""+number;
     }
+
 }

@@ -9,8 +9,8 @@ public class Location extends Entity<String> {
 
     public Location(String postcode, String country, String city) {
         super(postcode);
-        this.country = country;
-        this.city = city;
+        this.country = getNullableString(country);
+        this.city = getNullableString(city);
     }
 
     public String getCountry() {
@@ -29,5 +29,5 @@ public class Location extends Entity<String> {
         this.city = city;
     }
 
-
+    public boolean isNull(){return getId()==null;}
 }

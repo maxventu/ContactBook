@@ -68,28 +68,36 @@ public class ContactController implements Controller {
 
         Integer contactId = ContactDAO.INSTANCE.maxRow()+1;
         LOGGER.debug("setting up a new contact with id={}",contactId);
+
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
+        processLocation(contact);
         ContactDAO.INSTANCE.create(contact);
-        setContactInfo(request, contact, contactId);
+        setTelephonesAndAttachments(request, contact, contactId);
+
         LOGGER.debug("contact with id={} is set",contactId);
     }
 
     private void updateContact(HttpServletRequest request, String contactIdStr) {
         LOGGER.debug("updating contact, id={}",contactIdStr);
+
         Integer contactId = Integer.parseInt(contactIdStr);
         Contact contact = ContactHelper.INSTANCE.getContact(request, contactId);
+        processLocation(contact);
         ContactDAO.INSTANCE.update(contact);
-        setContactInfo(request,contact,contactId);
+        setTelephonesAndAttachments(request, contact, contactId);
+
         LOGGER.debug("contact with id={} updated",contactIdStr);
     }
-    private void setContactInfo(HttpServletRequest request,Contact contact, Integer contactId){
+    private void setTelephonesAndAttachments(HttpServletRequest request, Contact contact, Integer contactId){
         LOGGER.debug("setting up info for contact id={}",contactId);
-        Location location = new Location(contact.getPostcode(),contact.getCountry(),contact.getCity());
-        LocationHelper.INSTANCE.updateLocation(location);
         TelephoneHelper.INSTANCE.processTelephones(request,contactId);
         AttachmentHelper.INSTANCE.processAttachments(request,contactId);
     }
 
+    private void processLocation(Contact contact){
+        Location location = new Location(contact.getPostcode(),contact.getCountry(),contact.getCity());
+        LocationHelper.INSTANCE.updateLocation(location);
+    }
 
 
 

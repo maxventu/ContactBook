@@ -47,21 +47,21 @@ public class Contact extends Entity<Integer> {
                    String country,
                    String city) {
         this(id, firstName, lastName);
-        this.patronymic = patronymic;
+        this.patronymic = getNullableString(patronymic);
         this.dateOfBirth = dateOfBirth;
         this.sexIsMale = sexIsMale;
-        this.nationality = nationality;
-        this.familyStatus = familyStatus;
-        this.webSite = webSite;
-        this.email = email;
-        this.currentWorkplace = currentWorkplace;
-        this.photoUrl = photoUrl;
-        this.street=street;
-        this.house = house;
-        this.apartment = apartment;
-        this.postcode = postcode;
-        this.country = country;
-        this.city = city;
+        this.nationality = getNullableString(nationality);
+        this.familyStatus = getNullableString(familyStatus);
+        this.webSite = getNullableString(webSite);
+        this.email = getNullableString(email);
+        this.currentWorkplace = getNullableString(currentWorkplace);
+        this.photoUrl = getNullableString(photoUrl);
+        this.street=getNullableString(street);
+        this.house = getNullableString(house);
+        this.apartment = getNullableString(apartment);
+        this.postcode = getNullableString(postcode);
+        this.country = getNullableString(country);
+        this.city = getNullableString(city);
     }
 
     public Contact(Integer id,String firstName, String lastName) {

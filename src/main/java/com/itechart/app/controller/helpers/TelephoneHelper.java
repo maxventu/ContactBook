@@ -33,7 +33,10 @@ public class TelephoneHelper extends EntityHelper{
 
         ArrayList<Telephone> deletedTelephonesArray = getTelephonesByCriterionFromRequest("deletedTelephones",request,telephoneHashMap);
         ArrayList<Telephone> newTelephonesArray = getTelephonesByCriterionFromRequest("newTelephones", request, telephoneHashMap);
-        ArrayList<Telephone> updatedTelephonesArray = getTelephonesByCriterionFromRequest("newTelephones", request, telephoneHashMap);
+        ArrayList<Telephone> updatedTelephonesArray = getTelephonesByCriterionFromRequest("updatedTelephones", request, telephoneHashMap);
+        deleteTelephones(deletedTelephonesArray);
+        createTelephones(newTelephonesArray);
+        updateTelephones(updatedTelephonesArray);
 
     }
 

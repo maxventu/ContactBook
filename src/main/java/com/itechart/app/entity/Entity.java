@@ -23,4 +23,9 @@ public class Entity <T> implements Serializable,Cloneable {
     public void setId(T id) {
         this.id = id;
     }
+
+    protected String getNullableString(String st){
+        if(!"".equals(st))return st;
+        return null;
+    }
 }

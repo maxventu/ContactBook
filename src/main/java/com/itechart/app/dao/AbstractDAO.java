@@ -82,7 +82,8 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         try{
             connection = ConnectorDB.getConnection();
             statement = prepareStatementDelete(connection, id);
-            statement.executeQuery();
+            LOGGER.debug("executing delete query {}",statement);
+            statement.executeUpdate();
         }
         catch (SQLException ex){
             LOGGER.error("Something went wrong in deleting entity", ex);
@@ -100,12 +101,18 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         Connection connection = null;
         PreparedStatement statement = null;
         try{
+            LOGGER.debug("start creating entity");
             connection = ConnectorDB.getConnection();
             statement = prepareStatementCreate(connection, entity);
-            statement.executeQuery();
+            LOGGER.debug("executing create query {}",statement);
+            statement.executeUpdate();
+            LOGGER.debug("query executed");
         }
         catch (SQLException ex){
             LOGGER.error("Something went wrong in creating entity", ex);
+        }
+        catch (Exception e){
+            LOGGER.error("Unable to init creation query", e);
         }
         finally {
             try {
@@ -124,7 +131,8 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         try{
             connection = ConnectorDB.getConnection();
             statement = prepareStatementUpdate(connection,entity);
-            statement.executeQuery();
+            LOGGER.debug("executing update query {}",statement);
+            statement.executeUpdate();
         }
         catch (SQLException ex){
             LOGGER.error("Something went wrong in creating entity", ex);
@@ -145,9 +153,11 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         try{
             connection = ConnectorDB.getConnection();
             statement = prepareStatementMaxRow(connection);
+            LOGGER.debug("executing query {}",statement);
             ResultSet attachmentResultSet = statement.executeQuery();
             while (attachmentResultSet.next()){
                 maxRow = readKeyFrom(attachmentResultSet);
+                LOGGER.debug("maxRow is {}",maxRow);
             }
         }
         catch (Exception ex){

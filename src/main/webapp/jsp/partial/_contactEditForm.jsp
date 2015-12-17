@@ -92,12 +92,12 @@
         <div class="col-lg-10">
             <select class="form-control" name="familyStatus" id="familyStatus">
                 <c:if test="${contact.familyStatus == null}">
-                    <option>Choose status</option>
+                    <option value="">Choose status</option>
                 </c:if>
                 <c:forEach var="status" items="${familyStatuses}">
                     <c:choose>
                         <c:when test="${contact.familyStatus == status}">
-                            <option value="${status} selected">${status.value}</option>
+                            <option value="${status}" selected>${status.value}</option>
                         </c:when>
                         <c:otherwise>
                             <option value="${status}">${status.value}</option>

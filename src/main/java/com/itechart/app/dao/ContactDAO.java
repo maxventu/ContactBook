@@ -1,5 +1,6 @@
 package com.itechart.app.dao;
 
+import com.itechart.app.controller.helpers.DateHelper;
 import com.itechart.app.entity.Contact;
 import com.itechart.app.entity.Location;
 
@@ -22,20 +23,20 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
 
     private static final String CONTACT_FIND_ALL_QUERY =
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
-                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE is_deleted=0;";
+                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE is_deleted=0";
     private static final String CONTACT_SELECT_QUERY =
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
-                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE id = ? AND is_deleted=0;";
+                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE id = ? AND is_deleted=0";
     private static final String CONTACT_DELETE_QUERY =
-            "UPDATE contact SET is_deleted=1, date_deleted=NOW() WHERE id=?;";
+            "UPDATE contact SET is_deleted=1, date_deleted=NOW() WHERE id=?";
     private static final String CONTACT_CREATE_QUERY =
             "INSERT INTO contact (id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String CONTACT_UPDATE_QUERY =
             "UPDATE contact SET first_name=?, last_name=?, patronymic=?, date_of_birth=?, sex_is_male=?, nationality=?," +
                     " family_status=?, web_site=?, email=?, current_workplace=?, photo_url=?,street=?, house=?, apartment=?, location_postcode=?" +
-                    "WHERE id=?;";
+                    " WHERE id=?";
 
 
     @Override
@@ -64,11 +65,12 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         PreparedStatement statement = null;
         int i=1;
         statement = connection.prepareStatement(CONTACT_CREATE_QUERY);
-        statement.setInt(i++,contact.getId());
+        statement.setInt(i++, contact.getId());
         statement.setString(i++,contact.getFirstName());
         statement.setString(i++,contact.getLastName());
         statement.setString(i++,contact.getPatronymic());
-        statement.setDate(i++,new java.sql.Date(contact.getDateOfBirth().getTime()));
+        java.sql.Date date = DateHelper.INSTANCE.getSqlDate(contact.getDateOfBirth());
+        statement.setDate(i++,date);
         statement.setInt(i++,contact.isSexIsMale()?1:0);
         statement.setString(i++,contact.getNationality());
         statement.setString(i++,contact.getFamilyStatus());
@@ -91,7 +93,8 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++,contact.getFirstName());
         statement.setString(i++,contact.getLastName());
         statement.setString(i++,contact.getPatronymic());
-        statement.setDate(i++,new java.sql.Date(contact.getDateOfBirth().getTime()));
+        java.sql.Date date = DateHelper.INSTANCE.getSqlDate(contact.getDateOfBirth());
+        statement.setDate(i++,date);
         statement.setInt(i++,contact.isSexIsMale()?1:0);
         statement.setString(i++,contact.getNationality());
         statement.setString(i++,contact.getFamilyStatus());
@@ -102,6 +105,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++, contact.getStreet());
         statement.setString(i++, contact.getHouse());
         statement.setString(i++, contact.getApartment());
+        statement.setString(i++, contact.getPostcode());
         statement.setInt(i++, contact.getId());
         return statement;
     }
