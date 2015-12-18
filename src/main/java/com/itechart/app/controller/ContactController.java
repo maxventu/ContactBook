@@ -34,6 +34,8 @@ public class ContactController implements Controller {
         String st = request.getParameter("id");
         if(st!=null)initEditContact(request,st);
         else initNewEditContact(request);
+        request.setAttribute("cont_id",st!=null?st:ContactDAO.INSTANCE.maxRow()+1);
+        request.setAttribute("contact_id",st!=null?st:ContactDAO.INSTANCE.maxRow()+1);
         request.getRequestDispatcher("/static/jsp/contactForm.jsp").forward(request,response);
     }
 
@@ -48,6 +50,7 @@ public class ContactController implements Controller {
     }
 
     private void initNewEditContact(HttpServletRequest request){
+
         request.setAttribute("contact", new Contact());
         request.setAttribute("telephones", new ArrayList<Telephone>());
         request.setAttribute("attachments", new ArrayList<Attachment>());
@@ -57,7 +60,7 @@ public class ContactController implements Controller {
         String st = request.getParameter("id");
         if(!"".equals(st))updateContact(request, st);
         else createContact(request);
-        request.getRequestDispatcher("/ContactBook/main").forward(request,response);
+        request.getRequestDispatcher("main").forward(request,response);
     }
 
     private void createContact(HttpServletRequest request) {

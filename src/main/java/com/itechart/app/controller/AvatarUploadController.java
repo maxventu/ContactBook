@@ -30,7 +30,7 @@ public class AvatarUploadController extends Upload implements Controller {
             return;
         }
         ServletFileUpload upload = getFileUpload();
-
+        LOGGER.debug("saving avatar image");
         String contactId=null;
         String fromProjectAvatarPath =File.separator + UPLOAD_DIRECTORY+ File.separator+AVATAR_DIRECTORY;
         String uploadPath = FrontController.INSTANCE.getServletContext().getRealPath("");
@@ -45,6 +45,7 @@ public class AvatarUploadController extends Upload implements Controller {
                     if (item.isFormField()) {
                         if("contact_id".equals(item.getFieldName())){
                             contactId=item.getString();
+                            LOGGER.debug("avatar uploading for contact {}",contactId);
                         }
                     }
                 }
@@ -54,6 +55,8 @@ public class AvatarUploadController extends Upload implements Controller {
                         String fileName = new File(item.getName()).getName();
                         fileName = contactId+"."+ FilenameUtils.getExtension(fileName);
                         String filePath = uploadPath + fromProjectAvatarPath + File.separator + fileName;
+                        LOGGER.debug("trying to save file to {}",filePath);
+                        createDirectoryIfNotExists(uploadPath + fromProjectAvatarPath);
                         File storeFile = new File(filePath);
 
                         // saves the file on disk
@@ -71,7 +74,7 @@ public class AvatarUploadController extends Upload implements Controller {
             request.setAttribute("avatarLoaded",
                     "exception"+e);
         }
-        // redirects client to message page
+
         request.getRequestDispatcher("/static/jsp/partial/avatar/avatarAnswer.jsp").forward(
                 request, response);
 

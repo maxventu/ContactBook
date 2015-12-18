@@ -68,6 +68,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
         finally {
             try{
+                if(connection!=null)
                 connection.close();
             }
             catch (Exception e){
@@ -90,6 +91,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
         finally {
             try {
+                if(connection!=null)
                 connection.close();
             } catch (SQLException e) {
                 LOGGER.error("Connection is not closed", e);
@@ -116,6 +118,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
         finally {
             try {
+                if(connection!=null)
                 connection.close();
                 LOGGER.debug("end creating entity");
             } catch (SQLException e) {
@@ -139,6 +142,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
         finally {
             try {
+                if(connection!=null)
                 connection.close();
             } catch (SQLException e) {
                 LOGGER.error("Connection is not closed", e);
@@ -165,6 +169,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
         }
         finally {
             try{
+                if(connection!=null)
                 connection.close();
             }
             catch (Exception e){

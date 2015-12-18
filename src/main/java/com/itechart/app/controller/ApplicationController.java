@@ -19,7 +19,7 @@ public class ApplicationController implements Controller {
     final private HashMap<String,Controller> mapOfControllers;
     {
         mapOfControllers=new HashMap<String, Controller>();
-        mapOfControllers.put("",new MainFrameController());
+        mapOfControllers.put("/",new MainFrameController());
         mapOfControllers.put("/main",new MainFrameController());
         mapOfControllers.put("/edit",new ContactController());
         mapOfControllers.put("/update",new ContactController());
@@ -35,12 +35,13 @@ public class ApplicationController implements Controller {
         ErrorHandler errorHandler = new ErrorHandler();
         LOGGER.info("path: {}, query: {}", request.getPathInfo(), request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
-        if(controller!=null)
-            controller.processRequest(request,response);
-        else try{
-            request.getRequestDispatcher("/static/jsp"+request.getPathInfo()+".jsp").forward(
+        LOGGER.debug("controller {}",controller);
+        if (controller != null)
+            controller.processRequest(request, response);
+        else try {
+            request.getRequestDispatcher("/static/jsp" + request.getPathInfo() + ".jsp").forward(
                     request, response);
-        }catch(Exception e){
+        } catch (Exception e) {
             response.sendError(404);
         }
     }

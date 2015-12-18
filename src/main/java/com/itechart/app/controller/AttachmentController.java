@@ -30,7 +30,7 @@ import java.util.List;
  * Created by Maxim on 12/15/2015.
  */
 public class AttachmentController extends Upload implements Controller {
-    final Logger LOGGER = LoggerFactory.getLogger(AvatarUploadController.class);
+    final Logger LOGGER = LoggerFactory.getLogger(AttachmentController.class);
     // upload settings
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         String contactId = request.getParameter("id");
@@ -97,7 +97,7 @@ public class AttachmentController extends Upload implements Controller {
             if (formItems != null && formItems.size() > 0) {
                 for (FileItem item : formItems) {
                     if (item.isFormField()) {
-                        if("contact_id".equals(item.getFieldName())){
+                        if("cont_id".equals(item.getFieldName())){
                             contactId=item.getString("UTF-8");
                         }
                         else if("attachment_filename".equals(item.getFieldName())){
@@ -115,8 +115,8 @@ public class AttachmentController extends Upload implements Controller {
                         String fileName = new File(item.getName()).getName();
 
                         fileName = DateHelper.INSTANCE.getDateId(now)+"."+ FilenameUtils.getExtension(fileName);
-
-                        createDirectoryIfNotExists(getAttachmentDirectoryPath());
+                        String filePath = getAttachmentDirectoryPath()+ File.separator + contactId;
+                        createDirectoryIfNotExists(filePath);
                         File storeFile = new File(getRealAttachmentPath(contactId,fileName));
                         LOGGER.debug("start saving file");
                         item.write(storeFile);

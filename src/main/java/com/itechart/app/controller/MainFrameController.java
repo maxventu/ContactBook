@@ -25,8 +25,8 @@ public class MainFrameController implements Controller {
         redirectRequest(selectedButton,request,response);
     }
     private void redirectRequest(String type,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if("add_contact".equals(type))request.getRequestDispatcher("/ContactBook/edit").forward(request,response);
-        else if("send_email".equals(type))request.getRequestDispatcher("/email").forward(request, response);
+        if("add_contact".equals(type))request.getRequestDispatcher("edit").forward(request,response);
+        else if("send_email".equals(type))request.getRequestDispatcher("email").forward(request, response);
         else if("delete_contacts".equals(type)) deleteContacts(request,response);
         else initContacts(request,response);
     }

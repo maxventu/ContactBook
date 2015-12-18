@@ -14,11 +14,11 @@
     <title></title>
 </head>
 <body>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
+<c:import url="partial/_navbar.jsp"/>
 <div class="container form-horizontal">
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8"><h3><small>Attachments of </small><a href="/ContactBook/edit?id=${contact.id}">${contact.fullName}</a></h3></div>
+        <div class="col-lg-8"><h3><small>Attachments of </small><a href="edit?id=${contact.id}">${contact.fullName}</a></h3></div>
     </div>
     <div class="row">
         <div class="col-lg-2"></div>
@@ -42,7 +42,7 @@
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
                                         <input type="checkbox" name="att_id" id="att_check_${attachment.id}" value="${attachment.id}">
                                     </td>
-                                    <td><a href="/ContactBook/attachment?id=${attachment.contactId}&file=${attachment.id}" target="_blank">${attachment.filename}</a></td>
+                                    <td><a href="attachment?id=${attachment.contactId}&file=${attachment.id}" target="_blank">${attachment.filename}</a></td>
                                     <td>${attachment.stringDate}</td>
                                     <td>${attachment.comment}</td>
                                 </tr>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="contacts" scope="request" type="java.util.List<com.itechart.app.entity.Contact>"/>
-<form action="/ContactBook/main" method="post">
+<form action="main" method="post">
     <table class="table table-stripped">
         <tbody id="akk_table">
         <tr>
@@ -37,7 +37,7 @@
         <c:forEach var="contact" items="${contacts}">
             <tr>
                 <td><input name="choseContactsCheckbox" type="checkbox" value="${contact.id}"></td>
-                <td><a href="/ContactBook/edit?id=${contact.id}" >${contact.fullName}</a></td>
+                <td><a href="edit?id=${contact.id}" >${contact.fullName}</a></td>
                 <td>${contact.dateOfBirth}</td>
                 <td>${contact.fullAddress}</td>
                 <td>${contact.currentWorkplace}</td>
@@ -46,5 +46,5 @@
         <span class="not-visible" id="choseContacts"></span>
         </tbody>
     </table>
-    <c:import url="${pageContext.request.contextPath}/static/jsp/partial/_pagination.jsp"/>
+    <c:import url="partial/_pagination.jsp"/>
 </form>

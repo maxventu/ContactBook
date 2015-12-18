@@ -12,34 +12,33 @@
 <html>
 <head>
     <title>Contact</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/Bootstrap_cosmo.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/contactbook.css">
-    <script src="${pageContext.request.contextPath}/static/js/attachment.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/telephone.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/contactEdit.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/avatar.js"></script>
+    <link rel="stylesheet" href="static/css/contactbook.css">
+    <script src="static/js/attachment.js"></script>
+    <script src="static/js/telephone.js"></script>
+    <script src="static/js/contactEdit.js"></script>
+    <script src="static/js/avatar.js"></script>
 </head>
 <body>
 
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
+<c:import url="partial/_navbar.jsp"/>
 <div class="container">
 
-    <form id="data" method="POST" action="/ContactBook/edit"  >
+    <form id="data" method="POST" action="edit"  >
         <input type="hidden" name="id" id="contact_id" value="${contact.id}">
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/_contactEditForm.jsp"/>
+                <c:import url="partial/_contactEditForm.jsp"/>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/telephone/_telephonesTable.jsp"/>
+                <c:import url="partial/telephone/_telephonesTable.jsp"/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentsTable.jsp"/>
+                <c:import url="partial/attachment/_attachmentsTable.jsp"/>
             </div>
         </div>
 
@@ -51,9 +50,9 @@
     </form>
 </div>
 
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/telephone/_telephoneEditModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentAddModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentEditModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/avatar/_avatarEditModal.jsp"/>
+<c:import url="partial/telephone/_telephoneEditModal.jsp"/>
+<c:import url="partial/attachment/_attachmentAddModal.jsp"/>
+<c:import url="partial/attachment/_attachmentEditModal.jsp"/>
+<c:import url="partial/avatar/_avatarEditModal.jsp"/>
 </body>
 </html>

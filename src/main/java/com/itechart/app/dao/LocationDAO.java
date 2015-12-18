@@ -53,7 +53,7 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         statement = connection.prepareStatement(LOCATION_CREATE_QUERY);
         statement.setString(i++, location.getId());
         statement.setString(i++, location.getCountry());
-        statement.setString(i++, location.getCity());
+        statement.setString(i, location.getCity());
         return  statement;
     }
 
@@ -64,7 +64,7 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         statement = connection.prepareStatement(LOCATION_UPDATE_QUERY);
         statement.setString(i++, location.getCountry());
         statement.setString(i++, location.getCity());
-        statement.setString(i++, location.getId());
+        statement.setString(i, location.getId());
         return  statement;
     }
 
@@ -78,7 +78,7 @@ public class LocationDAO extends AbstractDAO<String,Location>{
         Integer i=1;
         String postcode = entityResultSet.getString(i++);
         String country = entityResultSet.getString(i++);
-        String city = entityResultSet.getString(i++);
+        String city = entityResultSet.getString(i);
         return new Location(postcode, country, city);
     }
 

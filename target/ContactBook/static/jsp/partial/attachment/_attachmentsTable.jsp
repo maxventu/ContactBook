@@ -13,7 +13,7 @@
 
 <div class="form-horizontal" role="form">
     <div class="form-group">
-        <label for="telephonesTable" class="col-lg-2 control-label"><a href="/ContactBook/attachments?id=${contact.id}">Attachments</a></label>
+        <label for="telephonesTable" class="col-lg-2 control-label"><a href="attachments?id=${contact.id}">Attachments</a></label>
         <div class="col-lg-10">
             <div class="panel panel-default" id="telephonesTable">
                 <div class="panel-body">
@@ -44,7 +44,7 @@
                                 <tr id="att_id_${attachment.id}">
                                     <td>
                                         <label for="att_check_${attachment.id}" class="sr-only"></label>
-                                        <input type="checkbox" id="att_check_${attachment.id}" name="att_check" id="att_check_${attachment.id}">
+                                        <input type="checkbox" id="att_check_${attachment.id}" name="att_check">
                                     </td>
                                     <td>${attachment.filename}</td>
                                     <td>${attachment.stringDate}</td>

@@ -115,7 +115,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++, contact.getHouse());
         statement.setString(i++, contact.getApartment());
         statement.setString(i++, contact.getPostcode());
-        statement.setInt(i++, contact.getId());
+        statement.setInt(i, contact.getId());
         return statement;
     }
 
@@ -142,7 +142,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         String street =  contact.getString(index++);
         String house =  contact.getString(index++);
         String apartment =  contact.getString(index++);
-        String postcode =  contact.getString(index++);
+        String postcode =  contact.getString(index);
         Location location = LocationDAO.INSTANCE.findEntityById(postcode);
         String country = null;
         String city = null;
@@ -187,6 +187,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             LOGGER.debug("finding contacts query={}",statement);
             if(statement!=null)
             addressResultSet = statement.executeQuery();
+            if(addressResultSet!=null)
             while (addressResultSet.next()) {
                 arrayList.add(readEntityFrom(addressResultSet));
             }

@@ -12,7 +12,7 @@
     <title>About</title>
     </head>
 <body>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
+<c:import url="partial/_navbar.jsp"/>
 <div class="container">
     <div class="form-horizontal">
         <div class="row">

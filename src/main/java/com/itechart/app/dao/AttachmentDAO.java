@@ -63,7 +63,7 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         Timestamp timestamp = DateHelper.INSTANCE.getTimestamp(attachment.getDateUpload());
         statement.setTimestamp(i++, timestamp);
         statement.setString(i++,attachment.getComment());
-        statement.setInt(i++,attachment.getContactId());
+        statement.setInt(i,attachment.getContactId());
         return statement;
     }
 
@@ -74,7 +74,7 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         statement = connection.prepareStatement(ATTACHMENT_UPDATE_QUERY);
         statement.setString(i++,attachment.getFilename());
         statement.setString(i++,attachment.getComment());
-        statement.setInt(i++,attachment.getId());
+        statement.setInt(i,attachment.getId());
         return statement;
     }
 
@@ -90,7 +90,7 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         String filename = attachmentResultSet.getString(i++);
         Date dateUpload = DateHelper.INSTANCE.getDate(attachmentResultSet.getTimestamp(i++));
         String comment = attachmentResultSet.getString(i++);
-        Integer contactId = attachmentResultSet.getInt(i++);
+        Integer contactId = attachmentResultSet.getInt(i);
         return new Attachment(id, filename, dateUpload, comment, contactId);
     }
 
@@ -116,6 +116,7 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
         }
         finally {
             try {
+                if(connection!=null)
                 connection.close();
             } catch (SQLException e) {
                 LOGGER.error("Connection is not closed", e);

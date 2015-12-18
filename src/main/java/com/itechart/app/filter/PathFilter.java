@@ -17,6 +17,8 @@ public class PathFilter implements Filter {
         LOGGER.debug("init");
         fc = filterConfig;
     }
+    private final String UPLOAD_AVATAR = "/upload_avatar";
+    private final String UPLOAD = "/upload";
     private final String STATIC = "/static";
     private final String CONTACT_BOOK = "/ContactBook";
 
@@ -27,9 +29,10 @@ public class PathFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         LOGGER.info("path: {}, query: {}",req.getPathInfo(), req.getQueryString());
         String path = req.getRequestURI().substring(req.getContextPath().length());
+        if(path.startsWith(UPLOAD_AVATAR))req.getRequestDispatcher(path).forward(request,response);
+        else if(path.startsWith(STATIC)||path.startsWith(UPLOAD))filterChain.doFilter(request,response);
 
-        if(path.startsWith(STATIC))filterChain.doFilter(request,response);
-        else req.getRequestDispatcher(CONTACT_BOOK+path).forward(request,response);
+           else request.getRequestDispatcher(CONTACT_BOOK+path).forward(request,response);
     }
 
     public void destroy() {

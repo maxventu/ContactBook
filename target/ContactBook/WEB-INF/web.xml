@@ -36,7 +36,7 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>/ContactBook/main</welcome-file>
+        <welcome-file>/main</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>

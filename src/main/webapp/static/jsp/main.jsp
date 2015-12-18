@@ -12,15 +12,16 @@
 <html>
 <head>
     <title>Contact Book</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/Bootstrap_cosmo.css">
-    <script src="${pageContext.request.contextPath}/static/js/contact.js"></script>
 </head>
 
 <body>
-<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
+<c:import url="partial/_navbar.jsp"/>
     <div class="container">
-        <c:import url="${pageContext.request.contextPath}/static/jsp/partial/_mainTableContacts.jsp"></c:import>
+        <c:import url="partial/_mainTableContacts.jsp"></c:import>
     </div>
 <input type="hidden" id="page_number" value="${pageNumber}">
 </body>
+
+<link rel="stylesheet" href="static/css/Bootstrap_cosmo.css">
+<script src="static/js/contact.js"></script>
 </html>
