@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<jsp:useBean id="contacts" scope="request" type="java.util.List<com.itechart.app.entity.Contact>"/>
 <form action="/ContactBook/main" method="post">
     <table class="table table-stripped">
         <tbody id="akk_table">
@@ -33,6 +33,7 @@
             </span>
             </th>
         </tr>
+
         <c:forEach var="contact" items="${contacts}">
             <tr>
                 <td><input name="choseContactsCheckbox" type="checkbox" value="${contact.id}"></td>

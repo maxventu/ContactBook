@@ -3,11 +3,13 @@ package com.itechart.app.dao;
 import com.itechart.app.controller.helpers.DateHelper;
 import com.itechart.app.entity.Contact;
 import com.itechart.app.entity.Location;
+import com.itechart.app.entity.helpers.SearchContact;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -37,7 +39,10 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             "UPDATE contact SET first_name=?, last_name=?, patronymic=?, date_of_birth=?, sex_is_male=?, nationality=?," +
                     " family_status=?, web_site=?, email=?, current_workplace=?, photo_url=?,street=?, house=?, apartment=?, location_postcode=?" +
                     " WHERE id=?";
-
+    private static final String CONTACT_FIND_CONTACT =
+            "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
+                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode" +
+                    " FROM contact LEFT JOIN location ON location_postcode=postcode WHERE is_deleted=0 ";
 
     @Override
     public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
@@ -164,6 +169,84 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
     @Override
     protected Integer readKeyFrom(ResultSet entityResultSet) throws SQLException {
         return entityResultSet.getInt(1);
+    }
+
+    public ArrayList<Contact> findContacts(SearchContact sc){
+        LOGGER.debug("starting finding contacts");
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ArrayList<Contact> arrayList = new ArrayList<Contact>();
+        ResultSet addressResultSet = null;
+        try {
+            connection = ConnectorDB.getConnection();
+            statement = prepareStatementFindContacts(connection,sc);
+            LOGGER.debug("finding contacts query={}",statement);
+            if(statement!=null)
+            addressResultSet = statement.executeQuery();
+            while (addressResultSet.next()) {
+                arrayList.add(readEntityFrom(addressResultSet));
+            }
+            //if(arrayList.isEmpty())arrayList.add(new T());
+        } catch (SQLException exception) {
+            LOGGER.error("Something went wrong while finding all", exception);
+        }
+        finally {
+            try {
+                if(connection!=null)
+                    connection.close();
+            } catch (SQLException e) {
+                LOGGER.error("Connection is not closed", e);
+            }
+        }
+        return arrayList;
+    }
+
+    private PreparedStatement prepareStatementFindContacts(Connection connection, SearchContact cont) throws SQLException {
+    StringBuilder sb = new StringBuilder(CONTACT_FIND_CONTACT);
+        if(cont==null)return null;
+        appendLikeString(sb,"first_name",cont.getFirstName());
+        appendLikeString(sb,"last_name",cont.getLastName());
+        appendLikeString(sb,"patronymic",cont.getPatronymic());
+        appendLikeString(sb,"sex_is_male",cont.getSexIsMale());
+        appendLikeString(sb,"nationality",cont.getNationality());
+        appendLikeString(sb,"family_status",cont.getFamilyStatus());
+        appendLikeString(sb,"current_workplace",cont.getCurrentWorkplace());
+        appendLikeString(sb,"street",cont.getStreet());
+        appendLikeString(sb,"house",cont.getHouse());
+        appendLikeString(sb,"apartment",cont.getApartment());
+        appendLikeString(sb,"postcode",cont.getPostcode());
+        appendLikeString(sb,"country",cont.getCountry());
+        appendLikeString(sb,"city",cont.getCity());
+        if(cont.getDateOfBirth()!=null){
+            sb.append("AND date_of_birth "+(cont.getDateIsGreater()?">":"<")+"? ");
+        }
+        LOGGER.debug("created statement={}",sb);
+        PreparedStatement statement = null;
+        int i=1;
+        statement = connection.prepareStatement(sb.toString());
+
+        i= setStringIfNotNull(i, statement, cont.getFirstName());
+        i= setStringIfNotNull(i, statement, cont.getLastName());
+        i= setStringIfNotNull(i, statement, cont.getPatronymic());
+        i= setStringIfNotNull(i, statement, cont.getSexIsMale());
+        i= setStringIfNotNull(i, statement, cont.getNationality());
+        i= setStringIfNotNull(i, statement, cont.getFamilyStatus());
+        i= setStringIfNotNull(i, statement, cont.getCurrentWorkplace());
+        i= setStringIfNotNull(i, statement, cont.getStreet());
+        i= setStringIfNotNull(i, statement, cont.getHouse());
+        i= setStringIfNotNull(i, statement, cont.getApartment());
+        i= setStringIfNotNull(i, statement, cont.getPostcode());
+        i= setStringIfNotNull(i, statement, cont.getCountry());
+        i= setStringIfNotNull(i, statement, cont.getCity());
+        if(cont.getDateOfBirth()!=null)statement.setDate(i, DateHelper.INSTANCE.getSqlDate(cont.getDateOfBirth()));
+        return statement;
+    }
+    private void appendLikeString(StringBuilder sb,String paramName,String param){
+        if(param!=null)sb.append("AND "+paramName+" LIKE ? ");
+    }
+    private int setStringIfNotNull(int i,PreparedStatement statement,String string) throws SQLException {
+        if(string!=null){statement.setString(i,"%"+string+"%");return ++i;}
+        return i;
     }
 
 }

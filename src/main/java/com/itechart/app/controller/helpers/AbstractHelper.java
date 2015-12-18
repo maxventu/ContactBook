@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Maxim on 12/16/2015.
  */
 public class AbstractHelper {
-    protected static ArrayList<Integer> getIntListFromArray(String[] array){
+    public static ArrayList<Integer> getIntListFromArray(String[] array){
         ArrayList<Integer> list = new ArrayList<Integer>();
         if(array!=null)
         for(int i=0;i<array.length;i++)

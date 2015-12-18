@@ -28,9 +28,6 @@
                 </c:otherwise>
             </c:choose>
             <input name="photoUrl" id="photoUrl" type="hidden" id="ava_file">
-
-
-        <%--TODO: image modal dialog--%>
         </div>
     </div>
 

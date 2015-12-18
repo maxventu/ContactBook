@@ -27,11 +27,12 @@ public class ApplicationController implements Controller {
         mapOfControllers.put("/upload_attachment",new AttachmentController());
         mapOfControllers.put("/attachment",new AttachmentController());
         mapOfControllers.put("/attachments",new AttachmentController());
+        mapOfControllers.put("/search",new SearchController());
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ErrorHandler errorHandler = new ErrorHandler();
-        LOGGER.debug("path: {}, query: {}",request.getPathInfo(), request.getQueryString());
+        LOGGER.info("path: {}, query: {}",request.getPathInfo(), request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
         if(controller!=null)
             controller.processRequest(request,response);
