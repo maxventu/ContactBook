@@ -16,8 +16,8 @@ function loadAttachmentsManagement(){
     initModalClosingByName("attachmentEditModal",closeAttachmentEditModal);
     initModalSubmitById("attachmentAddModalApply",submitAddAttachment);
     initModalSubmitById("attachmentEditModalApply",submitEditAttachment);
-    var button = document.getElementById("hiddenAttachmentFrame");
-    button.onload = handleAttachmentResponse;
+    var but = document.getElementById("hiddenAttachmentFrame");
+    but.onload = handleAttachmentResponse;
 }
 
 function createAttachmentModal(){
@@ -36,7 +36,7 @@ function deleteAttachments(){
         var id = getAttachmentId(element);
 
         deletedAttachmentsContainer.appendChild(createDeleteHistory(id));
-        var tr = document.getElementById("att_id_"+id);
+        var tr = document.getElementById("att_check_"+id);
         var table = tr.parentNode;
         table.removeChild(tr);
 
@@ -91,6 +91,7 @@ function submitEditAttachment() {
     function mainLogic(attachmentId) {
         var filename = setInfoAttachmentToNew(attachmentId, "filename");
         var comment = setInfoAttachmentToNew(attachmentId, "comment");
+        //var id = setInfoAttachmentToNew(attachmentId, "id");
         var parent = filename.parentNode;
         var tds = parent.getElementsByTagName("td");
 

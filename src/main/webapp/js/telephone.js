@@ -76,10 +76,11 @@ function submitTelephone(){
     var elem = document.getElementById("telephoneModal_id");
     var telephoneId = elem.value;
 
+    var answer = true;
     if(telephoneId != "" && telephoneId != null && telephoneId!=undefined)
         updateTelephone(telephoneId);
-    else createNewTelephone();
-
+    else { answer = createNewTelephone();
+    if(!answer) return false;}
     closeTelephoneModal();
 
     function updateTelephone(telephoneId) {
@@ -121,6 +122,7 @@ function submitTelephone(){
     }
 
     function createNewTelephone() {
+        if(!validateAllTelephoneFields())return false;
         contactVariables.telephoneLastId= 1+parseInt(contactVariables.telephoneLastId);
         var newId = contactVariables.telephoneLastId;
 
@@ -168,7 +170,7 @@ function submitTelephone(){
         telephones.appendChild(newTableRow);
         var newTelephonesContainer = document.getElementById("newTelephones");
         newTelephonesContainer.appendChild(createTelephoneNewHistory(newId));
-
+        return true;
         function createInput(telId,fieldType){
             var input = document.createElement("input");
             input.setAttribute("type","hidden");
