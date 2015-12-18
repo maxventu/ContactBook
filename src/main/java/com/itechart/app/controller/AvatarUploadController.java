@@ -72,7 +72,7 @@ public class AvatarUploadController extends Upload implements Controller {
                     "exception"+e);
         }
         // redirects client to message page
-        request.getRequestDispatcher("/jsp/partial/avatar/avatarAnswer.jsp").forward(
+        request.getRequestDispatcher("/static/jsp/partial/avatar/avatarAnswer.jsp").forward(
                 request, response);
 
     }

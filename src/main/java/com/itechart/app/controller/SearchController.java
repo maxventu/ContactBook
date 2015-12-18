@@ -20,7 +20,7 @@ public class SearchController implements Controller {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("searchBtn");
         if("search".equals(command)) doSearch(request,response);
-        else request.getRequestDispatcher("/jsp/search.jsp").forward(
+        else request.getRequestDispatcher("/static/jsp/search.jsp").forward(
                 request, response);
     }
 

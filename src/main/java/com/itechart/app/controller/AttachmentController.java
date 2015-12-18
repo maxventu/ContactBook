@@ -48,7 +48,7 @@ public class AttachmentController extends Upload implements Controller {
         Contact contact = ContactDAO.INSTANCE.findEntityById(contId);
         request.setAttribute("attachments",attachments);
         request.setAttribute("contact",contact);
-        request.getRequestDispatcher("/jsp/attachments.jsp").forward(
+        request.getRequestDispatcher("/static/jsp/attachments.jsp").forward(
                 request, response);
     }
 
@@ -135,7 +135,7 @@ public class AttachmentController extends Upload implements Controller {
             LOGGER.error("something bad happened while uploading",e);
         }
         // redirects client to message page
-        request.getRequestDispatcher("/jsp/partial/attachment/attachmentAnswer.jsp").forward(
+        request.getRequestDispatcher("/static/jsp/partial/attachment/attachmentAnswer.jsp").forward(
                 request, response);
 
     }

@@ -38,7 +38,7 @@ public class ApplicationController implements Controller {
         if(controller!=null)
             controller.processRequest(request,response);
         else try{
-            request.getRequestDispatcher("/jsp"+request.getPathInfo()+".jsp").forward(
+            request.getRequestDispatcher("/static/jsp"+request.getPathInfo()+".jsp").forward(
                     request, response);
         }catch(Exception e){
             response.sendError(404);
