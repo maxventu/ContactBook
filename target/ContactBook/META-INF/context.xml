@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/mysql"
+              global="jdbc/mysql"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="mkalenik"
+              password="mkalenik"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/maximkalenik"
+              maxActive="100"
+              maxIdle="30"
+              maxWait="10000"
+            />
+    <Parameter name="email" value="contactbooksender@gmail.com" />
+    <Parameter name="password" value="contactbooksender123" />
+    <Parameter name="hostname" value="smtp.googlemail.com" />
+    <Parameter name="port" value="465" />
+    <Parameter name="adminEmail" value="1995_maxim@mail.ru" />
+</Context>

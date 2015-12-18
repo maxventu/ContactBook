@@ -34,7 +34,7 @@ public class ContactController implements Controller {
         String st = request.getParameter("id");
         if(st!=null)initEditContact(request,st);
         else initNewEditContact(request);
-        request.getRequestDispatcher("/jsp/contactForm.jsp").forward(request,response);
+        request.getRequestDispatcher("/static/jsp/contactForm.jsp").forward(request,response);
     }
 
     private void initEditContact(HttpServletRequest request,String id){
