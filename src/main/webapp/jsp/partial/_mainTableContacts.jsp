@@ -46,4 +46,5 @@
         <span class="not-visible" id="choseContacts"></span>
         </tbody>
     </table>
+    <c:import url="partial/_pagination.jsp"/>
 </form>

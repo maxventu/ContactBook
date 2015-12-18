@@ -43,6 +43,10 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode" +
                     " FROM contact LEFT JOIN location ON location_postcode=postcode WHERE is_deleted=0 ";
+    private static final String CONTACT_FIND_BY_PAGE =
+            "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
+                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE is_deleted=0 LIMIT ?,?";
+
 
     @Override
     public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
@@ -249,4 +253,70 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         return i;
     }
 
+    public ArrayList<Contact> getContactsByPage(Integer pageNumber,Integer numberOfElements)
+    {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ArrayList<Contact> arrayList = new ArrayList<Contact>();
+        try {
+            connection = ConnectorDB.getConnection();
+            statement = prepareStatementFindAllByPage(connection, pageNumber, numberOfElements);
+            LOGGER.debug("contact by page query: {}",statement);
+            ResultSet addressResultSet = statement.executeQuery();
+            while (addressResultSet.next()) {
+                arrayList.add(readEntityFrom(addressResultSet));
+            }
+        } catch (SQLException exception) {
+            LOGGER.error("Something went wrong while finding all", exception);
+        }
+        finally {
+            try {
+                if(connection!=null)
+                    connection.close();
+            } catch (SQLException e) {
+                LOGGER.error("Connection is not closed", e);
+            }
+        }
+        return arrayList;
+    }
+
+    private PreparedStatement prepareStatementFindAllByPage(Connection connection, Integer pageNumber, Integer numberOfElements) throws SQLException {
+        PreparedStatement statement = null;
+        int i=1;
+        statement = connection.prepareStatement(CONTACT_FIND_BY_PAGE);
+        statement.setInt(i++,(pageNumber-1)*numberOfElements);
+        statement.setInt(i,numberOfElements);
+        return statement;
+    }
+
+
+
+    public Integer countNotDeleted(){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        Integer numberOfNotDeleted = null;
+        try{
+            connection = ConnectorDB.getConnection();
+            statement = connection.prepareStatement("SELECT COUNT(id) FROM contact WHERE is_deleted=0");
+            LOGGER.debug("executing query {}",statement);
+            ResultSet attachmentResultSet = statement.executeQuery();
+            while (attachmentResultSet.next()){
+                numberOfNotDeleted = readKeyFrom(attachmentResultSet);
+                LOGGER.debug("numberOfNotDeleted is {}",numberOfNotDeleted);
+            }
+        }
+        catch (Exception ex){
+            LOGGER.error("something went wrong while finding entity",ex);
+        }
+        finally {
+            try{
+                connection.close();
+            }
+            catch (Exception e){
+                LOGGER.error("connection wasn't closed",e);
+            }
+        }
+        return numberOfNotDeleted;
+    }
 }

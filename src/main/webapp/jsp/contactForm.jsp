@@ -24,7 +24,7 @@
 <c:import url="partial/_navbar.jsp"/>
 <div class="container">
 
-    <form id="data" method="POST" action="/ContactBook/edit">
+    <form id="data" method="POST" action="/ContactBook/edit"  >
         <input type="hidden" name="id" id="contact_id" value="${contact.id}">
         <div class="row">
             <div class="col-lg-10">
@@ -45,7 +45,7 @@
 
         <div class="row">
             <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" name="save_button" value="save_contact" class="btn btn-default">Submit</button>
+                <button type="submit" name="save_button" value="save_contact" class="btn btn-default" onclick="return initAllTextValidations();">Submit</button>
             </div>
         </div>
     </form>

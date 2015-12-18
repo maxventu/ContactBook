@@ -245,3 +245,9 @@ function handleAttachmentResponse(){
     }
 
 }
+function validateAllAttachmentModalFields(){
+    var isValid = true;
+    if(!validateString("attachmentAddModal_comment",0,100))isValid = false;
+    if(!validateString("attachmentAddModal_filename",1,45))isValid = false;
+    return isValid;
+}

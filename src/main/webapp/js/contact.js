@@ -29,3 +29,8 @@ function createHiddenInputForContacts(contactId){
     input.setAttribute("value",contactId);
     return input;
 }
+
+function setSubmitOnSelection(){
+    var numbOfElements = document.getElementById("numberOfElements");
+}
+

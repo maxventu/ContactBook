@@ -51,7 +51,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default attachmentAddModal-close-modal">Close</button>
-                    <input type="submit" class="btn btn-primary" id="attachmentAddModalApply" value="Apply">
+                    <input type="submit" class="btn btn-primary" id="attachmentAddModalApply" value="Apply" onclick="return validateAllAttachmentModalFields();">
                 </div>
             </form>
         </div>

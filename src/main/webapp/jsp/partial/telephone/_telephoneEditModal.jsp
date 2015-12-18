@@ -66,7 +66,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default telephoneModal-close-modal">Close</button>
-                <button type="button" class="btn btn-primary" id="telephoneModalApply">Apply</button>
+                <button type="button" class="btn btn-primary" id="telephoneModalApply" onclick="return validateAllTelephoneFields();">Apply</button>
             </div>
 
         </div>

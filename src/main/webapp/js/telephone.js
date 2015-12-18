@@ -88,7 +88,8 @@ function submitTelephone(){
         var number = setInfoTelephoneToNew(telephoneId,"number");
         setInfoTelephoneToNew(telephoneId,"type_select");
         var comment = setInfoTelephoneToNew(telephoneId,"comment");
-        var str = "+"+country_code.value+"("+operator_code.value+")"+number.value;
+        var str = (country_code.value.toString()!="" ? "+"+country_code.value : "")+
+            (operator_code.value.toString()!="" ? "("+operator_code.value+")" : "")+number.value;
         var parent = country_code.parentNode;
         var tds = parent.getElementsByTagName("td");
 
@@ -141,7 +142,8 @@ function submitTelephone(){
         var comment = createInput(newId,"comment");
 
         td = document.createElement("td");
-        td.innerHTML = "+"+country_code.value+"("+operator_code.value+")"+number.value;
+        td.innerHTML = (country_code.value.toString()!="" ? "+"+country_code.value : "")+
+            (operator_code.value.toString()!="" ? "("+operator_code.value+")" : "")+number.value;
         newTableRow.appendChild(td);
 
         td = document.createElement("td");
@@ -228,4 +230,15 @@ function setLastTelephoneId(){
     if(elements.length>0)
         contactVariables.telephoneLastId = parseInt(elements[elements.length-1].id.replace("tel_check_",""));
     else contactVariables.telephoneLastId = 0;
+}
+
+function validateAllTelephoneFields(){
+    var isValid = true;
+    var notNeeded = ["telephoneModal_country_code","telephoneModal_operator_code"];
+    for(var i=0;i<notNeeded.length;i++){
+        if(!validateString(notNeeded[i],0,3))isValid = false;
+    }
+    if(!validateString("telephoneModal_comment",0,100))isValid = false;
+    if(!validateString("telephoneModal_number",5,10))isValid = false;
+    return isValid;
 }
