@@ -16,7 +16,7 @@
     <title>Search</title>
 </head>
 <body>
-<c:import url="${pageContext.request.contextPath}/static/partial/_navbar.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
 <form action="/ContactBook/search" method="post">
     <div class="container">
         <div class="form-horizontal">

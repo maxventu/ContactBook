@@ -12,6 +12,6 @@ import java.io.IOException;
  */
 public class EmailController implements Controller {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/jsp/emailForm.jsp").forward(request,response);
+        request.getRequestDispatcher("/static/jsp/emailForm.jsp").forward(request,response);
     }
 }

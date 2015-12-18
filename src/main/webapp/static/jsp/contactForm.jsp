@@ -21,25 +21,25 @@
 </head>
 <body>
 
-<c:import url="${pageContext.request.contextPath}/static/partial/_navbar.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
 <div class="container">
 
     <form id="data" method="POST" action="/ContactBook/edit"  >
         <input type="hidden" name="id" id="contact_id" value="${contact.id}">
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/partial/_contactEditForm.jsp"/>
+                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/_contactEditForm.jsp"/>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/partial/telephone/_telephonesTable.jsp"/>
+                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/telephone/_telephonesTable.jsp"/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-10">
-                <c:import url="${pageContext.request.contextPath}/static/partial/attachment/_attachmentsTable.jsp"/>
+                <c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentsTable.jsp"/>
             </div>
         </div>
 
@@ -51,9 +51,9 @@
     </form>
 </div>
 
-<c:import url="${pageContext.request.contextPath}/static/partial/telephone/_telephoneEditModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/partial/attachment/_attachmentAddModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/partial/attachment/_attachmentEditModal.jsp"/>
-<c:import url="${pageContext.request.contextPath}/static/partial/avatar/_avatarEditModal.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/telephone/_telephoneEditModal.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentAddModal.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/attachment/_attachmentEditModal.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/avatar/_avatarEditModal.jsp"/>
 </body>
 </html>

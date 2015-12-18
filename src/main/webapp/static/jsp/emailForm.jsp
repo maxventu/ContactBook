@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="contacts" scope="request" type="java.util.List<com.itechart.app.entity.Contact>"/>
-<jsp:useBean id="templates" scope="request" type="java.util.List<com.itechart.app.entity.helpers.EmailTemplate >"/>
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -14,7 +12,7 @@
     <title>Email</title>
 </head>
 <body>
-<c:import url="partial/_navbar.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
 <div class="container">
     <div class="form-horizontal">
         <div class="row">

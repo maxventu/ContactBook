@@ -12,6 +12,6 @@ import java.io.IOException;
  */
 public class ErrorHandler implements Controller {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/static/error.jsp").forward(request,response);
+        request.getRequestDispatcher("/static/jsp/error.jsp").forward(request,response);
     }
 }

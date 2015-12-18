@@ -17,9 +17,9 @@
 </head>
 
 <body>
-<c:import url="${pageContext.request.contextPath}/static/partial/_navbar.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
     <div class="container">
-        <c:import url="${pageContext.request.contextPath}/static/partial/_mainTableContacts.jsp"></c:import>
+        <c:import url="${pageContext.request.contextPath}/static/jsp/partial/_mainTableContacts.jsp"></c:import>
     </div>
 <input type="hidden" id="page_number" value="${pageNumber}">
 </body>

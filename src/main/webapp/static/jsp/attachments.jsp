@@ -14,7 +14,7 @@
     <title></title>
 </head>
 <body>
-<c:import url="${pageContext.request.contextPath}/static/partial/_navbar.jsp"/>
+<c:import url="${pageContext.request.contextPath}/static/jsp/partial/_navbar.jsp"/>
 <div class="container form-horizontal">
     <div class="row">
         <div class="col-lg-2"></div>

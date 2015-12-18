@@ -28,7 +28,7 @@ public class SearchController implements Controller {
         SearchContact searchContact = getSearchContactFrom(request);
         ArrayList<Contact> foundContacts = ContactDAO.INSTANCE.findContacts(searchContact);
         request.setAttribute("contacts",foundContacts);
-        request.getRequestDispatcher("/jsp/main.jsp").forward(
+        request.getRequestDispatcher("/static/jsp/main.jsp").forward(
                 request, response);
     }
     private SearchContact getSearchContactFrom(HttpServletRequest request){
