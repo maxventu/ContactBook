@@ -47,7 +47,7 @@ public class MainFrameController implements Controller {
         request.setAttribute("maxPageNumber",numberOfNotDeleted/numberOfElements+(numberOfNotDeleted%numberOfElements==0?0:1));
         request.setAttribute("numberOfElements",numberOfElements);
         request.setAttribute("contacts", collection);
-        request.getRequestDispatcher("/jsp/main.jsp").forward(request,response);
+        request.getRequestDispatcher("/static/jsp/main.jsp").forward(request,response);
     }
 
     private void deleteContacts(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {

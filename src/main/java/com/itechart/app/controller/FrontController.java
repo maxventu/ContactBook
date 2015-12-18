@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by Maxim on 11/25/2015.
  */
-@WebServlet("/ContactBook/*")
+
 public class FrontController extends HttpServlet {
     final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 

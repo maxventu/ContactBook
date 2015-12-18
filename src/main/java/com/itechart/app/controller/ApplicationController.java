@@ -19,6 +19,7 @@ public class ApplicationController implements Controller {
     final private HashMap<String,Controller> mapOfControllers;
     {
         mapOfControllers=new HashMap<String, Controller>();
+        mapOfControllers.put("",new MainFrameController());
         mapOfControllers.put("/main",new MainFrameController());
         mapOfControllers.put("/edit",new ContactController());
         mapOfControllers.put("/update",new ContactController());
@@ -32,7 +33,7 @@ public class ApplicationController implements Controller {
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ErrorHandler errorHandler = new ErrorHandler();
-        LOGGER.info("path: {}, query: {}",request.getPathInfo(), request.getQueryString());
+        LOGGER.info("path: {}, query: {}", request.getPathInfo(), request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
         if(controller!=null)
             controller.processRequest(request,response);
