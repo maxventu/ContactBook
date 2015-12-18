@@ -18,6 +18,7 @@ public class LocationHelper {
 
     public void updateLocation(Location location){
         LOGGER.debug("updating location");
+
         Location previousLocation = LocationDAO.INSTANCE.findEntityById(location.getId());
         if(previousLocation != null)LocationDAO.INSTANCE.update(location);
         else if(!location.isNull())
