@@ -10,8 +10,8 @@ import java.io.File;
  * Created by Maxim on 12/15/2015.
  */
 public class Upload {
-
-    protected static final String UPLOAD_DIRECTORY = "upload";
+    protected static final String CONTACT_BOOK = "/ContactBook";
+    protected static final String UPLOAD_DIRECTORY = "static" + File.separator+"contact_files";
     protected static final String AVATAR_DIRECTORY = "avatar";
     protected static final String ATTACHMENT_DIRECTORY = "attachment";
 

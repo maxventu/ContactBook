@@ -52,16 +52,25 @@ public class AvatarUploadController extends Upload implements Controller {
 
                 for (FileItem item : formItems) {
                     if (!item.isFormField()) {
+                        if(item.getSize()==0){
+                            request.setAttribute("avatarURL","http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png");
+                            request.setAttribute("avatarLoaded","true");
+
+                            request.getRequestDispatcher("/static/jsp/partial/avatar/avatarAnswer.jsp").forward(
+                                    request, response);
+                            return;
+                        }
+                        LOGGER.debug("trying to save item {}",item.getSize());
                         String fileName = new File(item.getName()).getName();
                         fileName = contactId+"."+ FilenameUtils.getExtension(fileName);
                         String filePath = uploadPath + fromProjectAvatarPath + File.separator + fileName;
                         LOGGER.debug("trying to save file to {}",filePath);
+                        createDirectoryIfNotExists(uploadPath + File.separator + UPLOAD_DIRECTORY);
                         createDirectoryIfNotExists(uploadPath + fromProjectAvatarPath);
                         File storeFile = new File(filePath);
-
-                        // saves the file on disk
                         item.write(storeFile);
-                        request.setAttribute("avatarURL",fromProjectAvatarPath + File.separator + fileName);
+                        LOGGER.debug("file is saved to {}",filePath);
+                        request.setAttribute("avatarURL",CONTACT_BOOK + fromProjectAvatarPath + File.separator + fileName);
                         request.setAttribute("avatarLoaded","true");
 
                     }

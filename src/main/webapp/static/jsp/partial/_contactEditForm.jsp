@@ -14,8 +14,8 @@
     pageContext.setAttribute("familyStatuses", FamilyStatus.values());
 %>
 
-<iframe id="hiddenAvatarFrame" name="hiddenAvatarFrame" style="width:0px; height:0px; border:0px"></iframe>
-<iframe id="hiddenAttachmentFrame" name="hiddenAttachmentFrame" style="width:0px; height:0px; border:0px"></iframe>
+<iframe id="hiddenAvatarFrame" name="hiddenAvatarFrame" hidden ></iframe>
+<iframe id="hiddenAttachmentFrame" name="hiddenAttachmentFrame"hidden></iframe>
 <div class="form-horizontal" role="form">
     <div class="form-group row">
         <div class="col-lg-push-2 col-lg-2">
@@ -27,7 +27,7 @@
                     <img id="ava_image" src="http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png" class="img-responsive" alt="${contact.fullName}">
                 </c:otherwise>
             </c:choose>
-            <input name="photoUrl" id="photoUrl" type="hidden" id="ava_file">
+            <input name="photoUrl" id="photoUrl" type="hidden">
         </div>
     </div>
 

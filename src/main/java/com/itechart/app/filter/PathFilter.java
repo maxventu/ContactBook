@@ -29,8 +29,9 @@ public class PathFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         LOGGER.info("path: {}, query: {}",req.getPathInfo(), req.getQueryString());
         String path = req.getRequestURI().substring(req.getContextPath().length());
-        if(path.startsWith(UPLOAD_AVATAR))req.getRequestDispatcher(path).forward(request,response);
-        else if(path.startsWith(STATIC)||path.startsWith(UPLOAD))filterChain.doFilter(request,response);
+        LOGGER.info("HTTP path: {}",path);
+        /*if (path.startsWith(UPLOAD))req.getRequestDispatcher(path).forward(request,response);
+        else*/ if(path.startsWith(STATIC))filterChain.doFilter(request,response);
 
            else request.getRequestDispatcher(CONTACT_BOOK+path).forward(request,response);
     }

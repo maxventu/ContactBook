@@ -31,18 +31,11 @@ function deleteTelephones(){
         var deletedTelephonesContainer = document.getElementById("deletedTelephones");
         var id = getTelephoneId(element);
 
-        deletedTelephonesContainer.appendChild(createDeleteHistory(id));
+        deletedTelephonesContainer.appendChild(createInputForHistory(id,"deletedTelephones"));
         var tr = document.getElementById("tel_id_"+id);
         var table = tr.parentNode;
         table.removeChild(tr);
 
-        function createDeleteHistory(elementId){
-            var el = document.createElement("input");
-            el.setAttribute("type", "hidden");
-            el.setAttribute("name","deletedTelephones");
-            el.setAttribute("value",elementId);
-            return el;
-        }
         function getTelephoneId(checkbox){
             return checkbox.id.replace("tel_check_","");
         }
@@ -95,21 +88,13 @@ function submitTelephone(){
         var tds = parent.getElementsByTagName("td");
 
         tds[1].innerHTML = str;
-        var typeSel = document.getElementById("telephoneModal_type");
+        var typeSel = document.getElementById("telephoneModal_type_select");
         tds[2].innerHTML = typeSel[typeSel.selectedIndex].text;
         tds[3].innerHTML = comment.value;
 
 
         var updatedTelephonesContainer = document.getElementById("updatedTelephones");
-        updatedTelephonesContainer.appendChild(createDeleteHistory(telephoneId));
-
-        function createUpdateHistory(elementId){
-            var el = document.createElement("input");
-            el.setAttribute("type", "hidden");
-            el.setAttribute("name","updatedTelephones");
-            el.setAttribute("value",elementId);
-            return el;
-        }
+        updatedTelephonesContainer.appendChild(createInputForHistory(telephoneId,"updatedTelephones"));
 
         function setInfoTelephoneToNew(telephoneId,fieldType){
             var inputInModal = document.getElementById("telephoneModal_"+fieldType);
@@ -137,11 +122,11 @@ function submitTelephone(){
         td.appendChild(input);
         newTableRow.appendChild(td);
 
-        var country_code = createInput(newId,"country_code");
-        var operator_code = createInput(newId,"operator_code");
-        var number = createInput(newId,"number");
-        var type = createInput(newId,"type");
-        var comment = createInput(newId,"comment");
+        var country_code = createInputFromModal(newId,"country_code");
+        var operator_code = createInputFromModal(newId,"operator_code");
+        var number = createInputFromModal(newId,"number");
+        var type = createInputFromModal(newId,"type_select");
+        var comment = createInputFromModal(newId,"comment");
 
         td = document.createElement("td");
         td.innerHTML = (country_code.value.toString()!="" ? "+"+country_code.value : "")+
@@ -149,7 +134,7 @@ function submitTelephone(){
         newTableRow.appendChild(td);
 
         td = document.createElement("td");
-        var sel = document.getElementById("telephoneModal_type");
+        var sel = document.getElementById("telephoneModal_type_select");
         td.innerHTML = sel[sel.selectedIndex].text;
         newTableRow.appendChild(td);
 
@@ -169,15 +154,14 @@ function submitTelephone(){
         var telephones = document.getElementById("tel_table");
         telephones.appendChild(newTableRow);
         var newTelephonesContainer = document.getElementById("newTelephones");
-        newTelephonesContainer.appendChild(createTelephoneNewHistory(newId));
+        newTelephonesContainer.appendChild(createInputForHistory(newId,"newTelephones"));
         return true;
-        function createInput(telId,fieldType){
+        function createInputFromModal(telId,fieldType){
             var input = document.createElement("input");
             input.setAttribute("type","hidden");
-
-            var inputInModal = document.getElementById("telephoneModal_"+fieldType);
             input.setAttribute("name","tel_"+fieldType);
             input.id = "tel_"+fieldType+"_"+telId;
+            var inputInModal = document.getElementById("telephoneModal_"+fieldType);
             input.value = inputInModal.value;
             return input;
         }
@@ -188,14 +172,6 @@ function submitTelephone(){
             input.setAttribute("name","tel_"+fieldType);
             input.id = "tel_"+fieldType+"_"+attId;
             return input;
-        }
-
-        function createTelephoneNewHistory(elementId){
-            var el = document.createElement("input");
-            el.setAttribute("type", "hidden");
-            el.setAttribute("name","newTelephones");
-            el.setAttribute("value",elementId);
-            return el;
         }
     }
 }

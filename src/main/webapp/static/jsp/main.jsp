@@ -23,5 +23,5 @@
 </body>
 
 <link rel="stylesheet" href="static/css/Bootstrap_cosmo.css">
-<script src="static/js/contact.js"></script>
+<script src="static/js/main_page.js"></script>
 </html>

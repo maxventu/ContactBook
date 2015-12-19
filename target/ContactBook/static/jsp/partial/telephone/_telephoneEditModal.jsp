@@ -39,8 +39,8 @@
                                 <input type="tel" class="form-control" pattern="[0-9]{5,10}" id="telephoneModal_number">
                             </div>
                             <div class="col-lg-4">
-                                <label for="telephoneModal_type" class="">Telephone type</label>
-                                <select class="form-control" name="telephoneTypes" id="telephoneModal_type">
+                                <label for="telephoneModal_type_select" class="">Telephone type</label>
+                                <select class="form-control" name="telephoneTypes" id="telephoneModal_type_select">
                                     <c:forEach var="telephoneType" items="${telephoneTypes}">
                                         <option name="telephoneType" id="telephoneModal_type_${telephoneType}" value="${telephoneType}">${telephoneType.value}</option>
                                     </c:forEach>

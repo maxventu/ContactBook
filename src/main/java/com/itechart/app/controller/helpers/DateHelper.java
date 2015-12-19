@@ -18,26 +18,31 @@ public class DateHelper {
     private DateHelper(){}
 
     public Timestamp getTimestamp(Date date){
-        LOGGER.debug("getting timestamp for {}",date);
-        if(date!=null)
+        if(date!=null){
+            LOGGER.debug("getting timestamp for {}",date);
             return new Timestamp(date.getTime());
+        }
         return null;
     }
 
     public Date getDate(Timestamp timestamp){
-        LOGGER.debug("getting date for {}",timestamp);
-        if(timestamp!=null)
+        if(timestamp!=null){
+            LOGGER.debug("getting date for {}",timestamp);
             return new Date(timestamp.getTime());
+        }
         return null;
     }
 
     public Date getDateOfBirth(String dateString){
-        LOGGER.debug("getting date for {}",dateString);
+
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             if(dateString!=null && !"".equals(dateString))
+            {
+                LOGGER.debug("getting date for {}",dateString);
                 date = df.parse(dateString);
+            }
         } catch (ParseException e) {
             LOGGER.error("parsing date of birth",e);
         }
@@ -52,8 +57,8 @@ public class DateHelper {
     }
 
     public String getStringDate(Date date){
-        LOGGER.debug("getting string date for {}",date);
         if(date != null){
+            LOGGER.debug("getting string date for {}",date);
             SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
             return sdfDate.format(date);
         }

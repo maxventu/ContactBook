@@ -39,7 +39,10 @@ public class AttachmentController extends Upload implements Controller {
             if("/attachments".equals(request.getPathInfo()))showAttachments(request, response,contactId);
             else showAttachment(request,response,contactId);
         }
-        else uploadAttachment(request,response);
+        else {
+            Integer contId = ContactDAO.INSTANCE.maxRow()+1;
+            uploadAttachment(request,response,contId);
+        }
     }
 
     private void showAttachments(HttpServletRequest request, HttpServletResponse response,String contactId) throws ServletException, IOException {
@@ -76,7 +79,7 @@ public class AttachmentController extends Upload implements Controller {
         }
     }
 
-    private void uploadAttachment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void uploadAttachment(HttpServletRequest request, HttpServletResponse response,Integer contactId) throws ServletException, IOException {
         LOGGER.debug("attachment starts uploading");
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
@@ -86,7 +89,6 @@ public class AttachmentController extends Upload implements Controller {
         }
         ServletFileUpload upload = getFileUpload();
 
-        String contactId="";
         String comment="";
         String filename="";
 
@@ -97,10 +99,7 @@ public class AttachmentController extends Upload implements Controller {
             if (formItems != null && formItems.size() > 0) {
                 for (FileItem item : formItems) {
                     if (item.isFormField()) {
-                        if("cont_id".equals(item.getFieldName())){
-                            contactId=item.getString("UTF-8");
-                        }
-                        else if("attachment_filename".equals(item.getFieldName())){
+                        if("attachment_filename".equals(item.getFieldName())){
                             filename = item.getString("UTF-8");
                         }
                         else if("attachment_comment".equals(item.getFieldName())){
@@ -116,8 +115,9 @@ public class AttachmentController extends Upload implements Controller {
 
                         fileName = DateHelper.INSTANCE.getDateId(now)+"."+ FilenameUtils.getExtension(fileName);
                         String filePath = getAttachmentDirectoryPath()+ File.separator + contactId;
+                        createDirectoryIfNotExists(getAttachmentDirectoryPath());
                         createDirectoryIfNotExists(filePath);
-                        File storeFile = new File(getRealAttachmentPath(contactId,fileName));
+                        File storeFile = new File(getRealAttachmentPath(""+contactId,fileName));
                         LOGGER.debug("start saving file");
                         item.write(storeFile);
                         LOGGER.debug("end saving file");

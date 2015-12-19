@@ -145,3 +145,11 @@ function isMatchesPattern(value, pattern) {
     if(value != undefined && pattern.test(value))
         return true;
 }
+
+function createInputForHistory(elementValue,elementName){
+    var el = document.createElement("input");
+    el.setAttribute("type", "hidden");
+    el.setAttribute("name",elementName);
+    el.setAttribute("value",elementValue);
+    return el;
+}

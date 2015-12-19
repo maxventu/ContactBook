@@ -19,15 +19,12 @@ function addItemsToContainer(){
     }
 }
 function addContactToContainer(container,contactId){
-    container.appendChild(createHiddenInputForContacts(contactId));
-}
-
-function createHiddenInputForContacts(contactId){
     var input = document.createElement("input");
     input.setAttribute("type","hidden");
     input.setAttribute("name","choseContacts");
     input.setAttribute("value",contactId);
     return input;
+    container.appendChild(input);
 }
 
 function setSubmitOnSelection(){
