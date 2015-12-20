@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="attachmentAddModal_filename">File name</label>
-                                    <input type="text" name="attachment_filename" class="form-control" id="attachmentAddModal_filename" placeholder="Filename"/>
+                                    <input type="text" name="attachment_filename" class="form-control" id="attachmentAddModal_filename" placeholder="Filename"  maxlength="45"/>
                                 </div>
                                 <div class="col-lg-8">
                                     <label for="attachmentAddModal_file">File</label>
@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <label class="sr-only" for="attachmentAddModal_comment">Comment</label>
-                                    <input type="text" name="attachment_comment" class="form-control" id="attachmentAddModal_comment" placeholder="Add coments here"/>
+                                    <input type="text" name="attachment_comment" class="form-control" id="attachmentAddModal_comment" placeholder="Add comments here" maxlength="100"/>
                                 </div>
                             </div>
                         </div>

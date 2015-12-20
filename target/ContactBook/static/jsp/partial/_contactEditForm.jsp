@@ -34,21 +34,21 @@
     <div class="form-group">
         <label for="firstName" class="col-lg-2 control-label">First name</label>
         <div class="col-lg-10">
-            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Albert" value="${contact.firstName}">
+            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Albert" value="${contact.firstName}" maxlength="45">
         </div>
     </div>
 
     <div class="form-group">
         <label for="lastName" class="col-lg-2 control-label">Last name</label>
         <div class="col-lg-10">
-            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Einstein" value="${contact.lastName}">
+            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Einstein" value="${contact.lastName}" maxlength="45">
         </div>
     </div>
 
     <div class="form-group">
         <label for="patronymic" class="col-lg-2 control-label">Patronymic</label>
         <div class="col-lg-10">
-            <input type="text" name="patronymic" class="form-control" id="patronymic" placeholder="Hermann" value="${contact.patronymic}">
+            <input type="text" name="patronymic" class="form-control" id="patronymic" placeholder="Hermann" value="${contact.patronymic}" maxlength="45">
         </div>
     </div>
 
@@ -64,7 +64,7 @@
         <div class="col-lg-10">
             <select class="form-control" name="sexIsMale" id="sexIsMale">
                 <c:choose>
-                    <c:when test="${contact.sexIsMale != true}">
+                    <c:when test="${contact.sexIsMale == false}">
                         <option value="1">Male</option>
                         <option value="0" selected>Female</option>
                     </c:when>
@@ -80,7 +80,7 @@
     <div class="form-group">
         <label for="nationality" class="col-lg-2 control-label">Nationality</label>
         <div class="col-lg-10">
-            <input type="text" name="nationality" class="form-control" id="nationality" placeholder="Kingdom of Württemberg" value="${contact.nationality}">
+            <input type="text" name="nationality" class="form-control" id="nationality" placeholder="Kingdom of Württemberg" value="${contact.nationality}" maxlength="45">
         </div>
     </div>
 
@@ -108,21 +108,21 @@
     <div class="form-group">
         <label for="webSite" class="col-lg-2 control-label">Web site</label>
         <div class="col-lg-10">
-            <input type="text" name="webSite" class="form-control" id="webSite" placeholder="www.einstein.com" value="${contact.webSite}">
+            <input type="text" name="webSite" class="form-control" id="webSite" placeholder="www.einstein.com" value="${contact.webSite}"  maxlength="45">
         </div>
     </div>
 
     <div class="form-group">
         <label for="email" class="col-lg-2 control-label">Email</label>
         <div class="col-lg-10">
-            <input type="email" name="email" class="form-control" id="email" placeholder="albert.einstein@gmail.com" value="${contact.email}">
+            <input type="email" name="email" class="form-control" id="email" placeholder="albert.einstein@gmail.com" value="${contact.email}" maxlength="45">
         </div>
     </div>
 
     <div class="form-group">
         <label for="currentWorkplace" class="col-lg-2 control-label">Workplace</label>
         <div class="col-lg-10">
-            <input type="text" name="currentWorkplace" class="form-control" id="currentWorkplace" placeholder="Company Inc." value="${contact.currentWorkplace}">
+            <input type="text" name="currentWorkplace" class="form-control" id="currentWorkplace" placeholder="Company Inc." value="${contact.currentWorkplace}" maxlength="45">
         </div>
     </div>
 
@@ -132,15 +132,15 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label class="sr-only" for="postcode">Postcode</label>
-                    <input type="text" name="postcode" class="form-control" id="postcode" placeholder="Postcode" value="${contact.postcode}">
+                    <input type="text" name="postcode" class="form-control" id="postcode" placeholder="Postcode" value="${contact.postcode}" maxlength="10">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="city">City</label>
-                    <input type="text" name="city" class="form-control" id="city" placeholder="City" value="${contact.city}">
+                    <input type="text" name="city" class="form-control" id="city" placeholder="City" value="${contact.city}" maxlength="45">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="country">Country</label>
-                    <input type="text" name="country" class="form-control" id="country" placeholder="Country" value="${contact.country}">
+                    <input type="text" name="country" class="form-control" id="country" placeholder="Country" value="${contact.country}" maxlength="45">
                 </div>
             </div>
         </div>
@@ -152,15 +152,15 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label class="sr-only" for="street">Street</label>
-                    <input type="text" name="street" class="form-control " id="street" placeholder="Street" value="${contact.street}">
+                    <input type="text" name="street" class="form-control " id="street" placeholder="Street" value="${contact.street}" maxlength="45">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="house">House</label>
-                    <input type="text" name="house" class="form-control" id="house" placeholder="House" value="${contact.house}">
+                    <input type="text" name="house" class="form-control" id="house" placeholder="House" value="${contact.house}" maxlength="45">
                 </div>
                 <div class="col-lg-4">
                     <label class="sr-only" for="apartment">Apartment</label>
-                    <input type="text" name="apartment" class="form-control" id="apartment" placeholder="Apartment" value="${contact.apartment}">
+                    <input type="text" name="apartment" class="form-control" id="apartment" placeholder="Apartment" value="${contact.apartment}" maxlength="45">
                 </div>
             </div>
         </div>

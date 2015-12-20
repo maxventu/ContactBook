@@ -182,7 +182,7 @@ function reinitTelephoneModal(){
     types.forEach(function(type,i,types){
         setValueOfInputToNull("telephoneModal_"+type);
     });
-    var sel = document.getElementById("telephoneModal_type");
+    var sel = document.getElementById("telephoneModal_type_select");
     sel.selectedIndex = 0;
 }
 
@@ -217,6 +217,6 @@ function validateAllTelephoneFields(){
         if(!validateString(notNeeded[i],0,3))isValid = false;
     }
     if(!validateString("telephoneModal_comment",0,100))isValid = false;
-    if(!validateString("telephoneModal_number",5,10))isValid = false;
+    if(!validateString("telephoneModal_number",5,15))isValid = false;
     return isValid;
 }
