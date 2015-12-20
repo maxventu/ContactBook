@@ -35,18 +35,11 @@ function deleteAttachments(){
         var deletedAttachmentsContainer = document.getElementById("deletedAttachments");
         var id = getAttachmentId(element);
 
-        deletedAttachmentsContainer.appendChild(createDeleteHistory(id));
+        deletedAttachmentsContainer.appendChild(createInputForHistory(id,"deletedAttachments"));
         var tr = document.getElementById("att_check_"+id);
         var table = tr.parentNode;
         table.removeChild(tr);
 
-        function createDeleteHistory(elementId){
-            var el = document.createElement("input");
-            el.setAttribute("type", "hidden");
-            el.setAttribute("name","deletedAttachments");
-            el.setAttribute("value",elementId);
-            return el;
-        }
         function getAttachmentId(checkbox){
             return checkbox.id.replace("att_check_","");
         }
@@ -99,18 +92,9 @@ function submitEditAttachment() {
         tds[3].innerHTML = comment.value;
 
         var updatedAttachmentsContainer = document.getElementById("updatedAttachments");
-        updatedAttachmentsContainer.appendChild(createUpdateHistory(attachmentId));
+        updatedAttachmentsContainer.appendChild(createInputForHistory(attachmentId,"updatedAttachments"));
 
         closeAttachmentEditModal();
-
-
-        function createUpdateHistory(elementId){
-            var el = document.createElement("input");
-            el.setAttribute("type", "hidden");
-            el.setAttribute("name","updatedAttachments");
-            el.setAttribute("value",elementId);
-            return el;
-        }
     }
     function setInfoAttachmentToNew(attachmentId,fieldType){
         var inputInModal = document.getElementById("attachmentEditModal_"+fieldType);
@@ -156,7 +140,7 @@ function submitAddAttachment() {
     var attachments = document.getElementById("att_table");
     attachments.appendChild(newTableRow);
     var newAttachmentsContainer = document.getElementById("newAttachments");
-    newAttachmentsContainer.appendChild(createAttachmentNewHistory(newId));
+    newAttachmentsContainer.appendChild(createInputForHistory(newId,"newAttachments"));
 
     closeAttachmentAddModal();
     function createHiddenInput(attId,fieldType){
@@ -171,13 +155,6 @@ function submitAddAttachment() {
         var td = document.createElement("td");
         td.id="td_"+fieldType+"_"+attId;
         return td;
-    }
-    function createAttachmentNewHistory(elementId){
-        var el = document.createElement("input");
-        el.setAttribute("type", "hidden");
-        el.setAttribute("name","newAttachments");
-        el.setAttribute("value",elementId);
-        return el;
     }
 }
 

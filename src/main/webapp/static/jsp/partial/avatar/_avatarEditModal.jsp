@@ -23,13 +23,9 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <label class="" for="avatarEditModal_file">File</label>
-                                    <input type="hidden" id="contactIdForAvatar" name="contact_id" />
-                                    <%--<input type="file"  class="form-control"  id="avatarEditModal_file">--%>
-
+                                    <label class="sr-only" for="avatarEditModal_file">File</label>
                                     <input type="file" id="avatarEditModal_file" name="avatar" />
-                                    <%--<input type="submit" name="upload" id="upload" value="Загрузить" />--%>
-
+                                    <input type="hidden" id="contactIdForAvatar" name="contact_id" />
                                     <div id="res"></div>
                                 </div>
                             </div>

@@ -28,15 +28,15 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <label class="" for="telephoneModal_country_code">Country</label>
-                                <input type="text"  pattern="[0-9]{0,3}" class="form-control small-padding" id="telephoneModal_country_code">
+                                <input type="text"  pattern="[0-9]{0,3}" class="form-control small-padding" id="telephoneModal_country_code" maxlength="3">
                             </div>
                             <div class="col-lg-2">
                                 <label class="" for="telephoneModal_operator_code">Operator</label>
-                                <input type="text" pattern="[0-9]{0,3}" class="form-control small-padding"  id="telephoneModal_operator_code" >
+                                <input type="text" pattern="[0-9]{0,3}" class="form-control small-padding"  id="telephoneModal_operator_code" maxlength="3" >
                             </div>
                             <div class="col-lg-4">
                                 <label class="" for="telephoneModal_number">Number</label>
-                                <input type="tel" class="form-control" pattern="[0-9]{5,10}" id="telephoneModal_number">
+                                <input type="tel" class="form-control" pattern="[0-9]{5,10}" id="telephoneModal_number" maxlength="15">
                             </div>
                             <div class="col-lg-4">
                                 <label for="telephoneModal_type_select" class="">Telephone type</label>
@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <label class="sr-only" for="telephoneModal_comment">Comment</label>
-                                <input type="text" class="form-control" id="telephoneModal_comment" placeholder="Type any comment here">
+                                <input type="text" class="form-control" id="telephoneModal_comment" placeholder="Type any comment here" maxlength="100">
                             </div>
                         </div>
                     </div>

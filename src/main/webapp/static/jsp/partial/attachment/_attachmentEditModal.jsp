@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <label class="" for="attachmentEditModal_filename">File name</label>
-                <input type="text"  class="form-control" id="attachmentEditModal_filename" placeholder="Filename">
+                <input type="text"  class="form-control" id="attachmentEditModal_filename" placeholder="Filename" maxlength="45">
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <label class="" for="attachmentEditModal_comment">Comment</label>
-                <input type="text" class="form-control" id="attachmentEditModal_comment" placeholder="Add coments here">
+                <input type="text" class="form-control" id="attachmentEditModal_comment" placeholder="Add coments here" maxlength="100">
               </div>
             </div>
           </div>

@@ -26,7 +26,7 @@ public class TelephoneHelper extends AbstractHelper {
         String[] tel_country_code = request.getParameterValues("tel_country_code");
         String[] tel_operator_code = request.getParameterValues("tel_operator_code");
         String[] tel_number = request.getParameterValues("tel_number");
-        String[] tel_type = request.getParameterValues("tel_type");
+        String[] tel_type = request.getParameterValues("tel_type_select");
         String[] tel_comment = request.getParameterValues("tel_comment");
         HashMap<Integer,Telephone> telephoneHashMap = new HashMap<Integer, Telephone>();
         for(int i=0;i<tel_id.size();i++)

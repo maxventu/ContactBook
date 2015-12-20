@@ -58,7 +58,7 @@
                                 <input type="hidden" name="tel_country_code" id="tel_country_code_${telephone.id}" value="${telephone.countryCode}">
                                 <input type="hidden" name="tel_operator_code" id="tel_operator_code_${telephone.id}" value="${telephone.operatorCode}">
                                 <input type="hidden" name="tel_number" id="tel_number_${telephone.id}" value="${telephone.number}">
-                                <input type="hidden" name="tel_type" id="tel_type_select_${telephone.id}" value="${telephone.type}">
+                                <input type="hidden" name="tel_type_select" id="tel_type_select_${telephone.id}" value="${telephone.type}">
                                 <input type="hidden" name="tel_comment" id="tel_comment_${telephone.id}" value="${telephone.comment}">
                             </tr>
                         </c:forEach>
