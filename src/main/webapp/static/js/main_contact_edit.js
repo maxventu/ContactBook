@@ -101,8 +101,6 @@ function validate(fieldId,min,max,fieldName){
     }
 }
 
-
-
 function validateString(fieldId,min,max,fieldName){
     var element = document.getElementById(fieldId);
     var valid = true;
@@ -138,7 +136,7 @@ function isBirthDateCorrect() {
     birthDate.setFullYear(birthValue[0], (birthValue[1] - 1), birthValue[2]);
     if((birthValue[0] != birthDate.getFullYear()) ||  (birthValue[1] - 1 != birthDate.getMonth())
         || (birthValue[2] != birthDate.getDate())) {
-        alert("This date doesn't exist.");
+        alert("This date doesn't exist. The format of good date is: yyyy-mm-dd");
         return false;
     }
     var currentDate = new Date();

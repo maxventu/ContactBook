@@ -140,11 +140,12 @@
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <button type="submit" name="searchBtn" value="search" class="btn btn-default">Search</button>
+                    <button type="submit" name="searchBtn" value="search" class="btn btn-default" id="searchButton" onclick="return isBirthDateCorrect()">Search</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
 </body>
+<script src="static/js/search.js"></script>
 </html>

@@ -27,7 +27,7 @@
                     <img id="ava_image" src="http://res.cloudinary.com/goodcloud/image/upload/v1449943378/ContactBook/default_avatar.png" class="img-responsive" alt="${contact.fullName}">
                 </c:otherwise>
             </c:choose>
-            <input name="photoUrl" id="photoUrl" type="hidden">
+            <input name="photoUrl" id="photoUrl" type="hidden" value="${contact.photoUrl}">
         </div>
     </div>
 
