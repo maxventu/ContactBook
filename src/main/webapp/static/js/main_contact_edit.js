@@ -84,10 +84,21 @@ function initAllTextValidations(){
         if(!validateString(needed[i],1,45))isValid = false;
     }
     if(!validateString("postcode",0,11))isValid = false;
-    if((validateString("city",1,45) || validateString("country",1,45)) && !validateString("postcode",1,11))isValid = false;
+    if((validate("city",1,45) || validate("country",1,45)) && !validateString("postcode",1,11))isValid = false;
     if(!isBirthDateCorrect())isValid = false;
 
     return isValid;
+}
+function validate(fieldId,min,max,fieldName){
+    var element = document.getElementById(fieldId);
+    var valid = true;
+    return checkElement(element);
+
+    function checkElement(el){
+        if(el.value==null){return false;}
+        if( el.value.length<min|| el.value.length>max)
+            return false;
+    }
 }
 
 
