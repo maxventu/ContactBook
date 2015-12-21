@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -47,6 +48,10 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode FROM contact WHERE is_deleted=0 LIMIT ?,?";
 
+    private static final String CONTACT_FIND_BY_BIRTHDAY =
+            "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
+                    " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode" +
+                    " FROM contact WHERE is_deleted=0 AND DAY(birth_date) = ? AND MONTH(birth_date) = ?;";
 
     @Override
     public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
@@ -90,7 +95,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++,contact.getStreet());
         statement.setString(i++,contact.getHouse());
         statement.setString(i++,contact.getApartment());
-        statement.setString(i++,contact.getPostcode());
+        statement.setString(i,contact.getPostcode());
         return statement;
     }
 
@@ -184,7 +189,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         try {
             connection = ConnectorDB.getConnection();
             statement = prepareStatementFindContacts(connection,sc);
-            LOGGER.debug("finding contacts query={}",statement);
+            LOGGER.debug("finding contacts query={}", statement);
             if(statement!=null)
             addressResultSet = statement.executeQuery();
             if(addressResultSet!=null)
@@ -225,7 +230,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         if(cont.getDateOfBirth()!=null){
             sb.append("AND date_of_birth "+(cont.getDateIsGreater()?">":"<")+"? ");
         }
-        LOGGER.debug("created statement={}",sb);
+        LOGGER.debug("created statement={}", sb);
         PreparedStatement statement = null;
         int i=1;
         statement = connection.prepareStatement(sb.toString());
@@ -263,7 +268,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         try {
             connection = ConnectorDB.getConnection();
             statement = prepareStatementFindAllByPage(connection, pageNumber, numberOfElements);
-            LOGGER.debug("contact by page query: {}",statement);
+            LOGGER.debug("contact by page query: {}", statement);
             ResultSet addressResultSet = statement.executeQuery();
             while (addressResultSet.next()) {
                 arrayList.add(readEntityFrom(addressResultSet));
@@ -300,24 +305,63 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         try{
             connection = ConnectorDB.getConnection();
             statement = connection.prepareStatement("SELECT COUNT(id) FROM contact WHERE is_deleted=0");
-            LOGGER.debug("executing query {}",statement);
+            LOGGER.debug("executing query {}", statement);
             ResultSet attachmentResultSet = statement.executeQuery();
             while (attachmentResultSet.next()){
                 numberOfNotDeleted = readKeyFrom(attachmentResultSet);
-                LOGGER.debug("numberOfNotDeleted is {}",numberOfNotDeleted);
+                LOGGER.debug("numberOfNotDeleted is {}", numberOfNotDeleted);
             }
         }
         catch (Exception ex){
-            LOGGER.error("something went wrong while finding entity",ex);
+            LOGGER.error("something went wrong while finding entity", ex);
         }
         finally {
             try{
+                if(connection!=null)
                 connection.close();
             }
             catch (Exception e){
-                LOGGER.error("connection wasn't closed",e);
+                LOGGER.error("connection wasn't closed", e);
             }
         }
         return numberOfNotDeleted;
     }
+
+    private PreparedStatement prepareStatementFindAllByBirthday(Connection connection) throws SQLException {
+        PreparedStatement statement = null;
+        int i=1;
+        statement = connection.prepareStatement(CONTACT_FIND_BY_BIRTHDAY);
+        Calendar calendar = Calendar.getInstance();
+        statement.setInt(i++,calendar.get(Calendar.DAY_OF_MONTH));
+        statement.setInt(i,calendar.get(Calendar.MONTH)+1);
+        return statement;
+    }
+    public ArrayList<Contact> getContactsByBirthday()
+    {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ArrayList<Contact> arrayList = new ArrayList<Contact>();
+        try {
+            connection = ConnectorDB.getConnection();
+            statement = prepareStatementFindAllByBirthday(connection);
+            LOGGER.debug("contact by page query: {}", statement);
+            ResultSet addressResultSet = statement.executeQuery();
+            while (addressResultSet.next()) {
+                arrayList.add(readEntityFrom(addressResultSet));
+            }
+        } catch (SQLException exception) {
+            LOGGER.error("Something went wrong while finding by birthday", exception);
+        }
+        finally {
+            try {
+                if(connection!=null)
+                    connection.close();
+            } catch (SQLException e) {
+                LOGGER.error("Connection is not closed", e);
+            }
+        }
+        return arrayList;
+    }
+
 }

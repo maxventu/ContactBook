@@ -23,20 +23,22 @@ public class FrontController extends HttpServlet {
         return INSTANCE.getServletContext();
     }
 
+    private MyScheduler scheduler;
     private ApplicationController applicationController;
 
     public void init(ServletConfig config) throws
             ServletException {
         LOGGER.debug("initializing front controller");
         super.init(config);
-        MyScheduler.INSTANCE.init();
+        scheduler = new MyScheduler();
+        scheduler.init(getFrontControllerServletContext());
         INSTANCE = this;
         applicationController = new ApplicationController();
 
     }
 
     public void destroy() {
-        MyScheduler.INSTANCE.finish();
+        scheduler.finish();
     }
 
     protected void execute(HttpServletRequest
