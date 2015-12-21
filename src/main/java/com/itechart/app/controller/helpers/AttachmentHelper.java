@@ -55,7 +55,9 @@ public class AttachmentHelper extends AbstractHelper {
 
     private void deleteAttachmentFromDisk(Integer id){
         Attachment att = AttachmentDAO.INSTANCE.findEntityById(id);
-        File file = AttachmentHelper.INSTANCE.getFile(Upload.getAttachmentDirectoryPath() + File.separator + att.getContactId(), att.getDateUploadAsId());
+        File file = null;
+        if(att!=null)
+            file = AttachmentHelper.INSTANCE.getFile(Upload.getAttachmentDirectoryPath() + File.separator + att.getContactId(), att.getDateUploadAsId());
         if(file!=null)
             file.delete();
     }
@@ -99,6 +101,7 @@ public class AttachmentHelper extends AbstractHelper {
     public File getFile(String directory,String filename){
         File dir = new File(directory);
         File[] listOfFiles = dir.listFiles();
+        if(filename!=null && !"".equals(filename))
         for(File f:listOfFiles) {
             if(f.getName().startsWith(filename))return f;
         }

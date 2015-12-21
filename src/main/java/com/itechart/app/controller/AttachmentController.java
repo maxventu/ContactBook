@@ -115,6 +115,7 @@ public class AttachmentController extends Upload implements Controller {
 
                         fileName = DateHelper.INSTANCE.getDateId(now)+"."+ FilenameUtils.getExtension(fileName);
                         String filePath = getAttachmentDirectoryPath()+ File.separator + contactId;
+                        createDirectoryIfNotExists(getUploadDirectoryPath());
                         createDirectoryIfNotExists(getAttachmentDirectoryPath());
                         createDirectoryIfNotExists(filePath);
                         File storeFile = new File(getRealAttachmentPath(""+contactId,fileName));

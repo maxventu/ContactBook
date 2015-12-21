@@ -19,10 +19,6 @@ public class FrontController extends HttpServlet {
 
     public static FrontController INSTANCE;
 
-    public static ServletContext getFrontControllerServletContext(){
-        return INSTANCE.getServletContext();
-    }
-
     private MyScheduler scheduler;
     private ApplicationController applicationController;
 
@@ -31,7 +27,7 @@ public class FrontController extends HttpServlet {
         LOGGER.debug("initializing front controller");
         super.init(config);
         scheduler = new MyScheduler();
-        scheduler.init(getFrontControllerServletContext());
+        scheduler.init(getServletContext());
         INSTANCE = this;
         applicationController = new ApplicationController();
 

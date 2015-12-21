@@ -74,6 +74,7 @@ public class DateHelper {
         DateFormat format = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         Date date=null;
         try {
+            if(string!=null && !"".equals(string))
             date = format.parse(string);
         } catch (ParseException e) {
             LOGGER.error("error while getting date from string",e);

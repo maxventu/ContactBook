@@ -9,7 +9,6 @@ function load(){
     loadAttachmentsManagement();
     loadAvatarMangment();
     var form = document.getElementById("data");
-    //form.onsubmit=initAllTextValidations;
 }
 
 function openModal(textLabel,id){
@@ -85,7 +84,9 @@ function initAllTextValidations(){
         if(!validateString(needed[i],1,45))isValid = false;
     }
     if(!validateString("postcode",0,11))isValid = false;
+    if((validateString("city",1,45) || validateString("country",1,45)) && !validateString("postcode",1,11))isValid = false;
     if(!isBirthDateCorrect())isValid = false;
+
     return isValid;
 }
 

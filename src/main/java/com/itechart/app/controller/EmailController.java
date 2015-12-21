@@ -40,7 +40,7 @@ public class EmailController implements Controller {
         templatesArray = new ArrayList<Template>();
         templatesArray.add(new Template("simple","Without template",null));
         templatesArray.add(new Template("birthday","Birthday",templates.getInstanceOf("birthday").render()));
-        templatesArray.add(new Template("birthday_ru","День рождения",templates.getInstanceOf("birthday_ru").render()));
+        templatesArray.add(new Template("birthday_ru","Birthday ru",templates.getInstanceOf("birthday_ru").render()));
         templates.unload();
     }
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

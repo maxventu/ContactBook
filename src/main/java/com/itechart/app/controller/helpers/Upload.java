@@ -38,6 +38,9 @@ public class Upload {
     }
 
 
+    public static String getUploadDirectoryPath(){
+        return FrontController.INSTANCE.getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+    }
     public static String getAttachmentDirectoryPath(){
         return FrontController.INSTANCE.getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY;
     }

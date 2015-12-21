@@ -69,7 +69,9 @@ public class Attachment extends Entity<Integer>{
     }
 
     public String getDateUploadAsId(){
+        if(dateUpload!=null)
         return DateHelper.INSTANCE.getDateId(dateUpload);
+        return null;
     }
 
 }

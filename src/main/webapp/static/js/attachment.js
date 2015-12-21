@@ -36,7 +36,7 @@ function deleteAttachments(){
         var id = getAttachmentId(element);
 
         deletedAttachmentsContainer.appendChild(createInputForHistory(id,"deletedAttachments"));
-        var tr = document.getElementById("att_check_"+id);
+        var tr = document.getElementById("att_id_"+id);
         var table = tr.parentNode;
         table.removeChild(tr);
 
@@ -79,6 +79,9 @@ function submitEditAttachment() {
     var modal_id = document.getElementById("attachmentEditModal_id");
     var attId = modal_id.value;
 
+    var valid = validateAllAttachmentEditModalFields();
+    if(!valid) return false;
+
     if(attId != "" && attId != null && attId!=undefined)
         mainLogic(attId);
     function mainLogic(attachmentId) {
@@ -106,6 +109,10 @@ function submitEditAttachment() {
 }
 
 function submitAddAttachment() {
+
+    var valid = validateAllAttachmentAddModalFields();
+    if(!valid) return false;
+
     contactVariables.attachmentLastId= 1+parseInt(contactVariables.attachmentLastId);
     var newId = contactVariables.attachmentLastId;
 
@@ -181,7 +188,6 @@ function setLastAttachmentId(){
     else contactVariables.attachmentLastId = 0;
 }
 
-///
 function reinitAttachmentAddModal(){
     var types = ["id","filename","file","comment"];
     types.forEach(function(type,i,types){
@@ -223,7 +229,14 @@ function handleAttachmentResponse(){
     }
 
 }
-function validateAllAttachmentModalFields(){
+function validateAllAttachmentAddModalFields(){
+    var isValid = true;
+    if(!validateString("attachmentAddModal_comment",0,100))isValid = false;
+    if(!validateString("attachmentAddModal_filename",1,45))isValid = false;
+    if(!validateString("attachmentAddModal_file",1,1000))isValid = false;
+    return isValid;
+}
+function validateAllAttachmentEditModalFields(){
     var isValid = true;
     if(!validateString("attachmentAddModal_comment",0,100))isValid = false;
     if(!validateString("attachmentAddModal_filename",1,45))isValid = false;

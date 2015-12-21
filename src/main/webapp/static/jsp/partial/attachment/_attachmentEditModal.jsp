@@ -44,7 +44,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default attachmentEditModal-close-modal">Close</button>
-        <button type="button" class="btn btn-primary" id="attachmentEditModalApply" onclick="return validateAllAttachmentModalFields();">Apply</button>
+        <button type="button" class="btn btn-primary" id="attachmentEditModalApply">Apply</button>
       </div>
     </div>
   </div>
