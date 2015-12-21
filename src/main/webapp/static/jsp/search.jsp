@@ -54,7 +54,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-8">
-                                <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth">
+                                <input type="text" name="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" id="dateOfBirth">
                             </div>
                         </div>
 

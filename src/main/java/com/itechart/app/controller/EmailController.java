@@ -34,7 +34,7 @@ public class EmailController implements Controller {
     public static EmailController INSTANCE = new EmailController();
 
 
-    private static final STGroup templates = new STGroupFile("templates.stg");
+    private static final STGroup templates = new STGroupFile("templates.stg","UTF-8");
 
     private void init(){
         templatesArray = new ArrayList<Template>();

@@ -55,7 +55,7 @@
     <div class="form-group">
         <label for="dateOfBirth" class="col-lg-2 control-label">Date of birth</label>
         <div class="col-lg-10">
-            <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" value="${contact.dateOfBirth}">
+            <input type="text" name="dateOfBirth" class="form-control" id="dateOfBirth" placeholder="yyyy-mm-dd" value="${contact.dateOfBirth}">
         </div>
     </div>
 
