@@ -12,9 +12,11 @@
               maxIdle="30"
               maxWait="10000"
             />
-    <Parameter name="email" value="contactbooksender@gmail.com" />
+    <Parameter name="starttls.enable" value="true"/>
+    <Parameter name="auth" value="true"/>
+    <Parameter name="username" value="contactbooksender@gmail.com" />
     <Parameter name="password" value="contactbooksender123" />
-    <Parameter name="hostname" value="smtp.googlemail.com" />
-    <Parameter name="port" value="465" />
+    <Parameter name="host" value="smtp.gmail.com" />
+    <Parameter name="port" value="587" />
     <Parameter name="adminEmail" value="1995_maxim@mail.ru" />
 </Context>

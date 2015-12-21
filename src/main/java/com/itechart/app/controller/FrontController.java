@@ -27,17 +27,22 @@ public class FrontController extends HttpServlet {
 
     public void init(ServletConfig config) throws
             ServletException {
+        LOGGER.debug("initializing front controller");
         super.init(config);
+        MyScheduler.INSTANCE.init();
         INSTANCE = this;
         applicationController = new ApplicationController();
+
     }
 
     public void destroy() {
+        MyScheduler.INSTANCE.finish();
     }
 
     protected void execute(HttpServletRequest
                                    request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
+
         LOGGER.debug("started");
         applicationController.processRequest(request,response);
     }

@@ -1,0 +1,23 @@
+birthday(full_name,date,body)::=<<
+  Dear,<full_name>!
+
+  We're glad to congratulate you with your Birthday!
+  We wish you good health, enormous salary and interesting projects.
+
+  <body>
+
+  Sincerely yours, iTechArt Group, <date>.
+>>
+birthday_ru(full_name,date,body)::=<<
+Уважаемый(-ая),<full_name>!
+
+Поздравляем Вас с Днем рождения!
+
+<body>
+
+Ваш, iTechArt Group, <date>.
+>>
+  administrator_notification(user,date)::=<<
+  Dear, administrator!
+  Today,<date>, <user; separator=", "> has(ve) birthday(s)
+  >>

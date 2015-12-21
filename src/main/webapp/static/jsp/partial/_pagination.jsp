@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:choose>
-    <c:when test="${currentPage!=null}">
+    <c:when test="${currentPage!=null && maxPageNumber>0}">
         <div class="form-horizontal form-group">
             <div class="row">
                 <div class="col-lg-4"></div>

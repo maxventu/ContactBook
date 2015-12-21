@@ -31,10 +31,10 @@
                 <div class="col-lg-8">Exception: ${pageContext.exception}</div>
             </div>
         </c:if>
-        <c:if test="${pageContext.exception.message != null}">
+        <c:if test="${pageContext.exception.structure != null}">
             <div class="row">
                 <div class="col-lg-2"></div>
-                <div class="col-lg-8">Message from exception: ${pageContext.exception.message}</div>
+                <div class="col-lg-8">Message from exception: ${pageContext.exception.structure}</div>
             </div>
         </c:if>
     </div>

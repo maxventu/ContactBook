@@ -41,5 +41,32 @@ public class ContactHelper extends AbstractHelper {
             ContactDAO.INSTANCE.delete(id);
         }
     }
+    public ArrayList<Contact> getContactsByName(HttpServletRequest request,String name){
+        ArrayList<Integer> contactIds = getIntListFromArray(request.getParameterValues(name));
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+        for(Integer id:contactIds){
+            contacts.add(ContactDAO.INSTANCE.findEntityById(id));
+        }
+        return contacts;
+    }
+    public ArrayList<Contact> getContactsByNameWithEmail(HttpServletRequest request,String name){
+        ArrayList<Integer> contactIds = getIntListFromArray(request.getParameterValues(name));
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+        Contact cont = null;
+        for(Integer id:contactIds){
+            cont = ContactDAO.INSTANCE.findEntityById(id);
+            if(cont.getEmail()!=null);
+            contacts.add(cont);
+        }
+        return contacts;
+    }
+
+    public ArrayList<String> getEmails(ArrayList<Contact> contacts){
+        ArrayList<String> emails = new ArrayList<String>();
+        for(Contact cont: contacts){
+            if(cont.getEmail()!=null)emails.add(cont.getEmail());
+        }
+        return emails;
+    }
 
 }
