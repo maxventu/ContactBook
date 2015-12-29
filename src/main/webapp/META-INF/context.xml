@@ -19,4 +19,5 @@
     <Parameter name="host" value="smtp.gmail.com" />
     <Parameter name="port" value="587" />
     <Parameter name="adminEmail" value="1995_maxim@mail.ru" />
+    <Parameter name="uploadURL" value="E:\Temp"/>
 </Context>

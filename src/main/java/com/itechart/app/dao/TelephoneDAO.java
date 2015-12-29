@@ -106,12 +106,7 @@ public class TelephoneDAO extends AbstractDAO<Integer,Telephone>{
             LOGGER.error("Something went wrong while finding telephones", exception);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
         return telephones;
     }

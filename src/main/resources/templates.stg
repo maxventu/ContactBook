@@ -1,23 +1,27 @@
 birthday(full_name,date,body)::=<<
-  Dear,<full_name>!
+<pre>
+  Dear,$full_name$!
 
   We're glad to congratulate you with your Birthday!
   We wish you good health, enormous salary and interesting projects.
 
-  <body>
+  $body$
 
-  Sincerely yours, iTechArt Group, <date>.
+  Sincerely yours, iTechArt Group, $date$.
+  </pre>
 >>
 birthday_ru(full_name,date,body)::=<<
-Уважаемый(-ая),<full_name>!
+<pre>
+Уважаемый(-ая),$full_name$!
 
 Поздравляем Вас с Днем рождения!
 
-<body>
+$body$
 
-Ваш, iTechArt Group, <date>.
+Ваш, iTechArt Group, $date$.
+</pre>
 >>
   administrator_notification(user,date)::=<<
   Dear, administrator!
-  Today,<date>, <user; separator=", "> has(ve) birthday(s)
+  Today,$date$, $user; separator=", "$ has(ve) birthday(s)
   >>

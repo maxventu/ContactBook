@@ -14,15 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
  * Created by Maxim on 12/15/2015.
  */
-public class AvatarUploadController extends Upload implements Controller {
-    final Logger LOGGER = LoggerFactory.getLogger(AvatarUploadController.class);
-    // upload settings
+public class AvatarController extends Upload implements Controller {
+    final Logger LOGGER = LoggerFactory.getLogger(AvatarController.class);
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+        if("/upload_avatar".equals(request.getPathInfo())) uploadAvatar(request, response);
+        else if("/avatar".equals(request.getPathInfo())) showAvatar(request, response);
+
+    }
+
+    private void uploadAvatar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
             writer.println("Error: Form must has enctype=multipart/form-data.");
@@ -32,18 +40,15 @@ public class AvatarUploadController extends Upload implements Controller {
         ServletFileUpload upload = getFileUpload();
         LOGGER.debug("saving avatar image");
         String contactId=null;
-        String fromProjectAvatarPath =File.separator + UPLOAD_DIRECTORY+ File.separator+AVATAR_DIRECTORY;
-        String uploadPath = FrontController.INSTANCE.getServletContext().getRealPath("");
+        String uploadPath = getAvatarDirectoryPath();
 
         try{
-            createDirectoryIfNotExists(uploadPath);
-
             List<FileItem> formItems = upload.parseRequest(request);
 
             if (formItems != null && formItems.size() > 0) {
                 for (FileItem item : formItems) {
                     if (item.isFormField()) {
-                        if("contact_id".equals(item.getFieldName())){
+                        if("cont_id".equals(item.getFieldName())){
                             contactId=item.getString();
                             LOGGER.debug("avatar uploading for contact {}",contactId);
                         }
@@ -63,20 +68,17 @@ public class AvatarUploadController extends Upload implements Controller {
                         LOGGER.debug("trying to save item {}",item.getSize());
                         String fileName = new File(item.getName()).getName();
                         fileName = contactId+"."+ FilenameUtils.getExtension(fileName);
-                        String filePath = uploadPath + fromProjectAvatarPath + File.separator + fileName;
+                        String filePath = uploadPath + File.separator + fileName;
                         LOGGER.debug("trying to save file to {}",filePath);
-                        createDirectoryIfNotExists(uploadPath + File.separator + UPLOAD_DIRECTORY);
-                        createDirectoryIfNotExists(uploadPath + fromProjectAvatarPath);
                         File storeFile = new File(filePath);
                         item.write(storeFile);
                         LOGGER.debug("file is saved to {}",filePath);
-                        request.setAttribute("avatarURL",CONTACT_BOOK + fromProjectAvatarPath + File.separator + fileName);
+                        request.setAttribute("avatarURL",AVATAR_DIRECTORY  + "?filename=" + fileName);
                         request.setAttribute("avatarLoaded","true");
 
                     }
                 }
             }
-
         }
 
         catch (Exception e){
@@ -88,5 +90,14 @@ public class AvatarUploadController extends Upload implements Controller {
                 request, response);
 
     }
+    private void showAvatar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String filename = request.getParameter("filename");
+        File file = new File(getAvatarDirectoryPath(), filename);
+        response.setHeader("Content-Type", FrontController.INSTANCE.getServletContext().getMimeType(filename));
+        response.setHeader("Content-Length", String.valueOf(file.length()));
+        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+        Files.copy(file.toPath(), response.getOutputStream());
+    }
+
 }
 

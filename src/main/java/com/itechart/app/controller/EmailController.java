@@ -34,13 +34,20 @@ public class EmailController implements Controller {
     public static EmailController INSTANCE = new EmailController();
 
 
-    private static final STGroup templates = new STGroupFile("templates.stg","UTF-8");
+    private static final STGroup templates = new STGroupFile("templates.stg","UTF-8",'$','$');
 
     private void init(){
         templatesArray = new ArrayList<Template>();
         templatesArray.add(new Template("simple","Without template",null));
-        templatesArray.add(new Template("birthday","Birthday",templates.getInstanceOf("birthday").render()));
-        templatesArray.add(new Template("birthday_ru","Birthday ru",templates.getInstanceOf("birthday_ru").render()));
+        templatesArray.add(new Template("birthday","Birthday",templates.getInstanceOf("birthday")
+                .add("full_name","$Full name$")
+                .add("body","$Your message$")
+                .add("date","$Current time$")
+                .render()));
+        templatesArray.add(new Template("birthday_ru","Birthday ru",templates.getInstanceOf("birthday_ru").add("full_name","$Full name$")
+                .add("body","$Your message$")
+                .add("date","$Current time$")
+                .render()));
         templates.unload();
     }
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -88,10 +95,10 @@ public class EmailController implements Controller {
 
     private String getMessageString(String templateId,Contact contact,String body){
         String message=null;
-        ST t = templates.getInstanceOf(templateId);
-        t.add("full_name", contact.getFullName());
-        t.add("date", DateHelper.INSTANCE.getStringDate(new Date()));
-        t.add("body", body);
+        ST t = templates.getInstanceOf(templateId)
+                .add("full_name", contact.getFullName())
+                .add("date", DateHelper.INSTANCE.getStringDate(new Date()))
+                .add("body", body);
         message = t.render();
         log.debug("rendered message is:{}",message);
         return message;
@@ -114,7 +121,7 @@ public class EmailController implements Controller {
         message.addRecipient(MimeMessage.RecipientType.TO,
                 new InternetAddress(context.getInitParameter("adminEmail")));
         message.setSubject("Notification");
-        message.setText(letter);
+        message.setContent(letter, "text/html; charset=utf-8");
         return message;
     }
 
@@ -127,7 +134,7 @@ public class EmailController implements Controller {
         message.setFrom(new InternetAddress(context.getInitParameter("username")));
         message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailAddress));
         message.setSubject(subject);
-        message.setText(letter);
+        message.setContent(letter, "text/html; charset=utf-8");
         return message;
     }
 
@@ -145,7 +152,7 @@ public class EmailController implements Controller {
         message.addRecipients(MimeMessage.RecipientType.TO,addresses);
 
         message.setSubject(subject);
-        message.setText(letter);
+        message.setContent(letter, "text/html; charset=utf-8");
         return message;
     }
 

@@ -13,7 +13,12 @@
 
 <div class="form-horizontal" role="form">
     <div class="form-group">
-        <label for="telephonesTable" class="col-lg-2 control-label"><a href="attachments?id=${contact.id}">Attachments</a></label>
+        <label for="telephonesTable" class="col-lg-2 control-label">
+            <c:choose>
+                <c:when test="${contact.id != null}"><a href="attachments?id=${contact.id}">Attachments</a></c:when>
+                <c:otherwise>Attachments</c:otherwise>
+            </c:choose>
+        </label>
         <div class="col-lg-10">
             <div class="panel panel-default" id="telephonesTable">
                 <div class="panel-body">

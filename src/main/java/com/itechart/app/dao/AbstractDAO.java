@@ -42,12 +42,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             LOGGER.error("Something went wrong while finding all", exception);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
         return arrayList;
     }
@@ -67,13 +62,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             LOGGER.error("something went wrong while finding entity", ex);
         }
         finally {
-            try{
-                if(connection!=null)
-                connection.close();
-            }
-            catch (Exception e){
-                LOGGER.error("connection wasn't closed", e);
-            }
+            closeConnection(connection);
         }
         return entity;
     }
@@ -90,12 +79,7 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             LOGGER.error("Something went wrong in deleting entity", ex);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
     }
     public void create(T entity){
@@ -117,39 +101,26 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             LOGGER.error("Unable to init creation query", e);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-                LOGGER.debug("end creating entity");
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
     }
     public void update(T entity){
 
         Connection connection = null;
-        PreparedStatement statement = null;
-        Integer i=1;
         try{
             connection = ConnectorDB.getConnection();
-            statement = prepareStatementUpdate(connection,entity);
+            PreparedStatement statement = prepareStatementUpdate(connection,entity);
             LOGGER.debug("executing update query {}", statement);
             statement.executeUpdate();
         }
         catch (SQLException ex){
-            LOGGER.error("Something went wrong in creating entity", ex);
+            LOGGER.error("Something went wrong while updating entity", ex);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
-
     }
+
     public K maxRow(){
         Connection connection = null;
         PreparedStatement statement = null;
@@ -168,14 +139,18 @@ public abstract class AbstractDAO  <K,T extends Entity>{
             LOGGER.error("something went wrong while finding entity", ex);
         }
         finally {
-            try{
-                if(connection!=null)
-                connection.close();
-            }
-            catch (Exception e){
-                LOGGER.error("connection wasn't closed", e);
-            }
+            closeConnection(connection);
         }
         return maxRow;
+    }
+
+    protected void closeConnection(Connection connection){
+        try{
+            if(connection!=null)
+                connection.close();
+        }
+        catch (Exception e){
+            LOGGER.error("connection wasn't closed", e);
+        }
     }
 }

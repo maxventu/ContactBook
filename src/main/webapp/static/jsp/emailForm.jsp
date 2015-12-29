@@ -50,7 +50,7 @@
                                         </select>
                                 </div>
                                 <div class="col-lg-2">
-                                    <button type="submit" class="btn">Submit</button>
+                                    <button type="submit" class="btn btn-info">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -66,12 +66,6 @@
                 </div>
             </div>
         </form>
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-8">
-                <a href="main"><button class="btn btn-default">Home</button></a>
-            </div>
-        </div>
     </div>
 </div>
 <span hidden>

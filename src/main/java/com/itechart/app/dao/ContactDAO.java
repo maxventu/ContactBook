@@ -51,7 +51,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
     private static final String CONTACT_FIND_BY_BIRTHDAY =
             "SELECT id, first_name, last_name, patronymic, date_of_birth, sex_is_male, nationality," +
                     " family_status, web_site, email, current_workplace, photo_url, street, house, apartment, location_postcode" +
-                    " FROM contact WHERE is_deleted=0 AND DAY(birth_date) = ? AND MONTH(birth_date) = ?;";
+                    " FROM contact WHERE is_deleted=0 AND DAY(date_of_birth) = ? AND MONTH(date_of_birth) = ?;";
 
     @Override
     public PreparedStatement prepareStatementFindAll(Connection connection) throws SQLException {
@@ -277,12 +277,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             LOGGER.error("Something went wrong while finding all", exception);
         }
         finally {
-            try {
-                if(connection!=null)
-                    connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
         return arrayList;
     }
@@ -316,13 +311,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             LOGGER.error("something went wrong while finding entity", ex);
         }
         finally {
-            try{
-                if(connection!=null)
-                connection.close();
-            }
-            catch (Exception e){
-                LOGGER.error("connection wasn't closed", e);
-            }
+            closeConnection(connection);
         }
         return numberOfNotDeleted;
     }
@@ -354,12 +343,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
             LOGGER.error("Something went wrong while finding by birthday", exception);
         }
         finally {
-            try {
-                if(connection!=null)
-                    connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
         return arrayList;
     }

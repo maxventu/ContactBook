@@ -31,17 +31,13 @@
                         <table class="table table-condensed table-stripped">
                             <tbody id="att_table">
                             <tr>
-                                <th class="col-lg-1"></th>
                                 <th class="col-lg-3">Name</th>
                                 <th class="col-lg-3">Date of upload</th>
-                                <th class="col-lg-5">Comment</th>
+                                <th class="col-lg-6">Comment</th>
                             </tr>
                             <c:forEach var="attachment" items="${attachments}">
                                 <tr id="att_id_${attachment.id}">
-                                    <td>
-                                        <label for="att_check_${attachment.id}" class="sr-only"></label>
-                                        <input type="checkbox" name="att_id" id="att_check_${attachment.id}" value="${attachment.id}">
-                                    </td>
+                                    <input type="hidden" name="att_id" value="${attachment.id}">
                                     <td><a href="attachment?id=${attachment.contactId}&file=${attachment.id}" target="_blank">${attachment.filename}</a></td>
                                     <td>${attachment.stringDate}</td>
                                     <td>${attachment.comment}</td>

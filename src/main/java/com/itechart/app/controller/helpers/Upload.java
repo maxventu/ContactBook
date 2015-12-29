@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class Upload {
     protected static final String CONTACT_BOOK = "/ContactBook";
-    protected static final String UPLOAD_DIRECTORY = "static" + File.separator+"contact_files";
+    protected static final String UPLOAD_DIRECTORY = "ContactBook";
     protected static final String AVATAR_DIRECTORY = "avatar";
     protected static final String ATTACHMENT_DIRECTORY = "attachment";
 
@@ -30,19 +30,33 @@ public class Upload {
         return upload;
     }
 
-    protected void createDirectoryIfNotExists(String uploadPath){
+    protected static void createDirectoryIfNotExists(String uploadPath){
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
     }
 
+    public static String getApplicationDirectory(){
+        String st = FrontController.INSTANCE.getServletContext().getInitParameter("uploadURL");
+        createDirectoryIfNotExists(st);
+        return st;
+    }
 
     public static String getUploadDirectoryPath(){
-        return FrontController.INSTANCE.getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+        String st =  getApplicationDirectory() + File.separator + UPLOAD_DIRECTORY;
+        createDirectoryIfNotExists(st);
+        return st;
     }
     public static String getAttachmentDirectoryPath(){
-        return FrontController.INSTANCE.getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY + File.separator + ATTACHMENT_DIRECTORY;
+        String st = getUploadDirectoryPath() + File.separator + ATTACHMENT_DIRECTORY;
+        createDirectoryIfNotExists(st);
+        return st;
+    }
+    public static String getAvatarDirectoryPath(){
+        String st = getUploadDirectoryPath() + File.separator + AVATAR_DIRECTORY;
+        createDirectoryIfNotExists(st);
+        return st;
     }
 
     public static String getRealAttachmentPath(String contactId,String fileName){

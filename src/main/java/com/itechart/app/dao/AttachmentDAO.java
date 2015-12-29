@@ -115,12 +115,7 @@ public class AttachmentDAO extends AbstractDAO<Integer,Attachment> {
             LOGGER.error("Something went wrong while finding attachments", exception);
         }
         finally {
-            try {
-                if(connection!=null)
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Connection is not closed", e);
-            }
+            closeConnection(connection);
         }
         return attachments;
     }

@@ -1,3 +1,4 @@
+<jsp:useBean id="contactId" scope="request" type="java.lang.String"/>
 <%--
   Created by IntelliJ IDEA.
   User: Maxim
@@ -14,7 +15,7 @@
         <div class="modal-content">
             <form action="upload_attachment" method="post" target="hiddenAttachmentFrame" enctype="multipart/form-data">
                 <input type="hidden" id="attachmentAddModal_id"/>
-                <input type="hidden" id="modal_contact_id" name="cont_id" value="${cont_id}"/>
+                <input type="hidden" id="modal_contact_id" name="cont_id" value="${contactId}"/>
                 <div class="modal-header">
                     <button type="button" class="close attachmentAddModal-close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="attachmentAddModalLabel">Attachment</h4>

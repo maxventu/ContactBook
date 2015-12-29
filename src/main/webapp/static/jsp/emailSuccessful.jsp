@@ -22,9 +22,6 @@
                     Email(s) sent successfully!
                 </h1>
             </div>
-            <div class="col-lg-3">
-                <a href="main"><button class="btn btn-default">Home</button></a>
-            </div>
         </div>
     </div>
 </div>

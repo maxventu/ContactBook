@@ -14,8 +14,8 @@
         <tr>
             <th></th>
             <th class="col-lg-3">Full name</th>
-            <th class="col-lg-2">Date of birth</th>
-            <th class="col-lg-4">Address</th>
+            <th class="col-lg-1">Birthday</th>
+            <th class="col-lg-5">Address</th>
             <th class="col-lg-3">
                 <span class="col-lg-5" style="padding-left: 0;">Comment</span>
             <span class="col-lg-7">

@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `maximkalenik`.`attachment` (
   `contact_id` INT(11) NOT NULL,
   `is_deleted` TINYINT(1) NULL DEFAULT '0',
   `date_deleted` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `contact_id`),
+  PRIMARY KEY (`id`),
   INDEX `fk_attachment_contact_idx` (`contact_id` ASC),
   CONSTRAINT `fk_attachment_contact`
   FOREIGN KEY (`contact_id`)

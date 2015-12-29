@@ -45,7 +45,7 @@ public class MyScheduler implements Job {
                     .build();*/
             Trigger trigger = newTrigger()
                     .withIdentity("trigger3", "group1")
-                    .withSchedule(dailyAtHourAndMinute(12, 7))
+                    .withSchedule(dailyAtHourAndMinute(15, 0))
                     .forJob(job)
                     .build();
             // Tell quartz to schedule the job using our trigger

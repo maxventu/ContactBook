@@ -25,7 +25,7 @@
                                 <div class="col-lg-12">
                                     <label class="sr-only" for="avatarEditModal_file">File</label>
                                     <input type="file" id="avatarEditModal_file" name="avatar" />
-                                    <input type="hidden" id="contactIdForAvatar" name="contact_id" />
+                                    <input type="hidden" id="contactIdForAvatar" name="cont_id" value="${contactId}"/>
                                     <div id="res"></div>
                                 </div>
                             </div>

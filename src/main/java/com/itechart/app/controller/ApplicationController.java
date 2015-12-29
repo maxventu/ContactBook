@@ -24,7 +24,8 @@ public class ApplicationController implements Controller {
         mapOfControllers.put("/edit",new ContactController());
         mapOfControllers.put("/update",new ContactController());
         mapOfControllers.put("/email",new EmailController());
-        mapOfControllers.put("/upload_avatar",new AvatarUploadController());
+        mapOfControllers.put("/upload_avatar",new AvatarController());
+        mapOfControllers.put("/avatar",new AvatarController());
         mapOfControllers.put("/upload_attachment",new AttachmentController());
         mapOfControllers.put("/attachment",new AttachmentController());
         mapOfControllers.put("/attachments",new AttachmentController());

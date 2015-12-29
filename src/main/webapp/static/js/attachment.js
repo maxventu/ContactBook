@@ -1,11 +1,6 @@
 
 function loadAttachmentsManagement(){
     setLastAttachmentId();
-
-    var cont = document.getElementById("modal_contact_id");
-    var contId = document.getElementById("contact_id");
-    cont.value = contId.value;
-
     var button = document.getElementById("attachmentAddButton");
     button.onclick = createAttachmentModal;
     button = document.getElementById("attachmentDelete");
