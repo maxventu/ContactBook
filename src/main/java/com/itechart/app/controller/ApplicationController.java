@@ -36,7 +36,8 @@ public class ApplicationController implements Controller {
         LOGGER.info("path: {}, query: {}", request.getPathInfo(), request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
         LOGGER.debug("controller {}",controller);
-        try{if (controller != null)
+        try{
+            if (controller != null)
             controller.processRequest(request, response);
         else try {
             request.getRequestDispatcher("/static/jsp" + request.getPathInfo() + ".jsp").forward(
@@ -46,8 +47,6 @@ public class ApplicationController implements Controller {
         }
         }catch (Exception ex){
             response.sendError(500);
-            request.getRequestDispatcher("/static/jsp/error.jsp").forward(
-                    request, response);
         }
     }
 }
