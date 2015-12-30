@@ -47,13 +47,8 @@ public class AttachmentHelper extends AbstractHelper {
         LOGGER.debug("deleting attachments");
         for(Integer id : attachment_ids)
         {
-            try {
             deleteAttachmentFromDisk(id);
             AttachmentDAO.INSTANCE.delete(id);
-            }
-            catch (Exception e){
-                LOGGER.error("error while deleting attachment",e);
-            }
         }
 
     }
@@ -61,10 +56,16 @@ public class AttachmentHelper extends AbstractHelper {
     private void deleteAttachmentFromDisk(Integer id){
         Attachment att = AttachmentDAO.INSTANCE.findEntityById(id);
         File file = null;
-        if(att!=null)
-            file = AttachmentHelper.INSTANCE.getFile(Upload.getAttachmentDirectoryPath() + File.separator + att.getContactId(), att.getDateUploadAsId());
-        if(file!=null)
-            file.delete();
+        try{
+            if(att!=null)
+                file = AttachmentHelper.INSTANCE.getFile(Upload.getAttachmentDirectoryPath() + File.separator + att.getContactId(), att.getDateUploadAsId());
+            if(file!=null)
+                if(file.delete())LOGGER.debug("file {} deleted successfully",file.toPath());
+                else LOGGER.debug("file {} hasn't been deleted",file.toPath());
+        }
+        catch (Exception e){
+            LOGGER.error("error while deleting attachment at {}",file!=null?file.toPath():null,e);
+        }
     }
 
 
