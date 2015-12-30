@@ -64,7 +64,6 @@ public class EmailController implements Controller {
             log.error("Something went wrong while sending email: {}", ex);
             response.sendError(500);
         }
-
     }
 
     private void processEmails(HttpServletRequest request, String templateId) throws MessagingException {
