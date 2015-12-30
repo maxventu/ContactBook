@@ -19,7 +19,6 @@ public class DateHelper {
 
     public Timestamp getTimestamp(Date date){
         if(date!=null){
-            LOGGER.debug("getting timestamp for {}",date);
             return new Timestamp(date.getTime());
         }
         return null;
@@ -27,7 +26,6 @@ public class DateHelper {
 
     public Date getDate(Timestamp timestamp){
         if(timestamp!=null){
-            LOGGER.debug("getting date for {}",timestamp);
             return new Date(timestamp.getTime());
         }
         return null;
@@ -40,7 +38,6 @@ public class DateHelper {
         try {
             if(dateString!=null && !"".equals(dateString))
             {
-                LOGGER.debug("getting date for {}",dateString);
                 date = df.parse(dateString);
             }
         } catch (ParseException e) {
@@ -50,7 +47,6 @@ public class DateHelper {
     }
 
     public java.sql.Date getSqlDate(Date date){
-        LOGGER.debug("getting sqlDate for {}",date);
         if (date!=null)
             return new java.sql.Date(date.getTime());
         return null;

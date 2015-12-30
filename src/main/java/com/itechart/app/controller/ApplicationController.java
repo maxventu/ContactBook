@@ -45,6 +45,7 @@ public class ApplicationController implements Controller {
             response.sendError(404);
         }
         }catch (Exception ex){
+            response.sendError(500);
             request.getRequestDispatcher("/static/jsp/error.jsp").forward(
                     request, response);
         }
