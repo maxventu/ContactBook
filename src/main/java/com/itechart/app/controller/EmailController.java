@@ -46,7 +46,7 @@ public class EmailController implements Controller {
                 .render()));
         templatesArray.add(new Template("birthday_ru","Birthday ru",templates.getInstanceOf("birthday_ru").add("full_name","$Full name$")
                 .add("body","$Your message$")
-                .add("date","$Current time$")
+                .add("date", "$Current time$")
                 .render()));
         templates.unload();
     }
@@ -58,7 +58,6 @@ public class EmailController implements Controller {
         if("send_email".equals(command))openSendingPage(request, response);
         else{
             processEmails(request, templateId);
-
             request.getRequestDispatcher("/static/jsp/emailSuccessful.jsp").forward(request,response);
         }
         }catch (MessagingException ex){
@@ -76,12 +75,12 @@ public class EmailController implements Controller {
         ArrayList<Contact> contacts = ContactHelper.INSTANCE.getContactsByNameWithEmail(request, "contact_id");
         ArrayList<String> emails = ContactHelper.INSTANCE.getEmails(contacts);
         if("simple".equals(templateId)){
-            Message m = getMessageForEverybody(request.getServletContext(),message,emails,subject);
+            MimeMessage m = getMessageForEverybody(request.getServletContext(),message,emails,subject);
             log.info("sending emails to {}",emails);
             Transport.send(m);
         }
         else if("birthday".equals(templateId) || "birthday_ru".equals(templateId)){
-            Message m = null;
+            MimeMessage m = null;
             String text = null;
             for(Contact contact : contacts){
                 text = getMessageString(templateId,contact,message);
@@ -113,46 +112,45 @@ public class EmailController implements Controller {
             request.getRequestDispatcher("/static/jsp/emailForm.jsp").forward(request,response);}
     }
 
-    public Message getNotificationMessage(ServletContext context,String letter) throws MessagingException {
+    public MimeMessage getNotificationMessage(ServletContext context,String letter) throws MessagingException {
         log.info("preparing notification");
         if(session==null)init(context);
-        Message message = new MimeMessage(session);
+        MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(context.getInitParameter("username")));
         message.addRecipient(MimeMessage.RecipientType.TO,
                 new InternetAddress(context.getInitParameter("adminEmail")));
-        message.setSubject("Notification");
         message.setContent(letter, "text/html; charset=utf-8");
+        message.setSubject("Notification","UTF-8");
         return message;
     }
 
-    public Message getMessageForOne(ServletContext context,
+    public MimeMessage getMessageForOne(ServletContext context,
                                           String letter,
                                           String emailAddress,
                                           String subject) throws MessagingException {
         if(session==null)init(context);
-        Message message = new MimeMessage(session);
+        MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(context.getInitParameter("username")));
         message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailAddress));
-        message.setSubject(subject);
         message.setContent(letter, "text/html; charset=utf-8");
+        message.setSubject(subject,"UTF-8");
         return message;
     }
 
-    public Message getMessageForEverybody(ServletContext context,
+    public MimeMessage getMessageForEverybody(ServletContext context,
                                           String letter,
                                           ArrayList<String> emailAddresses,
                                           String subject) throws MessagingException {
         if(session==null)init(context);
-        Message message = new MimeMessage(session);
+        MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(context.getInitParameter("username")));
 
         Address[] addresses = new Address[emailAddresses.size()];
         for(int i=0;i<addresses.length;i++)
             addresses[i] = new InternetAddress(emailAddresses.get(i));
         message.addRecipients(MimeMessage.RecipientType.TO,addresses);
-
-        message.setSubject(subject);
         message.setContent(letter, "text/html; charset=utf-8");
+        message.setSubject(subject,"UTF-8");
         return message;
     }
 
@@ -183,7 +181,7 @@ public class EmailController implements Controller {
         message = t.render();
         log.debug("rendered message is:{}",message);
         try {
-            Message m = getNotificationMessage(context,message);
+            MimeMessage m = getNotificationMessage(context,message);
             Transport.send(m);
         } catch (MessagingException e) {
             log.error("cannot send notification",e);
