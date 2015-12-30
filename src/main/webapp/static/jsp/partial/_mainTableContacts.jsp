@@ -17,7 +17,7 @@
             <th class="col-lg-1">Birthday</th>
             <th class="col-lg-5">Address</th>
             <th class="col-lg-3">
-                <span class="col-lg-5" style="padding-left: 0;">Comment</span>
+                <span class="col-lg-5" style="padding-left: 0;">Workplace</span>
             <span class="col-lg-7">
                 <span class="btn-group pull-right" role="group">
                     <button type="submit" name="mainFormButton" value="delete_contacts" id="accountDelete" class="btn btn-danger btn-sm">

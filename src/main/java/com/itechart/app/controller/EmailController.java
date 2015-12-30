@@ -133,6 +133,7 @@ public class EmailController implements Controller {
         message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailAddress));
         message.setContent(letter, "text/html; charset=utf-8");
         message.setSubject(subject,"UTF-8");
+        log.debug("email with subject {}",subject);
         return message;
     }
 

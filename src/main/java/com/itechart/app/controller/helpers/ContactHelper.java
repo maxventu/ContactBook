@@ -56,7 +56,7 @@ public class ContactHelper extends AbstractHelper {
         Contact cont = null;
         for(Integer id:contactIds){
             cont = ContactDAO.INSTANCE.findEntityById(id);
-            if(cont.getEmail()!=null);
+            if(cont.getEmail()!=null)
             contacts.add(cont);
         }
         return contacts;
