@@ -28,8 +28,9 @@ public class ContactHelper extends AbstractHelper {
             map.put(st,request.getParameter(st));
 
         Date date = DateHelper.INSTANCE.getDateOfBirth(map.get("dateOfBirth"));
+        Boolean isMale = "Not chosen".equals(map.get("sexIsMale")) ? null : "1".equals(map.get("sexIsMale"));
 
-        Contact contact = new Contact(contactId,map.get("firstName"),map.get("lastName"),map.get("patronymic"),date,"1".equals(map.get("sexIsMale")),
+        Contact contact = new Contact(contactId,map.get("firstName"),map.get("lastName"),map.get("patronymic"),date,isMale,
                 map.get("nationality"),map.get("familyStatus"),map.get("webSite"),map.get("email"),map.get("currentWorkplace"),map.get("photoUrl"),map.get("street"),map.get("house"),
                 map.get("apartment"),map.get("postcode"),map.get("country"),map.get("city"));
         return contact;

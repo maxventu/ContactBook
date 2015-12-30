@@ -64,11 +64,18 @@
         <div class="col-lg-10">
             <select class="form-control" name="sexIsMale" id="sexIsMale">
                 <c:choose>
+                    <c:when test="${contact.sexIsMale == null}">
+                        <option selected>Not chosen</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </c:when>
                     <c:when test="${contact.sexIsMale == false}">
+                        <option>Not chosen</option>
                         <option value="1">Male</option>
                         <option value="0" selected>Female</option>
                     </c:when>
                     <c:otherwise>
+                        <option>Not chosen</option>
                         <option value="1" selected>Male</option>
                         <option value="0">Female</option>
                     </c:otherwise>
@@ -89,7 +96,7 @@
         <div class="col-lg-10">
             <select class="form-control" name="familyStatus" id="familyStatus">
                 <c:if test="${contact.familyStatus == null}">
-                    <option value="">Choose status</option>
+                    <option value="">Not chosen</option>
                 </c:if>
                 <c:forEach var="status" items="${familyStatuses}">
                     <c:choose>

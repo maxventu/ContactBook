@@ -85,7 +85,8 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++,contact.getPatronymic());
         java.sql.Date date = DateHelper.INSTANCE.getSqlDate(contact.getDateOfBirth());
         statement.setDate(i++,date);
-        statement.setInt(i++,contact.isSexIsMale()?1:0);
+        if(contact.isSexIsMale()==null)statement.setNull(i++,java.sql.Types.INTEGER);
+        else statement.setBoolean(i++,contact.isSexIsMale());
         statement.setString(i++,contact.getNationality());
         statement.setString(i++,contact.getFamilyStatus());
         statement.setString(i++,contact.getWebSite());
@@ -109,7 +110,8 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         statement.setString(i++,contact.getPatronymic());
         java.sql.Date date = DateHelper.INSTANCE.getSqlDate(contact.getDateOfBirth());
         statement.setDate(i++,date);
-        statement.setInt(i++,contact.isSexIsMale()?1:0);
+        if(contact.isSexIsMale()==null)statement.setNull(i++,java.sql.Types.INTEGER);
+        else statement.setBoolean(i++,contact.isSexIsMale());
         statement.setString(i++,contact.getNationality());
         statement.setString(i++,contact.getFamilyStatus());
         statement.setString(i++,contact.getWebSite());
@@ -138,6 +140,7 @@ public class ContactDAO extends AbstractDAO<Integer, Contact> {
         String patronymic =  contact.getString(index++);
         Date dateOfBirth = contact.getDate(index++);
         Boolean sexIsMale = contact.getBoolean(index++);
+        if(contact.wasNull()) sexIsMale=null;
         String nationality =  contact.getString(index++);
         String familyStatus = contact.getString(index++);
         String webSite = contact.getString(index++);

@@ -33,7 +33,6 @@ public class ApplicationController implements Controller {
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ErrorHandler errorHandler = new ErrorHandler();
         LOGGER.info("path: {}, query: {}", request.getPathInfo(), request.getQueryString());
         Controller controller = mapOfControllers.get(request.getPathInfo());
         LOGGER.debug("controller {}",controller);

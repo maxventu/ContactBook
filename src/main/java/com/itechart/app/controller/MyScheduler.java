@@ -35,14 +35,6 @@ public class MyScheduler implements Job {
         JobDetail job = newJob(MyScheduler.class)
                 .withIdentity("myJob", "group1")
                 .build();
-        // Trigger the job to run now, and then every 40 seconds
-            /*Trigger trigger = newTrigger()
-                    .withIdentity("myTrigger", "group1")
-                    .startNow()
-                    .withSchedule(simpleSchedule()
-                            .withIntervalInSeconds(40)
-                            .repeatForever())
-                    .build();*/
             Trigger trigger = newTrigger()
                     .withIdentity("trigger3", "group1")
                     .withSchedule(dailyAtHourAndMinute(15, 0))

@@ -85,8 +85,15 @@ function initAllTextValidations(){
     }
     if(!validateString("postcode",0,11))isValid = false;
     if((validate("city",1,45) || validate("country",1,45)) && !validateString("postcode",1,11))isValid = false;
-    if(!isBirthDateCorrect())isValid = false;
-
+    if(!isBirthDateCorrect()){
+        isValid = false;
+        var el = document.getElementById("dateOfBirth");
+        el.parentNode.classList.add("has-error");
+    }
+    else{
+        var el=document.getElementById("dateOfBirth");
+        el.parentNode.classList.remove("has-error");
+    }
     return isValid;
 }
 function validate(fieldId,min,max,fieldName){
