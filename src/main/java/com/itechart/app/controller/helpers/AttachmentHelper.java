@@ -47,8 +47,13 @@ public class AttachmentHelper extends AbstractHelper {
         LOGGER.debug("deleting attachments");
         for(Integer id : attachment_ids)
         {
+            try {
             deleteAttachmentFromDisk(id);
             AttachmentDAO.INSTANCE.delete(id);
+            }
+            catch (Exception e){
+                LOGGER.error("error while deleting attachment",e);
+            }
         }
 
     }
