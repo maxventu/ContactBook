@@ -34,7 +34,6 @@ public class ContactController implements Controller {
         String st = request.getParameter("id");
         if(st!=null)initEditContact(request,st);
         else initNewEditContact(request);
-        request.setAttribute("contactId",""+(ContactDAO.INSTANCE.maxRow()+1));
         request.getRequestDispatcher("/static/jsp/contactForm.jsp").forward(request,response);
     }
 
@@ -43,6 +42,7 @@ public class ContactController implements Controller {
         Contact contact =  ContactDAO.INSTANCE.findEntityById(index);
         ArrayList<Telephone> telephones = TelephoneDAO.INSTANCE.findAllByContactId(index);
         ArrayList<Attachment> attachments = AttachmentDAO.INSTANCE.findAllByContactId(index);
+        LOGGER.debug("passing info of edit contact with id={}",id);
         request.setAttribute("contactId",id);
        // request.setAttribute("cont_id",id);
         request.setAttribute("contact", contact);
