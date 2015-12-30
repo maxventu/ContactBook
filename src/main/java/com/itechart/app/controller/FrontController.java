@@ -42,12 +42,7 @@ public class FrontController extends HttpServlet {
             throws ServletException, java.io.IOException {
 
         LOGGER.debug("started");
-        try{
         applicationController.processRequest(request,response);
-        }
-        catch(Exception e){
-            response.sendError(500);
-        }
     }
 
     protected void doGet(HttpServletRequest request,

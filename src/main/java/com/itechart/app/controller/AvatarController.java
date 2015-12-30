@@ -93,6 +93,7 @@ public class AvatarController extends Upload implements Controller {
     private void showAvatar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String filename = request.getParameter("filename");
         File file = new File(getAvatarDirectoryPath(), filename);
+        LOGGER.debug("getting file in {}",file.toPath());
         response.setHeader("Content-Type", FrontController.INSTANCE.getServletContext().getMimeType(filename));
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");

@@ -63,6 +63,7 @@ public class AttachmentController extends Upload implements Controller {
             Integer id = Integer.parseInt(fileId);
             Attachment attachment = AttachmentDAO.INSTANCE.findEntityById(id);
             File file = AttachmentHelper.INSTANCE.getFile(getAttachmentDirectoryPath() + File.separator + contactId, attachment.getDateUploadAsId());
+            LOGGER.debug("getting file {}",file.toPath());
             ServletOutputStream out = AttachmentHelper.INSTANCE.getOutputStream(response, "application/octet-stream", attachment.getFilename() + "." + FilenameUtils.getExtension(file.getName()));
             byte[] buf = new byte[8192];
 
