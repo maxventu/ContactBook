@@ -109,7 +109,7 @@ public class EmailController implements Controller {
             request.setAttribute("contacts",contacts);
             request.setAttribute("templates",templatesArray);
             request.getRequestDispatcher("/static/jsp/emailForm.jsp").forward(request,response);}
-        else request.getRequestDispatcher("main").forward(request,response);
+        else response.sendRedirect(FrontController.INSTANCE.getServletContext().getContextPath()+"/main");
     }
 
     public MimeMessage getNotificationMessage(ServletContext context,String letter) throws MessagingException {
