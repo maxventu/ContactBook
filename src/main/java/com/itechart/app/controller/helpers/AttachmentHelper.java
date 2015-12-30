@@ -107,10 +107,11 @@ public class AttachmentHelper extends AbstractHelper {
     public File getFile(String directory,String filename){
         File dir = new File(directory);
         File[] listOfFiles = dir.listFiles();
-        if(filename!=null && !"".equals(filename))
-        for(File f:listOfFiles) {
-            if(f.getName().startsWith(filename))return f;
-        }
+        LOGGER.debug("finding file with name {} in folder {}",filename,directory);
+        if(filename!=null && !"".equals(filename) && listOfFiles!=null)
+            for(File f:listOfFiles) {
+                if(f.getName().startsWith(filename))return f;
+            }
         return null;
     }
 
